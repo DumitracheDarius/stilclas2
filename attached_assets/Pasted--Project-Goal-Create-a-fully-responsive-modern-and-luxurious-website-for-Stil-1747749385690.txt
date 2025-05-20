@@ -1,0 +1,175 @@
+
+### ✨ Project Goal
+
+Create a **fully responsive**, **modern**, and **luxurious website** for **StilClas**, a fashion brand specializing in **premium suits and elegant menswear**.
+The website must reflect the core values of the brand: **refinement, confidence, minimalism, and visual clarity**.
+
+The brand should feel like a **high-end fashion house**, combining **sophisticated design** with **cutting-edge technology**.
+
+---
+
+### 🖼️ Logo
+
+The logo has been uploaded and must be placed:
+
+* In the **header** (top-left)
+* As a **favicon**
+* Optionally in the **footer**
+
+Extract the **main burgundy color** from the logo (approx. `#7E1F2D`) and use it as the **primary accent color** across the entire website.
+
+---
+
+### 🎨 Color Palette (Strictly Use Only These)
+
+* **Black**: `#000000` – primary background and text color
+* **White**: `#FFFFFF` – clean contrast, sections, and backgrounds
+* **Burgundy**: `#7E1F2D` – from logo, used for:
+
+  * Button highlights (hover and default)
+  * Section headers
+  * Icons, underlines, borders
+  * Active nav links and accents
+
+The overall visual identity should be **polished, readable, and harmonious**, avoiding visual noise. Every section should **breathe** through intelligent use of whitespace.
+
+---
+
+### 🖋 Typography
+
+* **Headings**: Use `"Playfair Display"` – for elegance and class
+* **Body text**: Use `"Lato"` or `"Inter"` – for modern readability
+* Font weights should balance elegance with clarity (e.g., 300–600)
+
+---
+
+### 🧱 Layout & Design System
+
+* Layout must be **fully aligned**:
+
+  * If there are multiple cards in a row (e.g., 3 product cards or info sections), make sure **all text, images, and buttons are perfectly aligned** across all cards
+  * Ensure **grid consistency** (12-column layout or equivalent for responsiveness)
+  * Maintain **equal padding/margin** between components
+* All call-to-action buttons must be:
+
+  * Equal size
+  * Center-aligned within their parent
+  * Styled with **rounded corners**, **subtle shadows**, and **color transitions**
+* Use **smooth animations** (e.g., `ease-in-out 0.3s`) for all interactive elements
+
+---
+
+### 📐 Website Structure
+
+#### 1. **Header**
+
+* Sticky transparent navbar
+* Logo (uploaded image)
+* Navigation links:
+
+  * Home
+  * About Us
+  * Collections
+  * Shop
+  * Contact
+* Search icon + Cart icon
+
+#### 2. **Home Page**
+
+* Fullscreen hero section with:
+
+  * High-quality elegant fashion background image
+  * Slogan:
+
+    > “Elegance Redefined for the Modern Gentleman”
+  * Call-to-action button (e.g., “Explore Collection”)
+* Sections:
+
+  * **New Collections** – Grid layout (3 aligned cards)
+  * **Best Sellers** – Interactive carousel
+  * **Customer Testimonials** – Cards or slider with quotes
+  * **Brand Values** – 3 or 4 aligned info blocks with icons and titles
+* All blocks should have **consistent heights, aligned content and button placements**
+
+#### 3. **About Us**
+
+* Short history, brand mission, and vision
+* Image of atelier / behind-the-scenes work
+* Highlight on craftsmanship and quality
+
+#### 4. **Collections**
+
+* Categories:
+
+  * Wedding Suits
+  * Business Suits
+  * Smart Casual
+  * Accessories
+* Filterable grid layout
+* Each category:
+
+  * Title, description, hero image
+  * Grid of products with hover zoom effects
+
+#### 5. **Shop Page**
+
+* Full product catalog
+* Filters: category, price, size, color
+* Sorting: newest, price low to high, etc.
+* Product card (for each item):
+
+  * Image
+  * Name, price
+  * Button: “View Product”
+* Product detail page includes:
+
+  * High-quality images
+  * Material & care
+  * Size selector
+  * Add to cart
+  * Related products section
+
+
+#### 6. **Contact**
+
+* Elegant contact form (name, email, message)
+* Store address, phone, email
+* Embedded Google Map (or placeholder)
+* Social media icons (Instagram, Facebook, LinkedIn)
+
+#### 7. **Footer**
+
+* Quick links (Privacy Policy, Returns, Terms)
+* Logo again or motto
+* Newsletter signup field (email only)
+* Social icons
+* Elegant copyright: made with love by wesite.ro
+
+---
+
+### 🧩 Technical and Visual Details
+
+* Fully responsive on all devices
+* Use **glassmorphism** for cards, popups or key CTAs
+* Use **subtle parallax** effects and scroll animations
+* Ensure **WCAG-compliant** contrast (readable in all lighting conditions)
+* All hover states must animate with color fade or shadow pop
+* Use SVG icons for sharp visuals
+
+---
+
+### 📦 Functional Notes
+
+* Use dummy product data and placeholder images
+* All code must be clean, well-commented, modular
+* Prepare for future integration with CMS or eCommerce backend
+
+---
+
+### 🏁 Final Notes
+
+This website must feel like a luxury experience for visitors, with every component aligned, balanced, and clear.
+Maintain a minimal yet rich aesthetic. Visual and functional **cohesion is key**.
+Buttons must match in size and position, headings aligned, spacing uniform.
+
+
