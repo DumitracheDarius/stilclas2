@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Column */}
           <div>
-            <img src="/logoStilClas.png" alt="StilClas Logo" className="h-12 mb-6" />
+            <img src="/assets/logoStilClas.png" alt="StilClas Logo" className="h-12 mb-6" />
             <p className="text-gray-300 mb-6 font-lato">
               Crafting premium suits and menswear with exceptional attention to detail, quality materials, and timeless design.
             </p>

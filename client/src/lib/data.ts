@@ -7,25 +7,25 @@ export function getCollections(): Collection[] {
       id: "c1",
       title: "The Bordeaux Edit",
       description: "Sophisticated burgundy tones for the connoisseur.",
-      imageUrl: "https://pixabay.com/get/g7167f441e1a4dbb30f80a77226c4951ab4208aa9063a15a2f042b716ea8b15b46c2f8e92dbf972913826d753ca64242bba45007e05e129675b31a7b423833b36_1280.jpg"
+      imageUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
     },
     {
       id: "c2",
       title: "Black Tie Essentials",
       description: "Timeless elegance for formal occasions.",
-      imageUrl: "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
+      imageUrl: "https://images.unsplash.com/photo-1523983388277-336a66bf9bcd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
     },
     {
       id: "c3",
       title: "Summer Sophistication",
       description: "Lightweight linen for warm-weather elegance.",
-      imageUrl: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
+      imageUrl: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
     },
     {
       id: "c4",
       title: "Urban Classics",
       description: "Contemporary styles for the modern city gentleman.",
-      imageUrl: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
+      imageUrl: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
     }
   ];
 }

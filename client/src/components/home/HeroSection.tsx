@@ -38,8 +38,8 @@ export default function HeroSection({ className }: HeroSectionProps) {
           <Button
             asChild
             variant="default"
-            size="xl"
-            className="transform hover:-translate-y-1"
+            size="lg"
+            className="transform hover:-translate-y-1 text-lg px-12 py-6 font-semibold"
           >
             <Link href="/collections">
               Explore Collection
