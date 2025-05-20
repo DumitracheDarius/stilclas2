@@ -44,9 +44,9 @@ export default function Header() {
     )}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="z-10">
+        <Link href="/" className="z-10 bg-white/30 backdrop-blur-sm rounded px-2 py-1">
           <img 
-            src="/logoStilClas.png" 
+            src="/assets/logoStilClas.png" 
             alt="StilClas Logo" 
             className="h-14 md:h-16"
           />
@@ -70,10 +70,10 @@ export default function Header() {
         
         {/* Desktop Action Buttons */}
         <div className="hidden lg:flex items-center space-x-6">
-          <Button variant="transparent" size="icon" aria-label="Search">
+          <Button variant="ghost" size="icon" aria-label="Search">
             <Search className="h-5 w-5" />
           </Button>
-          <Button variant="transparent" size="icon" aria-label="Shopping Bag" className="relative">
+          <Button variant="ghost" size="icon" aria-label="Shopping Bag" className="relative">
             <ShoppingBag className="h-5 w-5" />
             <span className="absolute -top-1 -right-1 bg-burgundy text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
               0
@@ -83,7 +83,7 @@ export default function Header() {
         
         {/* Mobile Menu Button */}
         <Button 
-          variant="transparent"
+          variant="ghost"
           size="icon"
           className="lg:hidden z-20" 
           onClick={toggleMobileMenu}
@@ -113,10 +113,10 @@ export default function Header() {
               ))}
               
               <div className="flex items-center space-x-6 mt-8">
-                <Button variant="transparent" size="icon" aria-label="Search">
+                <Button variant="ghost" size="icon" aria-label="Search">
                   <Search className="h-6 w-6" />
                 </Button>
-                <Button variant="transparent" size="icon" aria-label="Shopping Bag" className="relative">
+                <Button variant="ghost" size="icon" aria-label="Shopping Bag" className="relative">
                   <ShoppingBag className="h-6 w-6" />
                   <span className="absolute -top-1 -right-1 bg-burgundy text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                     0

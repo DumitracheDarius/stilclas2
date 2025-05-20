@@ -8,7 +8,8 @@ export const buttonVariants = cva(
         default: "bg-burgundy text-white hover:bg-burgundy/90 transition-all duration-300 ease-in-out shadow-md",
         dark: "bg-black text-white hover:bg-burgundy transition-all duration-300 ease-in-out shadow-md",
         outline: "border border-burgundy text-burgundy hover:bg-burgundy hover:text-white transition-all duration-300 ease-in-out",
-        transparent: "bg-transparent text-white hover:text-burgundy transition-all duration-300 ease-in-out",
+        ghost: "bg-transparent text-white hover:text-burgundy hover:bg-white/10 transition-all duration-300 ease-in-out",
+        secondary: "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all duration-300 ease-in-out",
         link: "text-burgundy hover:text-black border-b border-burgundy hover:border-black transition-all duration-300 ease-in-out",
       },
       size: {
