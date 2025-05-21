@@ -330,14 +330,15 @@ export default function Shop() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <h3 className="text-xl font-playfair mb-2">No products found</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your filters to find what you're looking for.</p>
+              <h3 className="text-xl font-playfair mb-2">{t('no_products_found')}</h3>
+              <p className="text-gray-600 mb-4">{t('try_adjust_filters')}</p>
               <Button variant="default" onClick={() => {
                 setSelectedCategory("");
+                setSelectedSubcategory("");
                 setPriceRange([0, 2000]);
                 setSortOption("newest");
               }}>
-                Reset Filters
+                {t('reset_filters')}
               </Button>
             </div>
           )}

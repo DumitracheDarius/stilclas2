@@ -4,12 +4,15 @@ import { dividerVariants, sectionContainerVariants } from "@/components/ui/style
 import ContactForm from "@/components/ContactForm";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Clock } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function Contact() {
+  const { t } = useTranslation();
+  
   // Set page title and description
   useEffect(() => {
-    document.title = "Contact Us - StilClas";
-  }, []);
+    document.title = t('contact_title') + " - StilClas";
+  }, [t]);
 
   return (
     <>
@@ -22,10 +25,10 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-5xl font-playfair text-white font-semibold mb-4">Contact Us</h1>
+            <h1 className="text-4xl md:text-5xl font-playfair text-white font-semibold mb-4">{t('contact_title')}</h1>
             <div className={dividerVariants()}></div>
             <p className="text-gray-300 mt-6 max-w-3xl mx-auto font-lato">
-              We'd love to hear from you. Reach out to us with any questions about our products or services.
+              {t('contact_subtitle')}
             </p>
           </motion.div>
         </div>
@@ -43,7 +46,7 @@ export default function Contact() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-playfair mb-6">Send a Message</h3>
+              <h3 className="text-2xl font-playfair mb-6">{t('send_message')}</h3>
               <ContactForm />
             </motion.div>
             
@@ -55,9 +58,9 @@ export default function Contact() {
               viewport={{ once: true }}
             >
               <div className="mb-12">
-                <h3 className="text-2xl font-playfair mb-6">Get in Touch</h3>
+                <h3 className="text-2xl font-playfair mb-6">{t('get_in_touch')}</h3>
                 <p className="text-gray-800 mb-8 font-lato">
-                  Visit our flagship store or contact our customer service team for personalized assistance with your style needs.
+                  {t('contact_info_description')}
                 </p>
                 
                 <div className="space-y-6">
