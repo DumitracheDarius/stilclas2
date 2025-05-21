@@ -41,7 +41,7 @@ export function getCategories(): Category[] {
       id: "cat1",
       name: "suits",
       description: "",
-      imageUrl: "",
+      imageUrl: "/assets/category-suits.jpg",
       subcategories: [
         {
           id: "subcat1",
