@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import Home from "@/pages/Home";
 import AboutUs from "@/pages/AboutUs";
 import Collections from "@/pages/Collections";
+import Categories from "@/pages/Categories";
 import Shop from "@/pages/Shop";
 import Contact from "@/pages/Contact";
 import ProductDetail from "@/pages/ProductDetail";
@@ -16,7 +17,8 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={AboutUs} />
-      <Route path="/collections" component={Collections} />
+      <Route path="/collections" component={Categories} />
+      <Route path="/collections/legacy" component={Collections} />
       <Route path="/shop" component={Shop} />
       <Route path="/contact" component={Contact} />
       <Route path="/product/:id" component={ProductDetail} />

@@ -2,8 +2,11 @@ import { Link } from "wouter";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation();
+  
   return (
     <footer className="bg-black text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
@@ -12,7 +15,7 @@ export default function Footer() {
           <div>
             <img src="/assets/logoStilClas.png" alt="StilClas Logo" className="h-12 mb-6" />
             <p className="text-gray-300 mb-6 font-lato">
-              Crafting premium suits and menswear with exceptional attention to detail, quality materials, and timeless design.
+              {t('company_description')}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-300 hover:text-burgundy transition-luxury" aria-label="Facebook">
@@ -29,13 +32,13 @@ export default function Footer() {
           
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-playfair mb-6">Quick Links</h4>
+            <h4 className="text-lg font-playfair mb-6">{t('quick_links')}</h4>
             <ul className="space-y-3">
-              <li><Link href="/" className="text-gray-300 hover:text-burgundy transition-luxury">Home</Link></li>
-              <li><Link href="/about" className="text-gray-300 hover:text-burgundy transition-luxury">About Us</Link></li>
-              <li><Link href="/collections" className="text-gray-300 hover:text-burgundy transition-luxury">Collections</Link></li>
-              <li><Link href="/shop" className="text-gray-300 hover:text-burgundy transition-luxury">Shop</Link></li>
-              <li><Link href="/contact" className="text-gray-300 hover:text-burgundy transition-luxury">Contact</Link></li>
+              <li><Link href="/" className="text-gray-300 hover:text-burgundy transition-luxury">{t('home')}</Link></li>
+              <li><Link href="/about" className="text-gray-300 hover:text-burgundy transition-luxury">{t('about')}</Link></li>
+              <li><Link href="/collections" className="text-gray-300 hover:text-burgundy transition-luxury">{t('collections')}</Link></li>
+              <li><Link href="/shop" className="text-gray-300 hover:text-burgundy transition-luxury">{t('shop')}</Link></li>
+              <li><Link href="/contact" className="text-gray-300 hover:text-burgundy transition-luxury">{t('contact')}</Link></li>
             </ul>
           </div>
           

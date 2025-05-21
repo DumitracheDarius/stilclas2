@@ -77,6 +77,9 @@ const resources = {
       "about_title": "Despre StilClas",
       "about_subtitle": "Tradiție și eleganță în fiecare detaliu",
       
+      // Categories page
+      "discover_our_exquisite_collections": "Descoperă colecțiile noastre exclusiviste de îmbrăcăminte pentru bărbați create cu pasiune și măiestrie",
+      
       // Contact
       "contact_title": "Contactează-ne",
       "contact_subtitle": "Suntem aici pentru a te ajuta",
@@ -167,6 +170,9 @@ const resources = {
       // About Us
       "about_title": "About StilClas",
       "about_subtitle": "Tradition and elegance in every detail",
+      
+      // Categories page
+      "discover_our_exquisite_collections": "Discover our exquisite collections of menswear created with passion and craftsmanship",
       
       // Contact
       "contact_title": "Contact Us",
