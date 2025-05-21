@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CookieBanner from "@/components/layout/CookieBanner";
 import Home from "@/pages/Home";
 import AboutUs from "@/pages/AboutUs";
 import Collections from "@/pages/Collections";
@@ -38,6 +39,7 @@ function App() {
         <Router />
       </main>
       <Footer />
+      <CookieBanner />
       <Toaster />
     </TooltipProvider>
   );

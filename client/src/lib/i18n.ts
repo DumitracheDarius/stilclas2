@@ -115,6 +115,11 @@ const resources = {
       "subscribe": "Abonează-te",
       "copyright": "© 2024 StilClas. Toate drepturile rezervate.",
       
+      // Cookie Banner
+      "cookie_notice": "Notificare privind cookie-urile",
+      "cookie_description": "Acest site utilizează cookie-uri pentru a vă oferi cea mai bună experiență. Prin continuarea navigării, sunteți de acord cu politica noastră de cookie-uri.",
+      "accept_cookies": "Accept",
+      
       // About Us
       "about_title": "Despre StilClas",
       "about_subtitle": "Tradiție și eleganță în fiecare detaliu",
@@ -294,6 +299,11 @@ const resources = {
       "newsletter_desc": "Subscribe to receive updates on new collections and exclusive offers.",
       "subscribe": "Subscribe",
       "copyright": "© 2024 StilClas. All rights reserved.",
+      
+      // Cookie Banner
+      "cookie_notice": "Cookie Notice",
+      "cookie_description": "This site uses cookies to provide you with the best experience. By continuing to browse, you agree to our cookie policy.",
+      "accept_cookies": "Accept",
       
       // About Us
       "about_title": "About StilClas",
