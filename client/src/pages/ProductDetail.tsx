@@ -1,9 +1,10 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useRoute, Link } from "wouter";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { sectionContainerVariants } from "@/components/ui/stylesheet";
+import ProductGallery from "@/components/product/ProductGallery";
 import { Product } from "@/lib/types";
 import { getProductById, getRelatedProducts } from "@/lib/data";
 import { Heart, Minus, Plus, Star, StarHalf, ShoppingCart, Share2 } from "lucide-react";
@@ -18,8 +19,6 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [allImages, setAllImages] = useState<string[]>([]);
   const { t } = useTranslation();
   const { toast } = useToast();
   
@@ -27,30 +26,8 @@ export default function ProductDetail() {
   useEffect(() => {
     if (product) {
       document.title = `${product.name} - StilClas`;
-      
-      // Set all images once product is loaded
-      const imageUrls = [product.imageUrl, ...(product.gallery || [])];
-      setAllImages(imageUrls);
     }
   }, [product]);
-  
-  // Navigate to previous image
-  const prevImage = useCallback(() => {
-    if (allImages.length <= 1) return;
-    
-    setCurrentImageIndex((prev) => 
-      prev === 0 ? allImages.length - 1 : prev - 1
-    );
-  }, [allImages]);
-  
-  // Navigate to next image
-  const nextImage = useCallback(() => {
-    if (allImages.length <= 1) return;
-    
-    setCurrentImageIndex((prev) => 
-      prev === allImages.length - 1 ? 0 : prev + 1
-    );
-  }, [allImages]);
   
   // Fetch product data
   useEffect(() => {
@@ -58,7 +35,6 @@ export default function ProductDetail() {
       const fetchedProduct = getProductById(params.id);
       if (fetchedProduct) {
         setProduct(fetchedProduct);
-        setCurrentImageIndex(0);
         
         // Set default selections
         if (fetchedProduct.sizes && fetchedProduct.sizes.length > 0) {
@@ -74,11 +50,6 @@ export default function ProductDetail() {
       }
     }
   }, [params]);
-  
-  // Handle thumbnail click
-  const handleThumbnailClick = useCallback((index: number) => {
-    setCurrentImageIndex(index);
-  }, []);
   
   // Quantity handlers
   const decreaseQuantity = () => {
@@ -200,83 +171,18 @@ export default function ProductDetail() {
     );
   }
 
-  // Get current image
-  const currentImage = allImages[currentImageIndex] || product.imageUrl;
-
   return (
     <>
       {/* Product Detail */}
       <section className={cn(sectionContainerVariants({ variant: "white" }), "pt-32")}>
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Product Images */}
-            <div>
-              <div className="relative">
-                <motion.div 
-                  className="mb-4 overflow-hidden rounded-md shadow-md"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  key={`image-${currentImageIndex}`} // Key to force re-render
-                >
-                  <img 
-                    src={currentImage} 
-                    alt={`${product.name} - Image ${currentImageIndex + 1}`} 
-                    className="w-full h-auto object-cover transition-all duration-300"
-                  />
-                </motion.div>
-                
-                {/* Navigation Arrows - only show if there are multiple images */}
-                {allImages.length > 1 && (
-                  <>
-                    <button 
-                      type="button"
-                      className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all z-10"
-                      onClick={prevImage}
-                      aria-label="Previous image"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-                    <button 
-                      type="button"
-                      className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all z-10"
-                      onClick={nextImage}
-                      aria-label="Next image"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </>
-                )}
-              </div>
-              
-              {/* Thumbnail Gallery - only show if there are multiple images */}
-              {allImages.length > 1 && (
-                <div className="grid grid-cols-4 gap-4">
-                  {allImages.map((image, index) => (
-                    <button 
-                      key={`thumb-${index}`}
-                      type="button"
-                      className={cn(
-                        "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105 focus:outline-none",
-                        currentImageIndex === index ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
-                      )}
-                      onClick={() => handleThumbnailClick(index)}
-                      title={index === 0 ? t('main_image') : `${t('view')} ${index}`}
-                    >
-                      <img 
-                        src={image} 
-                        alt={`${product.name} ${t('thumbnail')} ${index + 1}`} 
-                        className="w-full h-24 object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            {/* Product Images using our new gallery component */}
+            <ProductGallery 
+              mainImage={product.imageUrl}
+              gallery={product.gallery}
+              productName={product.name}
+            />
             
             {/* Product Info */}
             <motion.div
