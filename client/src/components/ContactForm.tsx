@@ -44,16 +44,16 @@ export default function ContactForm() {
       await apiRequest("POST", "/api/contact", data);
       
       toast({
-        title: "Message Sent",
-        description: "Thank you for your message. We'll get back to you shortly.",
+        title: t('message_sent'),
+        description: t('message_sent_description'),
         variant: "default",
       });
       
       form.reset();
     } catch (error) {
       toast({
-        title: "Error",
-        description: "There was a problem sending your message. Please try again later.",
+        title: t('error'),
+        description: t('message_error_description'),
         variant: "destructive",
       });
     } finally {
@@ -69,12 +69,12 @@ export default function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="block text-gray-800 mb-2 font-lato">Full Name</FormLabel>
+              <FormLabel className="block text-gray-800 mb-2 font-lato">{t('name')}</FormLabel>
               <FormControl>
                 <Input
                   {...field}
                   className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-burgundy transition-luxury"
-                  placeholder="John Doe"
+                  placeholder={t('name_placeholder')}
                 />
               </FormControl>
               <FormMessage />
@@ -87,13 +87,13 @@ export default function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="block text-gray-800 mb-2 font-lato">Email Address</FormLabel>
+              <FormLabel className="block text-gray-800 mb-2 font-lato">{t('email')}</FormLabel>
               <FormControl>
                 <Input
                   {...field}
                   type="email"
                   className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-burgundy transition-luxury"
-                  placeholder="your@email.com"
+                  placeholder={t('email_placeholder')}
                 />
               </FormControl>
               <FormMessage />
@@ -106,12 +106,12 @@ export default function ContactForm() {
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="block text-gray-800 mb-2 font-lato">Subject</FormLabel>
+              <FormLabel className="block text-gray-800 mb-2 font-lato">{t('subject')}</FormLabel>
               <FormControl>
                 <Input
                   {...field}
                   className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-burgundy transition-luxury"
-                  placeholder="Inquiry about your products"
+                  placeholder={t('subject_placeholder')}
                 />
               </FormControl>
               <FormMessage />
@@ -124,13 +124,13 @@ export default function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="block text-gray-800 mb-2 font-lato">Message</FormLabel>
+              <FormLabel className="block text-gray-800 mb-2 font-lato">{t('message')}</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
                   rows={5}
                   className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-burgundy transition-luxury resize-none"
-                  placeholder="Your message here..."
+                  placeholder={t('message_placeholder')}
                 />
               </FormControl>
               <FormMessage />
@@ -144,7 +144,7 @@ export default function ContactForm() {
           className="w-full py-3"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Sending..." : "Send Message"}
+          {isSubmitting ? t('sending') : t('send_message')}
         </Button>
       </form>
     </Form>

@@ -229,6 +229,15 @@ const resources = {
       "saturday_hours": "Saturday: 10AM - 6PM",
       "sunday_hours": "Sunday: 12PM - 5PM",
       "follow_us": "Follow Us",
+      "name_placeholder": "John Doe",
+      "email_placeholder": "your@email.com",
+      "subject_placeholder": "Inquiry about your products",
+      "message_placeholder": "Your message here...",
+      "sending": "Sending...",
+      "message_sent": "Message Sent",
+      "message_sent_description": "Thank you for your message. We'll get back to you shortly.",
+      "error": "Error",
+      "message_error_description": "There was a problem sending your message. Please try again later.",
       
       // Product details
       "add_to_cart": "Add to Cart",
