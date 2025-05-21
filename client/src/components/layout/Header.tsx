@@ -18,9 +18,44 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDarkBackground, setIsDarkBackground] = useState(true);
+  const [cartCount, setCartCount] = useState(0);
   const [location] = useLocation();
   const { t } = useTranslation();
   const headerRef = useRef<HTMLElement>(null);
+  
+  // Get cart items count from localStorage
+  useEffect(() => {
+    const getCartCount = () => {
+      try {
+        const cartItems = localStorage.getItem('stilclas-cart');
+        if (!cartItems) return 0;
+        return JSON.parse(cartItems).length;
+      } catch (error) {
+        console.error("Error getting cart count:", error);
+        return 0;
+      }
+    };
+    
+    // Initial count
+    setCartCount(getCartCount());
+    
+    // Listen for storage changes
+    const handleStorageChange = () => {
+      setCartCount(getCartCount());
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // This is needed for updates within the same tab
+    const interval = setInterval(() => {
+      setCartCount(getCartCount());
+    }, 2000);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
 
   // Change navbar background and text color on scroll
   useEffect(() => {
@@ -68,6 +103,13 @@ export default function Header() {
   // Handle mobile menu toggle
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  // Handle cart click
+  const handleCartClick = () => {
+    // For now, we'll just alert that this will open the cart modal
+    // In the final version, this would toggle the cart visibility
+    alert(t('cart_reservation_coming_soon'));
   };
 
   return (
@@ -120,18 +162,21 @@ export default function Header() {
             <Search className="h-5 w-5" />
           </Button>
           <Button 
-            variant="ghost" 
-            size="icon" 
-            aria-label="Shopping Bag" 
+            variant="ghost"
+            size="icon"
+            aria-label="Shopping Cart"
+            onClick={handleCartClick}
             className={cn(
               "relative",
               isScrolled || isDarkBackground ? "text-white hover:text-burgundy" : "text-black hover:text-burgundy"
             )}
           >
             <ShoppingBag className="h-5 w-5" />
-            <span className="absolute -top-1 -right-1 bg-burgundy text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-              0
-            </span>
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-burgundy text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
           </Button>
         </div>
         
@@ -174,11 +219,19 @@ export default function Header() {
                 <Button variant="ghost" size="icon" aria-label="Search" className="text-white hover:text-burgundy">
                   <Search className="h-6 w-6" />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Shopping Bag" className="relative text-white hover:text-burgundy">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  aria-label="Shopping Cart" 
+                  className="relative text-white hover:text-burgundy"
+                  onClick={handleCartClick}
+                >
                   <ShoppingBag className="h-6 w-6" />
-                  <span className="absolute -top-1 -right-1 bg-burgundy text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                    0
-                  </span>
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-burgundy text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {cartCount}
+                    </span>
+                  )}
                 </Button>
               </div>
             </div>

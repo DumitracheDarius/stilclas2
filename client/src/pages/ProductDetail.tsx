@@ -80,7 +80,7 @@ export default function ProductDetail() {
     // Check if color is selected when available
     if (product.colors && product.colors.length > 0 && !selectedColor) {
       toast({
-        title: t('error'),
+        title: t('cart_error'),
         description: t('please_select_color'),
         variant: "destructive",
       });
@@ -128,7 +128,7 @@ export default function ProductDetail() {
     } catch (error) {
       console.error("Error adding to cart:", error);
       toast({
-        title: t('error'),
+        title: t('cart_error'),
         description: t('error_adding_to_cart'),
         variant: "destructive",
       });
