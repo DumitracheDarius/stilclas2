@@ -99,7 +99,20 @@ const resources = {
       "product_details": "Detalii produs",
       "related_products": "Produse similare",
       "quick_view": "Previzualizare",
-      "reviews": "recenzii"
+      "reviews": "recenzii",
+
+      // Shop page
+      "all_products": "Toate produsele",
+      "active_filters": "Filtre active",
+      "sort_by": "Sortează după",
+      "newest": "Cele mai noi",
+      "price_low_to_high": "Preț: crescător",
+      "price_high_to_low": "Preț: descrescător",
+      "highest_rated": "Cele mai bine cotate",
+      "price_range": "Interval de preț",
+      "reset_filters": "Resetează filtrele",
+      "no_products_found": "Nu s-au găsit produse",
+      "try_adjust_filters": "Încercați să ajustați filtrele pentru a găsi ce căutați"
     }
   },
   en: {
@@ -198,7 +211,20 @@ const resources = {
       "product_details": "Product Details",
       "related_products": "Related Products",
       "quick_view": "Quick View",
-      "reviews": "reviews"
+      "reviews": "reviews",
+
+      // Shop page
+      "all_products": "All Products",
+      "active_filters": "Active Filters",
+      "sort_by": "Sort by",
+      "newest": "Newest",
+      "price_low_to_high": "Price: Low to High",
+      "price_high_to_low": "Price: High to Low",
+      "highest_rated": "Highest Rated",
+      "price_range": "Price Range",
+      "reset_filters": "Reset Filters",
+      "no_products_found": "No products found",
+      "try_adjust_filters": "Try adjusting your filters to find what you're looking for"
     }
   }
 };

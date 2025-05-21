@@ -7,11 +7,13 @@ import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { dividerVariants, sectionContainerVariants } from "@/components/ui/stylesheet";
 import { getProducts, getCategories } from "@/lib/data";
-import { Product, Category } from "@/lib/types";
-import { Heart, Star, StarHalf } from "lucide-react";
+import { Product, Category, Subcategory } from "@/lib/types";
+import { Heart, Star, StarHalf, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function Shop() {
+  const { t } = useTranslation();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -19,8 +21,10 @@ export default function Shop() {
   
   // Filter states
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>("");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000]);
   const [sortOption, setSortOption] = useState<string>("newest");
+  const [activeCategoryMenu, setActiveCategoryMenu] = useState<string | null>(null);
   
   // Get query parameters
   const queryParams = new URLSearchParams(window.location.search);
@@ -42,13 +46,44 @@ export default function Shop() {
     }
   }, [categoryParam]);
   
+  // Toggle category menu
+  const toggleCategoryMenu = (categoryId: string) => {
+    if (activeCategoryMenu === categoryId) {
+      setActiveCategoryMenu(null);
+    } else {
+      setActiveCategoryMenu(categoryId);
+    }
+  };
+  
+  // Handle category selection
+  const handleCategorySelect = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    setSelectedSubcategory("");
+    setActiveCategoryMenu(null);
+  };
+  
+  // Handle subcategory selection
+  const handleSubcategorySelect = (subcategoryId: string) => {
+    setSelectedSubcategory(subcategoryId);
+    setActiveCategoryMenu(null);
+  };
+  
   // Apply filters when filter state changes
   useEffect(() => {
     let result = [...products];
     
     // Apply category filter
     if (selectedCategory) {
-      result = result.filter(product => product.categoryId === selectedCategory);
+      if (selectedSubcategory) {
+        // If subcategory is selected, filter by subcategory
+        result = result.filter(product => 
+          product.categoryId === selectedCategory && 
+          product.subcategoryId === selectedSubcategory
+        );
+      } else {
+        // Otherwise, filter just by main category
+        result = result.filter(product => product.categoryId === selectedCategory);
+      }
     }
     
     // Apply price filter
@@ -75,7 +110,7 @@ export default function Shop() {
     }
     
     setFilteredProducts(result);
-  }, [selectedCategory, priceRange, sortOption, products]);
+  }, [selectedCategory, selectedSubcategory, priceRange, sortOption, products]);
 
   // Render stars for rating
   const renderStars = (rating: number) => {
@@ -125,34 +160,104 @@ export default function Shop() {
           {/* Filter Controls */}
           <div className="mb-12">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-              <div className="flex flex-wrap gap-3">
-                <Button 
-                  variant={selectedCategory === "" ? "default" : "outline"}
-                  onClick={() => setSelectedCategory("")}
-                >
-                  All Products
-                </Button>
-                {categories.map(category => (
+              <div className="flex flex-col w-full md:w-auto">
+                <div className="flex flex-wrap gap-3 mb-4">
                   <Button 
-                    key={category.id}
-                    variant={selectedCategory === category.id ? "default" : "outline"}
-                    onClick={() => setSelectedCategory(category.id)}
+                    variant={selectedCategory === "" ? "default" : "outline"}
+                    onClick={() => {
+                      setSelectedCategory("");
+                      setSelectedSubcategory("");
+                    }}
+                    className="mb-2"
                   >
-                    {category.name}
+                    {t('all_products')}
                   </Button>
-                ))}
+                  
+                  {categories.map(category => (
+                    <div key={category.id} className="relative">
+                      <div className="flex mb-2">
+                        <Button 
+                          variant={selectedCategory === category.id && !selectedSubcategory ? "default" : "outline"}
+                          onClick={() => handleCategorySelect(category.id)}
+                          className="mr-1"
+                        >
+                          {t(category.name)}
+                        </Button>
+                        
+                        {category.subcategories && category.subcategories.length > 0 && (
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => toggleCategoryMenu(category.id)}
+                            className="px-2"
+                          >
+                            <ChevronDown className={cn(
+                              "h-4 w-4 transition-transform",
+                              activeCategoryMenu === category.id && "transform rotate-180"
+                            )} />
+                          </Button>
+                        )}
+                      </div>
+                      
+                      {/* Subcategories dropdown */}
+                      {activeCategoryMenu === category.id && category.subcategories && category.subcategories.length > 0 && (
+                        <div className="absolute z-10 mt-1 w-full bg-white shadow-lg rounded-md border border-gray-200 py-1">
+                          {category.subcategories.map(subcategory => (
+                            <button
+                              key={subcategory.id}
+                              onClick={() => {
+                                setSelectedCategory(category.id);
+                                handleSubcategorySelect(subcategory.id);
+                              }}
+                              className={cn(
+                                "w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors",
+                                selectedSubcategory === subcategory.id ? "bg-burgundy bg-opacity-10 text-burgundy font-medium" : ""
+                              )}
+                            >
+                              {t(subcategory.name)}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Active filters display */}
+                {(selectedCategory || selectedSubcategory) && (
+                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                    <span className="text-sm text-gray-600">{t('active_filters')}:</span>
+                    {selectedCategory && (
+                      <div className="px-3 py-1 bg-burgundy bg-opacity-10 rounded-full text-burgundy text-sm flex items-center">
+                        {categories.find(c => c.id === selectedCategory)?.name && t(categories.find(c => c.id === selectedCategory)?.name || '')}
+                        {selectedSubcategory && ' › '}
+                        {selectedSubcategory && categories.find(c => c.id === selectedCategory)?.subcategories?.find(s => s.id === selectedSubcategory)?.name && 
+                          t(categories.find(c => c.id === selectedCategory)?.subcategories?.find(s => s.id === selectedSubcategory)?.name || '')}
+                        <button 
+                          onClick={() => {
+                            setSelectedCategory("");
+                            setSelectedSubcategory("");
+                          }}
+                          className="ml-2 text-burgundy hover:text-burgundy/80"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
               
               <div className="w-full md:w-48">
                 <Select value={sortOption} onValueChange={setSortOption}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Sort by" />
+                    <SelectValue placeholder={t('sort_by')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="newest">Newest</SelectItem>
-                    <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                    <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                    <SelectItem value="rating">Highest Rated</SelectItem>
+                    <SelectItem value="newest">{t('newest')}</SelectItem>
+                    <SelectItem value="price-asc">{t('price_low_to_high')}</SelectItem>
+                    <SelectItem value="price-desc">{t('price_high_to_low')}</SelectItem>
+                    <SelectItem value="rating">{t('highest_rated')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -216,7 +321,7 @@ export default function Shop() {
                       </div>
                       <span className="ml-1 text-xs text-gray-800">({product.reviewCount})</span>
                     </div>
-                    <Button variant="transparent" size="icon" className="text-burgundy hover:text-black transition-luxury">
+                    <Button variant="ghost" size="icon" className="text-burgundy hover:text-black transition-luxury">
                       <Heart className="h-5 w-5" />
                     </Button>
                   </div>

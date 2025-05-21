@@ -30,6 +30,8 @@ export interface Product {
   reviewCount: number;
   categoryId: string;
   category: string;
+  subcategoryId?: string;
+  subcategory?: string;
   colors?: string[];
   sizes?: string[];
   createdAt: string;
