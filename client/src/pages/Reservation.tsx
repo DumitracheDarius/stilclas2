@@ -34,9 +34,6 @@ const formSchema = z.object({
   phone: z.string().min(10, {
     message: "Please enter a valid phone number.",
   }),
-  address: z.string().min(10, {
-    message: "Address must be at least 10 characters.",
-  }),
   preferredDate: z.string().optional(),
   preferredTime: z.string().optional(),
   notes: z.string().optional(),
@@ -49,6 +46,29 @@ export default function Reservation() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [cartItems, setCartItems] = useState<Product[]>([]);
   const [, navigate] = useLocation();
+  
+  // This useEffect is for changing the header background logic
+  useEffect(() => {
+    // Dispatch a custom event that the header background should be white
+    // which means we want dark text
+    const event = new CustomEvent('header-background', { 
+      detail: { isDarkBackground: false } 
+    });
+    window.dispatchEvent(event);
+    
+    // Cleanup when component unmounts - reset to default (dark background)
+    return () => {
+      const resetEvent = new CustomEvent('header-background', { 
+        detail: { isDarkBackground: true } 
+      });
+      window.dispatchEvent(resetEvent);
+    };
+  }, []);
+  
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+  }, []);
   
   // Load cart items from localStorage
   useEffect(() => {
@@ -74,7 +94,6 @@ export default function Reservation() {
     fullName: "",
     email: "",
     phone: "",
-    address: "",
     preferredDate: "",
     preferredTime: "",
     notes: "",
@@ -123,7 +142,6 @@ export default function Reservation() {
         from_name: data.fullName,
         from_email: data.email,
         phone: data.phone,
-        address: data.address,
         preferred_date: data.preferredDate || "Not specified",
         preferred_time: data.preferredTime || "Not specified",
         notes: data.notes || "None",
@@ -133,13 +151,19 @@ export default function Reservation() {
         reply_to: data.email,
       };
       
-      // Using EmailJS to send email
-      await emailjs.send(
+      // Using EmailJS to send email - with debug logging
+      console.log("EmailJS sending with:", {
+        serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        templateId: import.meta.env.VITE_EMAILJS_RESERVATION_TEMPLATE_ID
+      });
+      
+      const result = await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_RESERVATION_TEMPLATE_ID,
-        templateParams,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        templateParams
       );
+      
+      console.log("EmailJS result:", result);
       
       toast({
         title: t('reservation_success'),
@@ -289,23 +313,7 @@ export default function Reservation() {
                   />
                 </div>
                 
-                <FormField
-                  control={form.control}
-                  name="address"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t('address')}</FormLabel>
-                      <FormControl>
-                        <Textarea 
-                          placeholder={t('address_placeholder')} 
-                          className="resize-none" 
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField

@@ -94,7 +94,19 @@ export default function Header() {
     // Run once on initial load
     handleScroll();
     
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Listen for custom events from pages that want to set the header background
+    const handleCustomBackground = (event: CustomEvent) => {
+      if (event.detail && typeof event.detail.isDarkBackground === 'boolean') {
+        setIsDarkBackground(event.detail.isDarkBackground);
+      }
+    };
+    
+    window.addEventListener("header-background", handleCustomBackground as EventListener);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("header-background", handleCustomBackground as EventListener);
+    };
   }, []);
 
   // Close mobile menu on location change
