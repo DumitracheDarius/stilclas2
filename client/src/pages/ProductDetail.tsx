@@ -29,12 +29,15 @@ export default function ProductDetail() {
     }
   }, [product]);
   
-  // Function to handle thumbnail click
+  // Function to handle thumbnail click with proper image update
   const handleThumbnailClick = (imageUrl: string) => {
-    // Add a small delay to create a smooth transition effect
-    setTimeout(() => {
+    console.log("Thumbnail clicked, updating main image to:", imageUrl);
+    setMainImage(""); // Clear the image first to ensure re-render
+    
+    // Force the state update in the next tick
+    requestAnimationFrame(() => {
       setMainImage(imageUrl);
-    }, 50);
+    });
   };
   
   // Fetch product data
@@ -43,7 +46,11 @@ export default function ProductDetail() {
       const fetchedProduct = getProductById(params.id);
       if (fetchedProduct) {
         setProduct(fetchedProduct);
-        setMainImage(fetchedProduct.imageUrl);
+        
+        // Set the main image directly (needed for initial load)
+        setTimeout(() => {
+          setMainImage(fetchedProduct.imageUrl);
+        }, 100);
         
         // Set default selections
         if (fetchedProduct.sizes && fetchedProduct.sizes.length > 0) {
@@ -193,6 +200,7 @@ export default function ProductDetail() {
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
+                key={mainImage || 'default-image-key'} // Add key to force re-render
               >
                 <img 
                   src={mainImage || product.imageUrl} 
@@ -204,9 +212,10 @@ export default function ProductDetail() {
               {/* Thumbnail Gallery */}
               {product.gallery && product.gallery.length > 0 && (
                 <div className="grid grid-cols-4 gap-4">
-                  <div 
+                  <button 
+                    type="button"
                     className={cn(
-                      "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105",
+                      "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105 focus:outline-none",
                       mainImage === product.imageUrl ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
                     )}
                     onClick={() => handleThumbnailClick(product.imageUrl)}
@@ -217,13 +226,14 @@ export default function ProductDetail() {
                       alt={`${product.name} ${t('thumbnail')}`} 
                       className="w-full h-24 object-cover"
                     />
-                  </div>
+                  </button>
                   
                   {product.gallery.map((image, index) => (
-                    <div 
+                    <button 
                       key={index}
+                      type="button"
                       className={cn(
-                        "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105",
+                        "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105 focus:outline-none",
                         mainImage === image ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
                       )}
                       onClick={() => handleThumbnailClick(image)}
@@ -234,7 +244,7 @@ export default function ProductDetail() {
                         alt={`${product.name} ${t('thumbnail')} ${index + 1}`} 
                         className="w-full h-24 object-cover"
                       />
-                    </div>
+                    </button>
                   ))}
                 </div>
               )}

@@ -92,20 +92,70 @@ export default function Shop() {
         const subcategory = category?.subcategories?.find(s => s.id === selectedSubcategory);
         
         if (subcategory) {
-          // Filter products by subcategory name (which matches categoryId in the products)
-          result = result.filter(product => 
-            product.categoryId === subcategory.name || 
-            product.subcategoryId === subcategory.name
-          );
+          // Filter by category + subcategory
+          result = result.filter(product => {
+            const productName = product.name.toLowerCase();
+            
+            // Check if product name contains the main category keyword
+            let matchesMainCategory = false;
+            
+            if (category?.name === "suits" && productName.includes("costum")) {
+              matchesMainCategory = true;
+            } else if (category?.name === "blazers" && productName.includes("sacou")) {
+              matchesMainCategory = true;
+            } else if (category?.name === "trousers" && productName.includes("pantaloni")) {
+              matchesMainCategory = true;
+            } else if (category?.name === "ties" && productName.includes("cravata")) {
+              matchesMainCategory = true;
+            } else if (category?.name === "bow_ties" && productName.includes("papion")) {
+              matchesMainCategory = true;
+            } else if (category?.name === "cufflinks" && productName.includes("butoni")) {
+              matchesMainCategory = true;
+            } else if (category?.name === "belts" && productName.includes("curea")) {
+              matchesMainCategory = true;
+            } else if (category?.name === "shirts" && productName.includes("camasa")) {
+              matchesMainCategory = true;
+            }
+            
+            // Check if product name contains the subcategory keyword
+            let matchesSubcategory = false;
+            
+            if (subcategory.name === "ceremony" && productName.includes("ceremonie")) {
+              matchesSubcategory = true;
+            } else if (subcategory.name === "business" && productName.includes("business")) {
+              matchesSubcategory = true;
+            } else if (subcategory.name === "casual" && productName.includes("casual")) {
+              matchesSubcategory = true;
+            }
+            
+            return matchesMainCategory && matchesSubcategory;
+          });
         }
       } else {
-        // If only main category is selected, include all products from this category and its subcategories
-        const subcategoryNames = category?.subcategories?.map(s => s.name) || [];
-        
-        result = result.filter(product => 
-          product.category === category?.name || 
-          subcategoryNames.includes(product.categoryId)
-        );
+        // If only main category is selected
+        result = result.filter(product => {
+          const productName = product.name.toLowerCase();
+          
+          if (category?.name === "suits" && productName.includes("costum")) {
+            return true;
+          } else if (category?.name === "blazers" && productName.includes("sacou")) {
+            return true;
+          } else if (category?.name === "trousers" && productName.includes("pantaloni")) {
+            return true;
+          } else if (category?.name === "ties" && productName.includes("cravata")) {
+            return true;
+          } else if (category?.name === "bow_ties" && productName.includes("papion")) {
+            return true;
+          } else if (category?.name === "cufflinks" && productName.includes("butoni")) {
+            return true;
+          } else if (category?.name === "belts" && productName.includes("curea")) {
+            return true;
+          } else if (category?.name === "shirts" && productName.includes("camasa")) {
+            return true;
+          }
+          
+          return false;
+        });
       }
     }
 
