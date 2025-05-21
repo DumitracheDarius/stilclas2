@@ -7,6 +7,8 @@ import { sectionContainerVariants } from "@/components/ui/stylesheet";
 import { Product } from "@/lib/types";
 import { getProductById, getRelatedProducts } from "@/lib/data";
 import { Heart, Minus, Plus, Star, StarHalf, ShoppingCart, Share2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 
 export default function ProductDetail() {
@@ -17,6 +19,8 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [mainImage, setMainImage] = useState("");
+  const { t } = useTranslation();
+  const { toast } = useToast();
   
   // Set page title and description
   useEffect(() => {

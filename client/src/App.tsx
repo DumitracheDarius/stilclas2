@@ -29,26 +29,33 @@ function Router() {
   );
 }
 
-function App() {
+// Separate component to use cart context after provider is available
+function CartContainer() {
   return (
-    <TooltipProvider>
-      <CartProvider>
-        <Header />
-        <main className="min-h-screen">
-          <Router />
-        </main>
-        <Footer />
-        <CartWithProvider />
-        <Toaster />
-      </CartProvider>
-    </TooltipProvider>
+    <CartProvider>
+      <Header />
+      <main className="min-h-screen">
+        <Router />
+      </main>
+      <Footer />
+      <CartWrapper />
+    </CartProvider>
   );
 }
 
-// Separate component to use cart context
-function CartWithProvider() {
+// We need this separate wrapper component to access the cart context
+function CartWrapper() {
   const { isCartOpen, closeCart } = useCart();
   return <Cart isOpen={isCartOpen} onClose={closeCart} />;
+}
+
+function App() {
+  return (
+    <TooltipProvider>
+      <CartContainer />
+      <Toaster />
+    </TooltipProvider>
+  );
 }
 
 export default App;
