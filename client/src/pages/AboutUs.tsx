@@ -4,12 +4,15 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { dividerVariants, sectionContainerVariants } from "@/components/ui/stylesheet";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function AboutUs() {
+  const { t } = useTranslation();
+  
   // Set page title and description
   useEffect(() => {
-    document.title = "About Us - StilClas";
-  }, []);
+    document.title = `${t('about_title')} - StilClas`;
+  }, [t]);
 
   return (
     <>
@@ -22,7 +25,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-5xl font-playfair text-white font-semibold mb-4">Our Story</h1>
+            <h1 className="text-4xl md:text-5xl font-playfair text-white font-semibold mb-4">{t('our_story')}</h1>
             <div className={dividerVariants()}></div>
           </motion.div>
         </div>
@@ -50,16 +53,16 @@ export default function AboutUs() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-6">Our Story</h2>
+              <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-6">{t('our_story')}</h2>
               <div className={cn(dividerVariants({ alignment: "left" }))}></div>
               <p className="text-gray-800 mb-6 font-lato leading-relaxed">
-                Founded in 1998, StilClas began as a small atelier dedicated to preserving the art of traditional tailoring. Our founder, a master tailor with over 30 years of experience, envisioned a brand that would combine time-honored craftsmanship with contemporary aesthetics.
+                {t('our_story_p1')}
               </p>
               <p className="text-gray-800 mb-6 font-lato leading-relaxed">
-                Today, StilClas has evolved into a premium menswear brand recognized for its commitment to excellence. Every garment we create embodies our core philosophy: refinement is found in the details, confidence comes from perfect fit, and true luxury lies in timeless quality.
+                {t('our_story_p2')}
               </p>
               <p className="text-gray-800 mb-8 font-lato leading-relaxed">
-                Our team of skilled artisans works meticulously to ensure each piece meets our exacting standards, creating clothing that doesn't just dress a man, but elevates his presence.
+                {t('our_story_p3')}
               </p>
               <Button 
                 asChild 
@@ -68,7 +71,7 @@ export default function AboutUs() {
                 className="transform hover:-translate-y-1"
               >
                 <Link href="/collections">
-                  Discover Our Craftsmanship
+                  {t('discover_craftsmanship')}
                 </Link>
               </Button>
             </motion.div>
