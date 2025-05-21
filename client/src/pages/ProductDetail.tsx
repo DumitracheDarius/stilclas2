@@ -187,9 +187,9 @@ export default function ProductDetail() {
                 transition={{ duration: 0.6 }}
               >
                 <img 
-                  src={mainImage} 
+                  src={mainImage || product.imageUrl} 
                   alt={product.name} 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover transition-all duration-300"
                 />
               </motion.div>
               
@@ -198,14 +198,15 @@ export default function ProductDetail() {
                 <div className="grid grid-cols-4 gap-4">
                   <div 
                     className={cn(
-                      "cursor-pointer rounded-md overflow-hidden border-2",
-                      mainImage === product.imageUrl ? "border-burgundy" : "border-transparent"
+                      "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105",
+                      mainImage === product.imageUrl ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
                     )}
                     onClick={() => setMainImage(product.imageUrl)}
+                    title={t('main_image')}
                   >
                     <img 
                       src={product.imageUrl} 
-                      alt={`${product.name} thumbnail`} 
+                      alt={`${product.name} ${t('thumbnail')}`} 
                       className="w-full h-24 object-cover"
                     />
                   </div>
@@ -214,14 +215,15 @@ export default function ProductDetail() {
                     <div 
                       key={index}
                       className={cn(
-                        "cursor-pointer rounded-md overflow-hidden border-2",
-                        mainImage === image ? "border-burgundy" : "border-transparent"
+                        "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105",
+                        mainImage === image ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
                       )}
                       onClick={() => setMainImage(image)}
+                      title={`${t('view')} ${index + 1}`}
                     >
                       <img 
                         src={image} 
-                        alt={`${product.name} thumbnail ${index + 1}`} 
+                        alt={`${product.name} ${t('thumbnail')} ${index + 1}`} 
                         className="w-full h-24 object-cover"
                       />
                     </div>
