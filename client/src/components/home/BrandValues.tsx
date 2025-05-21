@@ -56,7 +56,7 @@ export default function BrandValues({ values, className }: BrandValuesProps) {
     )}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-3">Our Values</h2>
+          <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-3">{t('brand_values')}</h2>
           <div className={dividerVariants()}></div>
         </div>
         
@@ -76,9 +76,9 @@ export default function BrandValues({ values, className }: BrandValuesProps) {
               <div className="inline-block p-4 rounded-full bg-burgundy bg-opacity-10 mb-6">
                 {renderIcon(value.iconName)}
               </div>
-              <h3 className="text-xl font-playfair font-medium mb-3">{value.title}</h3>
+              <h3 className="text-xl font-playfair font-medium mb-3">{t(value.title.toLowerCase())}</h3>
               <p className="text-gray-800 font-lato">
-                {value.description}
+                {t(value.title.toLowerCase() + '_desc')}
               </p>
             </motion.div>
           ))}

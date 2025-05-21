@@ -3,6 +3,7 @@ import { dividerVariants, sectionContainerVariants } from "@/components/ui/style
 import { Testimonial } from "@/lib/types";
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface TestimonialsProps {
   testimonials: Testimonial[];
@@ -10,6 +11,7 @@ interface TestimonialsProps {
 }
 
 export default function Testimonials({ testimonials, className }: TestimonialsProps) {
+  const { t } = useTranslation();
   // Render stars based on rating
   const renderStars = (rating: number) => {
     return Array(5).fill(0).map((_, index) => (
@@ -30,7 +32,7 @@ export default function Testimonials({ testimonials, className }: TestimonialsPr
     )}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-3 text-white">Client Testimonials</h2>
+          <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-3 text-white">{t('testimonials')}</h2>
           <div className={dividerVariants()}></div>
         </div>
         
