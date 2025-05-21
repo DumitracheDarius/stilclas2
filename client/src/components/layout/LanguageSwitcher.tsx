@@ -2,8 +2,13 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
-export default function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  isDarkBackground?: boolean;
+}
+
+export default function LanguageSwitcher({ isDarkBackground = true }: LanguageSwitcherProps) {
   const { i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState(i18n.language);
 

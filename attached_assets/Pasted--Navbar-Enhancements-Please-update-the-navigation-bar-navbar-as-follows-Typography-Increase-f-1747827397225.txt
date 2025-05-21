@@ -1,0 +1,43 @@
+🧭 Navbar Enhancements
+Please update the navigation bar (navbar) as follows:
+
+Typography:
+Increase font weight on all navbar items (e.g., use font-weight: 600 or higher).
+Make sure they are easily readable and appear bold enough to stand out.
+Dynamic Color Logic Based on Background:
+If the background of the section behind the navbar is black or dark, automatically set all navbar items, icons, and buttons to white for contrast.
+If the background is white or light, automatically switch all navbar elements to black.
+This ensures optimal readability and visual contrast at all times.
+This dynamic behavior should work across all scroll sections and on all devices (desktop and mobile).
+🗺️ Map & Contact Section Update
+Please update the map and contact info section to reflect the real location and details of StilClas:
+
+📍 Address:
+
+Amplasat în incinta APACA, Cotroceni Business Center  
+Str. Iuliu Maniu, Nr. 7, corpul U, etaj 1  
+București 061072, România
+📞 Phone:
+
+0752 078 888
+Embed a Google Map with a pin dropped exactly on this address.
+Make sure the address and phone number are clearly visible and styled consistently with the rest of the site.
+Both should also support translation: Romanian (default) and English (when language is switched).
+⭐ Replace Homepage Reviews with Live Google Reviews
+Please remove the placeholder/testimonial section from the hero page and replace it with real Google reviews for StilClas from the following source:
+
+🔗 Google Reviews Link:
+https://www.google.com/search?q=STIL+CLAS+Reviews
+
+Display the top 3–5 recent reviews, including:
+Reviewer name
+Star rating
+Review text (truncate if too long)
+Date (optional)
+Use a modern layout: e.g., clean cards or a scrolling testimonial slider.
+Display them in both Romanian and English depending on the selected language toggle.
+✅ Final Details
+Ensure all these changes are responsive and fully functional on mobile and desktop.
+Maintain the elegant, minimalist, and modern aesthetic across all updated components.
+Double-check contrast visibility across dynamic sections (especially for the navbar).
+Test translations and content alignment on all affected pages.
