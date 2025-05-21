@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Search, Menu, X } from "lucide-react";
 import { ShoppingBag } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { toast } from "@/hooks/use-toast";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const NAV_LINKS = [
@@ -106,11 +107,33 @@ export default function Header() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  // Handle cart click
+  // Handle cart click - opens dialog to create a reservation
   const handleCartClick = () => {
-    // For now, we'll just alert that this will open the cart modal
-    // In the final version, this would toggle the cart visibility
-    alert(t('cart_reservation_coming_soon'));
+    // Get the cart items from localStorage
+    try {
+      const cartItems = localStorage.getItem('stilclas-cart');
+      const parsedItems = cartItems ? JSON.parse(cartItems) : [];
+      
+      if (parsedItems.length === 0) {
+        // If cart is empty, show a message
+        toast({
+          title: t('your_cart'),
+          description: t('cart_empty_message'),
+          variant: "default",
+        });
+      } else {
+        // Show reservation form
+        const reservationUrl = `/reservation`;
+        window.location.href = reservationUrl;
+      }
+    } catch (error) {
+      console.error("Error handling cart:", error);
+      toast({
+        title: t('error'),
+        description: t('error_adding_to_cart'),
+        variant: "destructive",
+      });
+    }
   };
 
   return (

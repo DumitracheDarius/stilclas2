@@ -12,6 +12,7 @@ import Categories from "@/pages/Categories";
 import Shop from "@/pages/Shop";
 import Contact from "@/pages/Contact";
 import ProductDetail from "@/pages/ProductDetail";
+import Reservation from "@/pages/Reservation";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/shop" component={Shop} />
       <Route path="/contact" component={Contact} />
       <Route path="/product/:id" component={ProductDetail} />
+      <Route path="/reservation" component={Reservation} />
       <Route component={NotFound} />
     </Switch>
   );
