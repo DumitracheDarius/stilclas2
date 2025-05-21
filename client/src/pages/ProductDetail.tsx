@@ -37,6 +37,29 @@ export default function ProductDetail() {
     setMainImage(imageUrl);
   };
   
+  // Functions to navigate between images
+  const navigateToPrevImage = () => {
+    if (!product || !product.gallery) return;
+    
+    const allImages = [product.imageUrl, ...product.gallery];
+    const currentIndex = allImages.indexOf(mainImage || product.imageUrl);
+    const prevIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+    
+    console.log("Navigating to previous image:", allImages[prevIndex]);
+    setMainImage(allImages[prevIndex]);
+  };
+  
+  const navigateToNextImage = () => {
+    if (!product || !product.gallery) return;
+    
+    const allImages = [product.imageUrl, ...product.gallery];
+    const currentIndex = allImages.indexOf(mainImage || product.imageUrl);
+    const nextIndex = (currentIndex + 1) % allImages.length;
+    
+    console.log("Navigating to next image:", allImages[nextIndex]);
+    setMainImage(allImages[nextIndex]);
+  };
+  
   // Fetch product data
   useEffect(() => {
     if (params && params.id) {
@@ -44,10 +67,8 @@ export default function ProductDetail() {
       if (fetchedProduct) {
         setProduct(fetchedProduct);
         
-        // Set the main image directly (needed for initial load)
-        setTimeout(() => {
-          setMainImage(fetchedProduct.imageUrl);
-        }, 100);
+        // Set the main image immediately
+        setMainImage(fetchedProduct.imageUrl);
         
         // Set default selections
         if (fetchedProduct.sizes && fetchedProduct.sizes.length > 0) {
@@ -208,19 +229,12 @@ export default function ProductDetail() {
                 </motion.div>
                 
                 {/* Navigation Arrows */}
-                {product.gallery && (
+                {product.gallery && product.gallery.length > 0 && (
                   <>
                     <button 
                       type="button"
-                      className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all"
-                      onClick={() => {
-                        if (product.gallery) {
-                          const allImages = [product.imageUrl, ...product.gallery];
-                          const currentIndex = allImages.indexOf(mainImage || product.imageUrl);
-                          const prevIndex = (currentIndex - 1 + allImages.length) % allImages.length;
-                          handleThumbnailClick(allImages[prevIndex]);
-                        }
-                      }}
+                      className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all z-10"
+                      onClick={navigateToPrevImage}
                       aria-label="Previous image"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -229,15 +243,8 @@ export default function ProductDetail() {
                     </button>
                     <button 
                       type="button"
-                      className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all"
-                      onClick={() => {
-                        if (product.gallery) {
-                          const allImages = [product.imageUrl, ...product.gallery];
-                          const currentIndex = allImages.indexOf(mainImage || product.imageUrl);
-                          const nextIndex = (currentIndex + 1) % allImages.length;
-                          handleThumbnailClick(allImages[nextIndex]);
-                        }
-                      }}
+                      className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all z-10"
+                      onClick={navigateToNextImage}
                       aria-label="Next image"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
