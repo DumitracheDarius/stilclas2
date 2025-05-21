@@ -6,6 +6,7 @@ export interface Collection {
   title: string;
   description: string;
   imageUrl: string;
+  translationKey?: string;
 }
 
 // Product review type
@@ -60,12 +61,21 @@ export interface Testimonial {
   avatarUrl: string;
 }
 
+// Subcategory type
+export interface Subcategory {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+}
+
 // Category type
 export interface Category {
   id: string;
   name: string;
   description: string;
   imageUrl: string;
+  subcategories?: Subcategory[];
 }
 
 // Contact form data type

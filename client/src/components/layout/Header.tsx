@@ -3,19 +3,22 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Search, ShoppingBag, Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const NAV_LINKS = [
-  { name: "Home", path: "/" },
-  { name: "About Us", path: "/about" },
-  { name: "Collections", path: "/collections" },
-  { name: "Shop", path: "/shop" },
-  { name: "Contact", path: "/contact" },
+  { key: "home", path: "/" },
+  { key: "about", path: "/about" },
+  { key: "collections", path: "/collections" },
+  { key: "shop", path: "/shop" },
+  { key: "contact", path: "/contact" },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
+  const { t } = useTranslation();
 
   // Change navbar background on scroll
   useEffect(() => {
@@ -63,13 +66,14 @@ export default function Header() {
                 location === link.path ? "text-burgundy" : "hover:text-burgundy"
               )}
             >
-              {link.name}
+              {t(link.key)}
             </Link>
           ))}
         </nav>
         
         {/* Desktop Action Buttons */}
         <div className="hidden lg:flex items-center space-x-6">
+          <LanguageSwitcher />
           <Button variant="ghost" size="icon" aria-label="Search">
             <Search className="h-5 w-5" />
           </Button>
@@ -108,11 +112,12 @@ export default function Header() {
                     location === link.path ? "text-burgundy" : "hover:text-burgundy"
                   )}
                 >
-                  {link.name}
+                  {t(link.key)}
                 </Link>
               ))}
               
               <div className="flex items-center space-x-6 mt-8">
+                <LanguageSwitcher />
                 <Button variant="ghost" size="icon" aria-label="Search">
                   <Search className="h-6 w-6" />
                 </Button>

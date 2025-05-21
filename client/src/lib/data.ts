@@ -5,27 +5,125 @@ export function getCollections(): Collection[] {
   return [
     {
       id: "c1",
-      title: "The Bordeaux Edit",
-      description: "Sophisticated burgundy tones for the connoisseur.",
-      imageUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
+      title: "the_bordeaux_edit",
+      description: "bordeaux_description",
+      imageUrl: "/assets/collection1.jpg",
+      translationKey: "the_bordeaux_edit"
     },
     {
       id: "c2",
-      title: "Black Tie Essentials",
-      description: "Timeless elegance for formal occasions.",
-      imageUrl: "https://images.unsplash.com/photo-1523983388277-336a66bf9bcd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
+      title: "black_tie_essentials",
+      description: "black_tie_description",
+      imageUrl: "/assets/collection2.jpg",
+      translationKey: "black_tie_essentials"
     },
     {
       id: "c3",
-      title: "Summer Sophistication",
-      description: "Lightweight linen for warm-weather elegance.",
-      imageUrl: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
+      title: "summer_sophistication",
+      description: "summer_description",
+      imageUrl: "/assets/collection3.jpg",
+      translationKey: "summer_sophistication"
     },
     {
       id: "c4",
-      title: "Urban Classics",
-      description: "Contemporary styles for the modern city gentleman.",
-      imageUrl: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80"
+      title: "urban_classics",
+      description: "urban_description",
+      imageUrl: "/assets/collection4.jpg",
+      translationKey: "urban_classics"
+    }
+  ];
+}
+
+// Main category data
+export function getCategories(): Category[] {
+  return [
+    {
+      id: "cat1",
+      name: "suits",
+      description: "",
+      imageUrl: "",
+      subcategories: [
+        {
+          id: "subcat1",
+          name: "ceremony",
+          description: "",
+          imageUrl: "/assets/suit-ceremony.jpg"
+        },
+        {
+          id: "subcat2",
+          name: "business",
+          description: "",
+          imageUrl: "/assets/suit-business.jpg"
+        },
+        {
+          id: "subcat3",
+          name: "casual",
+          description: "",
+          imageUrl: "/assets/suit-casual.jpg"
+        }
+      ]
+    },
+    {
+      id: "cat2",
+      name: "blazers",
+      description: "",
+      imageUrl: "",
+      subcategories: [
+        {
+          id: "subcat4",
+          name: "business",
+          description: "",
+          imageUrl: "/assets/blazer-business.jpg"
+        },
+        {
+          id: "subcat5",
+          name: "casual",
+          description: "",
+          imageUrl: "/assets/blazer-casual.jpg"
+        }
+      ]
+    },
+    {
+      id: "cat3",
+      name: "trousers",
+      description: "",
+      imageUrl: "/assets/trousers.jpg",
+      subcategories: []
+    },
+    {
+      id: "cat4",
+      name: "shirts",
+      description: "",
+      imageUrl: "/assets/shirts.jpg",
+      subcategories: []
+    },
+    {
+      id: "cat5",
+      name: "ties",
+      description: "",
+      imageUrl: "/assets/ties.jpg",
+      subcategories: []
+    },
+    {
+      id: "cat6",
+      name: "cufflinks",
+      description: "",
+      imageUrl: "/assets/cufflinks.jpg",
+      subcategories: []
+    },
+    {
+      id: "cat7",
+      name: "bow_ties",
+      description: "",
+      imageUrl: "/assets/bowties.jpg",
+      subcategories: []
+    },
+    {
+      id: "cat8",
+      name: "belts",
+      description: "",
+      imageUrl: "/assets/belts.jpg",
+      subcategories: []
     }
   ];
 }
@@ -387,13 +485,13 @@ export function getTestimonials(): Testimonial[] {
 }
 
 // Categories
-export function getCategories(): Category[] {
+export function getLegacyCategories(): Category[] {
   return [
     {
       id: "wedding",
       name: "Wedding Suits",
       description: "Exquisite tailoring for your most important day, combining timeless elegance with contemporary details.",
-      imageUrl: "https://pixabay.com/get/g3414ce56988d42caa5710f5d573fb9a022326f53a9d4087b4afe544f4530b159b31235d9f99ac7f93a8ae899662cdc900c4a3a6886816c52705ff60efedbef71_1280.jpg"
+      imageUrl: "/assets/suit-ceremony.jpg"
     },
     {
       id: "business",

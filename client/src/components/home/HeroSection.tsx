@@ -2,12 +2,15 @@ import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface HeroSectionProps {
   className?: string;
 }
 
 export default function HeroSection({ className }: HeroSectionProps) {
+  const { t } = useTranslation();
+  
   return (
     <section className={cn(
       "relative h-screen bg-black flex items-center",
@@ -17,7 +20,7 @@ export default function HeroSection({ className }: HeroSectionProps) {
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-70"
           style={{ 
-            backgroundImage: "url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')" 
+            backgroundImage: "url('/assets/hero-image.jpg')" 
           }}
         ></div>
       </div>
@@ -30,10 +33,10 @@ export default function HeroSection({ className }: HeroSectionProps) {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-playfair font-semibold leading-tight mb-6">
-            Elegance Redefined for the Modern Gentleman
+            {t('hero_title')}
           </h1>
           <p className="text-gray-200 text-lg md:text-xl font-lato font-light mb-8">
-            Premium suits and menswear crafted with precision and passion
+            {t('hero_subtitle')}
           </p>
           <Button
             asChild
@@ -42,7 +45,7 @@ export default function HeroSection({ className }: HeroSectionProps) {
             className="transform hover:-translate-y-1 text-lg px-12 py-6 font-semibold"
           >
             <Link href="/collections">
-              Explore Collection
+              {t('explore_collection')}
             </Link>
           </Button>
         </motion.div>
