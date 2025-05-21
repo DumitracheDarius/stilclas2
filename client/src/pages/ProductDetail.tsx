@@ -26,7 +26,6 @@ export default function ProductDetail() {
   useEffect(() => {
     if (product) {
       document.title = `${product.name} - StilClas`;
-      setMainImage(product.imageUrl);
     }
   }, [product]);
   
@@ -36,6 +35,7 @@ export default function ProductDetail() {
       const fetchedProduct = getProductById(params.id);
       if (fetchedProduct) {
         setProduct(fetchedProduct);
+        setMainImage(fetchedProduct.imageUrl);
         
         // Set default selections
         if (fetchedProduct.sizes && fetchedProduct.sizes.length > 0) {
