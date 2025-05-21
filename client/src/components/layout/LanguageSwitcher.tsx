@@ -32,10 +32,18 @@ export default function LanguageSwitcher({ isDarkBackground = true }: LanguageSw
         onClick={toggleLanguage}
         variant="outline" 
         size="sm"
-        className="bg-transparent hover:bg-primary/10 border border-gray-300 dark:border-gray-700 text-sm font-medium"
+        className={cn(
+          "bg-transparent hover:bg-primary/10 border text-sm font-semibold",
+          isDarkBackground 
+            ? "border-gray-500 text-white hover:text-white" 
+            : "border-gray-400 text-black hover:text-black"
+        )}
       >
         {currentLang === 'ro' ? 'RO' : 'EN'} 
-        <span className="ml-1 text-xs opacity-50">
+        <span className={cn(
+          "ml-1 text-xs", 
+          isDarkBackground ? "text-gray-300" : "text-gray-600"
+        )}>
           | {currentLang === 'ro' ? 'EN' : 'RO'}
         </span>
       </Button>

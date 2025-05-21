@@ -161,7 +161,7 @@ export default function Header() {
                   key={link.path} 
                   href={link.path}
                   className={cn(
-                    "text-white text-xl transition-luxury",
+                    "text-white text-xl font-semibold transition-luxury",
                     location === link.path ? "text-burgundy" : "hover:text-burgundy"
                   )}
                 >
@@ -170,11 +170,11 @@ export default function Header() {
               ))}
               
               <div className="flex items-center space-x-6 mt-8">
-                <LanguageSwitcher />
-                <Button variant="ghost" size="icon" aria-label="Search">
+                <LanguageSwitcher isDarkBackground={true} />
+                <Button variant="ghost" size="icon" aria-label="Search" className="text-white hover:text-burgundy">
                   <Search className="h-6 w-6" />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Shopping Bag" className="relative">
+                <Button variant="ghost" size="icon" aria-label="Shopping Bag" className="relative text-white hover:text-burgundy">
                   <ShoppingBag className="h-6 w-6" />
                   <span className="absolute -top-1 -right-1 bg-burgundy text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                     0

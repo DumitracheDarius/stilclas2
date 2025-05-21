@@ -61,6 +61,11 @@ const resources = {
       "testimonial2_quote": "Ca CEO, aspectul meu contează. Costumele StilClas au devenit imaginea mea de marcă—calitate excepțională, potrivire perfectă și stil sofisticat.",
       "testimonial3_quote": "Colecția smart casual combină confortul cu rafinamentul perfect. Aceste piese mi-au îmbunătățit substanțial stilul de zi cu zi.",
       
+      // Google Reviews
+      "google_reviews": "Recenzii Clienți",
+      "google_reviews_subtitle": "Vedeți ce spun clienții noștri despre experiența lor cu StilClas",
+      "view_all_reviews": "Vezi toate recenziile pe Google",
+      
       // Footer
       "company_description": "Creăm costume și îmbrăcăminte pentru bărbați premium cu atenție excepțională la detalii, materiale de calitate și design fără timp.",
       "quick_links": "Linkuri Rapide",
@@ -94,9 +99,9 @@ const resources = {
       "get_in_touch": "Contactează-ne",
       "contact_info_description": "Vizitați magazinul nostru sau contactați echipa de servicii clienți pentru asistență personalizată în alegerea stilului potrivit.",
       "store_location": "Locația Magazinului",
-      "store_address": "123 Bulevardul Modei, Sector 1, București, România",
+      "store_address": "Amplasat în incinta APACA, Cotroceni Business Center\nStr. Iuliu Maniu, Nr. 7, corpul U, etaj 1\nBucurești 061072, România",
       "phone": "Telefon",
-      "phone_number": "+40 755 123 456",
+      "phone_number": "0752 078 888",
       "email_address": "client@stilclas.ro",
       "business_hours": "Program",
       "weekday_hours": "Luni-Vineri: 10:00 - 20:00",
@@ -196,6 +201,11 @@ const resources = {
       "testimonial2_quote": "As a CEO, my appearance matters. StilClas suits have become my signature look—exceptional quality, perfect fit, and sophisticated style.",
       "testimonial3_quote": "The smart casual collection combines comfort with sophistication perfectly. These pieces have elevated my everyday style substantially.",
       
+      // Google Reviews
+      "google_reviews": "Customer Reviews",
+      "google_reviews_subtitle": "See what our clients are saying about their experience with StilClas",
+      "view_all_reviews": "View all reviews on Google",
+      
       // Footer
       "company_description": "Crafting premium suits and menswear with exceptional attention to detail, quality materials, and timeless design.",
       "quick_links": "Quick Links",
@@ -229,9 +239,9 @@ const resources = {
       "get_in_touch": "Get in Touch",
       "contact_info_description": "Visit our flagship store or contact our customer service team for personalized assistance with your style needs.",
       "store_location": "Store Location",
-      "store_address": "123 Fashion Avenue, Luxury District, Bucharest, Romania",
+      "store_address": "Amplasat în incinta APACA, Cotroceni Business Center\nStr. Iuliu Maniu, Nr. 7, corpul U, etaj 1\nBucharest 061072, Romania",
       "phone": "Phone",
-      "phone_number": "+40 755 123 456",
+      "phone_number": "0752 078 888",
       "email_address": "client@stilclas.ro",
       "business_hours": "Business Hours",
       "weekday_hours": "Monday-Friday: 10AM - 8PM",
