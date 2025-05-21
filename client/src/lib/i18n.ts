@@ -102,6 +102,8 @@ const resources = {
       "reviews": "recenzii",
 
       // Shop page
+      "shop_heading": "Magazin",
+      "shop_description": "Explorați colecția noastră completă de costume și îmbrăcăminte pentru bărbați premium, create pentru gentlemanul modern.",
       "all_products": "Toate produsele",
       "active_filters": "Filtre active",
       "sort_by": "Sortează după",
@@ -214,6 +216,8 @@ const resources = {
       "reviews": "reviews",
 
       // Shop page
+      "shop_heading": "Shop",
+      "shop_description": "Browse our complete collection of premium suits and menswear, crafted for the modern gentleman.",
       "all_products": "All Products",
       "active_filters": "Active Filters",
       "sort_by": "Sort by",

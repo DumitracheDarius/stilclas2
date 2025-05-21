@@ -145,10 +145,10 @@ export default function Shop() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-5xl font-playfair text-white font-semibold mb-4">Shop</h1>
+            <h1 className="text-4xl md:text-5xl font-playfair text-white font-semibold mb-4">{t('shop_heading')}</h1>
             <div className={dividerVariants()}></div>
             <p className="text-gray-300 mt-6 max-w-3xl mx-auto font-lato">
-              Browse our complete collection of premium suits and menswear, crafted for the modern gentleman.
+              {t('shop_description')}
             </p>
           </motion.div>
         </div>
@@ -265,7 +265,7 @@ export default function Shop() {
             
             {/* Price Range Filter */}
             <div className="bg-gray-50 p-4 rounded-md mb-8">
-              <h3 className="font-medium mb-4">Price Range</h3>
+              <h3 className="font-medium mb-4">{t('price_range')}</h3>
               <Slider
                 defaultValue={[0, 2000]}
                 max={2000}
@@ -303,7 +303,7 @@ export default function Shop() {
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-luxury flex items-center justify-center">
                       <Button variant="default" className="transform -translate-y-4 group-hover:translate-y-0 transition-luxury">
-                        Quick View
+                        {t('quick_view')}
                       </Button>
                     </div>
                   </div>
