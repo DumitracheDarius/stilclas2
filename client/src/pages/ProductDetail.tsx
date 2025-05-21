@@ -29,6 +29,11 @@ export default function ProductDetail() {
     }
   }, [product]);
   
+  // Function to handle thumbnail click
+  const handleThumbnailClick = (imageUrl: string) => {
+    setMainImage(imageUrl);
+  };
+  
   // Fetch product data
   useEffect(() => {
     if (params && params.id) {
@@ -201,7 +206,7 @@ export default function ProductDetail() {
                       "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105",
                       mainImage === product.imageUrl ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
                     )}
-                    onClick={() => setMainImage(product.imageUrl)}
+                    onClick={() => handleThumbnailClick(product.imageUrl)}
                     title={t('main_image')}
                   >
                     <img 
@@ -218,7 +223,7 @@ export default function ProductDetail() {
                         "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105",
                         mainImage === image ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
                       )}
-                      onClick={() => setMainImage(image)}
+                      onClick={() => handleThumbnailClick(image)}
                       title={`${t('view')} ${index + 1}`}
                     >
                       <img 
