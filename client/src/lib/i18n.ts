@@ -128,8 +128,9 @@ const resources = {
       shipping: "Livrare",
       returns: "Returnări",
       sizing_guide: "Ghid Mărimi",
-      terms: "Termeni și Condiții",
+      terms_and_conditions: "Termeni și Condiții",
       privacy_policy: "Politica de Confidențialitate",
+      faqs: "Întrebări Frecvente",
       newsletter: "Abonează-te la newsletter",
       newsletter_desc:
         "Abonează-te pentru a primi noutăți despre colecții și oferte exclusive.",
