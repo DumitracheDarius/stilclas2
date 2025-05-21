@@ -90,10 +90,10 @@ export default function AboutUs() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-playfair font-semibold mb-4">Our Mission</h3>
+              <h3 className="text-2xl font-playfair font-semibold mb-4">{t('our_mission')}</h3>
               <div className={cn(dividerVariants({ alignment: "left", spacing: "tight" }))}></div>
               <p className="font-lato leading-relaxed">
-                At StilClas, our mission is to create exceptional menswear that embodies timeless elegance and impeccable craftsmanship. We're dedicated to providing our clients with garments that not only look exceptional but also feel extraordinary to wear, combining the finest materials with traditional tailoring techniques and modern design sensibilities.
+                {t('mission_description')}
               </p>
             </motion.div>
             
@@ -104,10 +104,10 @@ export default function AboutUs() {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-playfair font-semibold mb-4">Our Vision</h3>
+              <h3 className="text-2xl font-playfair font-semibold mb-4">{t('our_vision')}</h3>
               <div className={cn(dividerVariants({ alignment: "left", spacing: "tight" }))}></div>
               <p className="font-lato leading-relaxed">
-                We envision a world where men approach dressing not as a daily obligation, but as an expression of personal excellence. StilClas aims to be recognized globally as the definitive destination for those who value meticulous craftsmanship, timeless design, and clothing that enhances their confidence and presence in any setting.
+                {t('vision_description')}
               </p>
             </motion.div>
           </div>
@@ -118,7 +118,7 @@ export default function AboutUs() {
       <section className={sectionContainerVariants({ variant: "white" })}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-3">Our Craftsmanship</h2>
+            <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-3">{t('our_craftsmanship')}</h2>
             <div className={dividerVariants()}></div>
           </div>
           
@@ -130,15 +130,15 @@ export default function AboutUs() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-2xl font-playfair font-semibold mb-4">The Art of Tailoring</h3>
+                <h3 className="text-2xl font-playfair font-semibold mb-4">{t('art_of_tailoring')}</h3>
                 <p className="text-gray-800 mb-6 font-lato leading-relaxed">
-                  At StilClas, we maintain the traditions of bespoke tailoring while embracing innovation. Each garment begins with premium fabrics sourced from the finest mills in Italy and the United Kingdom. Our master tailors, with decades of experience, craft each piece with meticulous attention to detail.
+                  {t('tailoring_p1')}
                 </p>
                 <p className="text-gray-800 mb-6 font-lato leading-relaxed">
-                  What sets us apart is our commitment to construction techniques that have stood the test of time. From hand-stitched lapels to properly canvassed jackets, we refuse to compromise on quality. The result is clothing with exceptional drape, comfort, and longevity.
+                  {t('tailoring_p2')}
                 </p>
                 <p className="text-gray-800 font-lato leading-relaxed">
-                  We believe that true luxury is found in the details that others might overlook – the perfect buttonhole, the precise roll of a lapel, the clean finishing of an interior seam. These elements combine to create garments of exceptional quality and distinction.
+                  {t('tailoring_p3')}
                 </p>
               </motion.div>
             </div>

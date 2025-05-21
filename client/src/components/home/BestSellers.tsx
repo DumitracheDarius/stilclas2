@@ -6,6 +6,8 @@ import { Product } from "@/lib/types";
 import { ChevronLeft, ChevronRight, Star, StarHalf } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "wouter";
+import { toast } from "@/hooks/use-toast";
 
 interface BestSellersProps {
   products: Product[];
@@ -136,6 +138,7 @@ export default function BestSellers({ products, className }: BestSellersProps) {
                         <Button 
                           variant="default"
                           className="transform -translate-y-4 group-hover:translate-y-0 transition-luxury"
+                          onClick={() => window.location.href = `/product/${product.id}`}
                         >
                           {t('quick_view')}
                         </Button>
@@ -153,6 +156,50 @@ export default function BestSellers({ products, className }: BestSellersProps) {
                       <Button
                         variant="default"
                         className="w-full py-3 bg-gray-900 hover:bg-burgundy"
+                        onClick={() => {
+                          try {
+                            // Prepare cart item
+                            const cartItem = {
+                              ...product,
+                              quantity: 1
+                            };
+                            
+                            // Get existing cart
+                            const existingCart = localStorage.getItem('stilclas-cart');
+                            let cart = existingCart ? JSON.parse(existingCart) : [];
+                            
+                            // Check if product already exists in cart
+                            const existingItemIndex = cart.findIndex((item: any) => item.id === product.id);
+                            
+                            if (existingItemIndex >= 0) {
+                              // Update quantity if item exists
+                              cart[existingItemIndex].quantity += 1;
+                            } else {
+                              // Add new item to cart
+                              cart.push(cartItem);
+                            }
+                            
+                            // Save cart to localStorage
+                            localStorage.setItem('stilclas-cart', JSON.stringify(cart));
+                            
+                            // Show success message
+                            toast({
+                              title: t('success'),
+                              description: t('product_added_to_cart'),
+                              variant: "default",
+                            });
+                            
+                            // Trigger storage event for cart counter update
+                            window.dispatchEvent(new Event('storage'));
+                          } catch (error) {
+                            console.error("Error adding to cart:", error);
+                            toast({
+                              title: t('cart_error'),
+                              description: t('error_adding_to_cart'),
+                              variant: "destructive",
+                            });
+                          }
+                        }}
                       >
                         {t('add_to_cart')}
                       </Button>
