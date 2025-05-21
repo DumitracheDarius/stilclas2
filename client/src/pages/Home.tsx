@@ -6,8 +6,11 @@ import Testimonials from "@/components/home/Testimonials";
 
 import { getCollections, getBestSellingProducts, getBrandValues, getTestimonials } from "@/lib/data";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t, i18n } = useTranslation();
+  
   // Fetch data
   const collections = getCollections().slice(0, 3); // Get first 3 collections for display
   const bestSellers = getBestSellingProducts();
@@ -16,8 +19,8 @@ export default function Home() {
   
   // Set page title and description
   useEffect(() => {
-    document.title = "StilClas - Elegance Redefined for the Modern Gentleman";
-  }, []);
+    document.title = `StilClas - ${t('hero_title')}`;
+  }, [t, i18n.language]);
 
   return (
     <>

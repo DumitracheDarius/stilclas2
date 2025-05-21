@@ -1,0 +1,68 @@
+Great job so far — the translation toggle works well and the hero section looks great. Now please continue with the following:
+
+---
+
+### 🌐 Complete Homepage Translation
+
+Translate **all remaining sections on the homepage** into **both Romanian and English**, and integrate them with the existing language switcher.
+
+The sections that must be fully localized:
+
+* **New Collections**
+* **Best Sellers**
+* **Our Values**
+* **Client Testimonials**
+
+All titles, descriptions, buttons, and captions must switch correctly when the language is toggled.
+
+---
+
+### 🖼️ Replace Stock Images with Uploaded Images (Everywhere)
+
+Just like you already did with the hero section, now please **replace all other stock images on the homepage** with **new ones from my uploaded image folder**.
+
+Important:
+
+* Use **different images** for each section (don’t reuse the same image across multiple blocks).
+* Choose relevant images based on the section:
+
+  * For **New Collections**: show sharp images of new suits or shirts.
+  * For **Best Sellers**: use product images of popular items.
+  * For **Our Values**: visual representation of craftsmanship, tailoring, or customer service.
+  * For **Testimonials**: either background visuals or profile-like images (if applicable).
+
+---
+
+### 📄 Apply Same Changes to the Following Pages
+
+Repeat the **image replacement and full translation logic** for the following internal pages:
+
+1. **About Us**
+
+   * Replace any existing stock/team/atelier images with new ones.
+   * Make sure all text is fully available in both Romanian and English.
+
+2. **Collections**
+
+   * All collection category visuals must be updated.
+   * The categories and subcategories defined earlier must be translated and navigable in both languages.
+
+3. **Shop**
+
+   * Ensure product previews are updated with new visuals.
+   * All product details, buttons, filters, and UI elements must support dual language switching.
+
+4. **Contact**
+
+   * Translate all fields, placeholder texts, and descriptions.
+   * Replace any stock contact/location visuals with brand-aligned images.
+
+---
+
+### ✅ Final Notes
+
+* Do **not reuse the same image repeatedly** across multiple sections.
+* Maintain alignment, consistent sizing, and elegant styling.
+* Ensure language switching is **instant and seamless** on every page.
+
+

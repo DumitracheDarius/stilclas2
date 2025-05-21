@@ -5,6 +5,7 @@ import { dividerVariants, sectionContainerVariants } from "@/components/ui/style
 import { Product } from "@/lib/types";
 import { ChevronLeft, ChevronRight, Star, StarHalf } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface BestSellersProps {
   products: Product[];
