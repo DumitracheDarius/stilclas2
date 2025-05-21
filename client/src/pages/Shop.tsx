@@ -85,17 +85,26 @@ export default function Shop() {
 
     // Apply category filter
     if (selectedCategory) {
+      const category = categories.find(c => c.id === selectedCategory);
+      
       if (selectedSubcategory) {
         // If subcategory is selected, filter by subcategory
-        result = result.filter(
-          (product) =>
-            product.categoryId === selectedCategory &&
-            product.subcategoryId === selectedSubcategory,
-        );
+        const subcategory = category?.subcategories?.find(s => s.id === selectedSubcategory);
+        
+        if (subcategory) {
+          // Filter products by subcategory name (which matches categoryId in the products)
+          result = result.filter(product => 
+            product.categoryId === subcategory.name || 
+            product.subcategoryId === subcategory.name
+          );
+        }
       } else {
-        // Otherwise, filter just by main category
-        result = result.filter(
-          (product) => product.categoryId === selectedCategory,
+        // If only main category is selected, include all products from this category and its subcategories
+        const subcategoryNames = category?.subcategories?.map(s => s.name) || [];
+        
+        result = result.filter(product => 
+          product.category === category?.name || 
+          subcategoryNames.includes(product.categoryId)
         );
       }
     }

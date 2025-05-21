@@ -11,6 +11,11 @@ const resources = {
       shop: "Magazin",
       about: "Despre noi",
       contact: "Contact",
+      
+      // Product Gallery
+      main_image: "Imagine principală",
+      thumbnail: "miniatură",
+      view: "Vizualizare imagine",
 
       // Hero Section
       hero_title: "Eleganță și Rafinament",
@@ -249,6 +254,11 @@ const resources = {
       shop: "Shop",
       about: "About Us",
       contact: "Contact",
+      
+      // Product Gallery
+      main_image: "Main image",
+      thumbnail: "thumbnail",
+      view: "View image",
 
       // Hero Section
       hero_title: "Elegance & Refinement",

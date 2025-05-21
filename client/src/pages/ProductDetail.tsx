@@ -31,7 +31,10 @@ export default function ProductDetail() {
   
   // Function to handle thumbnail click
   const handleThumbnailClick = (imageUrl: string) => {
-    setMainImage(imageUrl);
+    // Add a small delay to create a smooth transition effect
+    setTimeout(() => {
+      setMainImage(imageUrl);
+    }, 50);
   };
   
   // Fetch product data
