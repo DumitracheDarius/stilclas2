@@ -67,7 +67,7 @@ export function getCategories(): Category[] {
       id: "cat2",
       name: "blazers",
       description: "",
-      imageUrl: "",
+      imageUrl: "/assets/category-blazers.jpg",
       subcategories: [
         {
           id: "subcat4",
@@ -87,21 +87,21 @@ export function getCategories(): Category[] {
       id: "cat3",
       name: "trousers",
       description: "",
-      imageUrl: "/assets/trousers.jpg",
+      imageUrl: "/assets/category-trousers.jpg",
       subcategories: []
     },
     {
       id: "cat4",
       name: "shirts",
       description: "",
-      imageUrl: "/assets/shirts.jpg",
+      imageUrl: "/assets/category-shirts.jpg",
       subcategories: []
     },
     {
       id: "cat5",
       name: "ties",
       description: "",
-      imageUrl: "/assets/ties.jpg",
+      imageUrl: "/assets/category-ties.jpg",
       subcategories: []
     },
     {
