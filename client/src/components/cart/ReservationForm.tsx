@@ -1,15 +1,18 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useTranslation } from "react-i18next";
-import { X } from "lucide-react";
-import { format } from "date-fns";
-import { ro } from "date-fns/locale";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { toast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -18,29 +21,32 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
+import { formatPrice } from "@/lib/utils";
 import { Product } from "@/lib/types";
-import emailjs from '@emailjs/browser';
+import { Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-// Define form schema
+// Form schema
 const formSchema = z.object({
-  name: z.string().min(3, { message: "Name must be at least 3 characters" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  pickupDate: z.date({
-    required_error: "Please select a date",
+  fullName: z.string().min(3, {
+    message: "Full name must be at least 3 characters.",
   }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  phone: z.string().min(10, {
+    message: "Please enter a valid phone number.",
+  }),
+  address: z.string().min(10, {
+    message: "Address must be at least 10 characters.",
+  }),
+  preferredDate: z.string().optional(),
+  preferredTime: z.string().optional(),
+  notes: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -55,67 +61,69 @@ interface ReservationFormProps {
 export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: ReservationFormProps) {
   const { t, i18n } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Initialize form
+  
+  const defaultValues: Partial<FormValues> = {
+    fullName: "",
+    email: "",
+    phone: "",
+    address: "",
+    preferredDate: "",
+    preferredTime: "",
+    notes: "",
+  };
+  
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      pickupDate: undefined,
-    },
+    defaultValues,
   });
-
-  // Get current date + 1 day as the minimum selectable date
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
-  // Format cart items for email
-  const formatCartItems = () => {
-    return cartItems.map(item => `${item.name}`).join(", ");
-  };
-
-  // Form submission handler
+  
+  // Calculate total price
+  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     
     try {
-      // Format date to YYYY-MM-DD
-      const formattedDate = format(data.pickupDate, "yyyy-MM-dd");
-      
-      // Prepare data for EmailJS
+      // Create email template parameters
       const templateParams = {
-        user_name: data.name,
-        user_email: data.email,
-        product_list: formatCartItems(),
-        pickup_date: formattedDate
+        to_name: "StilClas",
+        from_name: data.fullName,
+        from_email: data.email,
+        phone: data.phone,
+        address: data.address,
+        preferred_date: data.preferredDate || "Not specified",
+        preferred_time: data.preferredTime || "Not specified",
+        notes: data.notes || "None",
+        items: cartItems.map(item => `${item.name} - ${formatPrice(item.price)}`).join('\\n'),
+        total: formatPrice(totalPrice),
+        language: i18n.language,
+        reply_to: data.email,
       };
       
-      // Send email using EmailJS
+      // Using EmailJS to send email
       await emailjs.send(
-        "service_29oy11b",
-        "template_5qiucuw", 
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_RESERVATION_TEMPLATE_ID,
         templateParams,
-        "DfK5Tovpa24FfvJ1q"
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
       
-      // Show success message
       toast({
-        title: t("reservation_success_title"),
-        description: t("reservation_success_message"),
+        title: t('reservation_success'),
+        description: t('reservation_success_message'),
         variant: "default",
       });
       
-      // Clear cart and close modal
+      // Clear form and cart
+      form.reset();
       clearCart();
       onClose();
-      form.reset();
+      
     } catch (error) {
       console.error("Error sending reservation:", error);
       toast({
-        title: t("reservation_error_title"),
-        description: t("reservation_error_message"),
+        title: t('reservation_error'),
+        description: t('reservation_error_message'),
         variant: "destructive",
       });
     } finally {
@@ -123,121 +131,186 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
     }
   };
   
-  // Dialog close handler with form reset
-  const handleClose = () => {
-    form.reset();
-    onClose();
-  };
-
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[500px] p-6">
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-playfair">{t("reserve_in_store")}</DialogTitle>
-          <DialogDescription className="pt-2 pb-4">
-            {t("reservation_description")}
+          <DialogTitle className="text-2xl font-bold text-center">
+            {t('reservation_title')}
+          </DialogTitle>
+          <DialogDescription className="text-center">
+            {t('reservation_description')}
           </DialogDescription>
-          <Button 
-            className="absolute top-2 right-2" 
-            variant="ghost" 
-            size="icon"
-            onClick={handleClose}
-          >
-            <X className="h-4 w-4" />
-          </Button>
         </DialogHeader>
         
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-medium">{t("full_name")}</FormLabel>
-                  <FormControl>
-                    <Input 
-                      {...field} 
-                      placeholder={t("full_name_placeholder")}
-                      className="w-full border-gray-300 focus:border-burgundy"
+        <div className="mt-4 space-y-6">
+          {/* Selected items section */}
+          <div className="border border-gray-200 rounded-md p-4">
+            <h3 className="font-semibold mb-3">{t('selected_items')}</h3>
+            <div className="space-y-3 max-h-[200px] overflow-y-auto">
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex justify-between items-center">
+                  <div className="flex items-center space-x-3">
+                    <img 
+                      src={item.imageUrl} 
+                      alt={item.name} 
+                      className="w-12 h-12 object-cover rounded-md"
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-medium">{t("email_address")}</FormLabel>
-                  <FormControl>
-                    <Input 
-                      {...field} 
-                      type="email"
-                      placeholder={t("email_placeholder")}
-                      className="w-full border-gray-300 focus:border-burgundy"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="pickupDate"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel className="font-medium">{t("preferred_pickup_date")}</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          className={cn(
-                            "w-full pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, "PPP", {
-                              locale: i18n.language === "ro" ? ro : undefined
-                            })
-                          ) : (
-                            <span>{t("select_date")}</span>
-                          )}
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={field.onChange}
-                        disabled={(date) => date < tomorrow}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <div className="pt-4">
-              <Button 
-                type="submit" 
-                className="w-full bg-burgundy hover:bg-burgundy/90 text-white py-6"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? t("reservation_sending") : t("submit_reservation")}
-              </Button>
+                    <span className="font-medium">{item.name}</span>
+                  </div>
+                  <span>{formatPrice(item.price)}</span>
+                </div>
+              ))}
             </div>
-          </form>
-        </Form>
+            <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-200">
+              <span className="font-semibold">{t('total')}</span>
+              <span className="font-bold text-burgundy">{formatPrice(totalPrice)}</span>
+            </div>
+          </div>
+          
+          {/* Reservation form */}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('full_name')}</FormLabel>
+                    <FormControl>
+                      <Input placeholder={t('full_name_placeholder')} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('email')}</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder={t('email_placeholder')} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('phone')}</FormLabel>
+                      <FormControl>
+                        <Input placeholder={t('phone_placeholder')} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('address')}</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        placeholder={t('address_placeholder')} 
+                        className="resize-none" 
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="preferredDate"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('preferred_date')}</FormLabel>
+                      <FormControl>
+                        <Input type="date" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="preferredTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('preferred_time')}</FormLabel>
+                      <FormControl>
+                        <Input type="time" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              
+              <FormField
+                control={form.control}
+                name="notes"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('notes')}</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        placeholder={t('notes_placeholder')} 
+                        className="resize-none" 
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <DialogFooter>
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={onClose}
+                  disabled={isSubmitting}
+                >
+                  {t('cancel')}
+                </Button>
+                <Button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className={cn(
+                    "bg-burgundy hover:bg-burgundy/90",
+                    isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                  )}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      {t('submitting')}
+                    </>
+                  ) : (
+                    t('complete_reservation')
+                  )}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </div>
       </DialogContent>
     </Dialog>
   );

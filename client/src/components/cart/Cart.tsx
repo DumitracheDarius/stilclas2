@@ -1,11 +1,21 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
+import { ShoppingBag, X, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import { X, ShoppingBag } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/types";
 import { ReservationForm } from "./ReservationForm";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+  SheetClose
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 
 interface CartProps {
   isOpen: boolean;
@@ -13,150 +23,191 @@ interface CartProps {
 }
 
 export function Cart({ isOpen, onClose }: CartProps) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [cartItems, setCartItems] = useState<Product[]>([]);
-  const [reservationModalOpen, setReservationModalOpen] = useState(false);
+  const [isReservationFormOpen, setIsReservationFormOpen] = useState(false);
   
-  // Load cart items from localStorage on component mount
+  // Load cart items from localStorage
   useEffect(() => {
-    const storedCart = localStorage.getItem("stilclas-cart");
-    if (storedCart) {
+    if (typeof window !== 'undefined') {
       try {
-        setCartItems(JSON.parse(storedCart));
+        const savedCart = localStorage.getItem('stilclas-cart');
+        if (savedCart) {
+          setCartItems(JSON.parse(savedCart));
+        }
       } catch (error) {
-        console.error("Error loading cart from localStorage:", error);
-        setCartItems([]);
+        console.error("Error loading cart:", error);
       }
     }
+    
+    // Listen for storage changes
+    const handleStorageChange = () => {
+      try {
+        const savedCart = localStorage.getItem('stilclas-cart');
+        if (savedCart) {
+          setCartItems(JSON.parse(savedCart));
+        } else {
+          setCartItems([]);
+        }
+      } catch (error) {
+        console.error("Error updating cart:", error);
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
   
-  // Save cart items to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem("stilclas-cart", JSON.stringify(cartItems));
-  }, [cartItems]);
-  
-  // Calculate total price
-  const totalPrice = useMemo(() => {
-    return cartItems.reduce((sum, item) => sum + item.price, 0);
-  }, [cartItems]);
+  // Calculate total
+  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
   
   // Remove item from cart
-  const removeItem = (productId: string) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+  const removeFromCart = (productId: string) => {
+    const updatedCart = cartItems.filter(item => item.id !== productId);
+    setCartItems(updatedCart);
+    
+    // Update localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('stilclas-cart', JSON.stringify(updatedCart));
+    }
+    
+    // Trigger storage event for other components to update
+    window.dispatchEvent(new Event('storage'));
   };
   
-  // Clear cart 
+  // Clear cart
   const clearCart = () => {
     setCartItems([]);
+    
+    // Update localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('stilclas-cart', JSON.stringify([]));
+    }
+    
+    // Trigger storage event for other components to update
+    window.dispatchEvent(new Event('storage'));
   };
   
-  // Open reservation modal
-  const handleReserveInStore = () => {
-    setReservationModalOpen(true);
+  // Open reservation form
+  const openReservationForm = () => {
+    setIsReservationFormOpen(true);
   };
   
-  // No items in cart view
-  if (cartItems.length === 0) {
-    return (
-      <div 
-        className={`fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-xl transform transition-transform duration-300 z-50 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-4 border-b">
-            <h2 className="text-xl font-playfair">{t("shopping_cart")}</h2>
-            <Button variant="ghost" size="icon" onClick={onClose}>
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-          
-          <div className="flex-grow flex flex-col items-center justify-center p-6 text-center">
-            <ShoppingBag className="h-16 w-16 text-gray-300 mb-4" />
-            <p className="text-lg font-medium mb-2">{t("empty_cart")}</p>
-            <p className="text-gray-500 mb-6">{t("empty_cart_message")}</p>
-            <Button 
-              className="bg-burgundy text-white hover:bg-burgundy/90"
-              onClick={onClose}
-            >
-              {t("continue_shopping")}
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // Close reservation form
+  const closeReservationForm = () => {
+    setIsReservationFormOpen(false);
+  };
   
   return (
     <>
-      <div 
-        className={`fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-xl transform transition-transform duration-300 z-50 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-4 border-b">
-            <h2 className="text-xl font-playfair">{t("shopping_cart")}</h2>
-            <Button variant="ghost" size="icon" onClick={onClose}>
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
+      <Sheet open={isOpen} onOpenChange={onClose}>
+        <SheetContent className="w-full sm:max-w-md" side="right">
+          <SheetHeader>
+            <SheetTitle className="flex items-center space-x-2">
+              <ShoppingBag size={20} />
+              <span>{t('your_cart')}</span>
+            </SheetTitle>
+            <SheetDescription>
+              {cartItems.length === 0
+                ? t('empty_cart_message')
+                : t('cart_item_count', { count: cartItems.length })}
+            </SheetDescription>
+          </SheetHeader>
           
-          <div className="flex-grow overflow-y-auto py-4">
-            {cartItems.map((item) => (
-              <motion.div 
-                key={item.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                className="flex items-center p-4 border-b"
-              >
-                <div className="w-20 h-20 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
-                  <img 
-                    src={item.imageUrl} 
-                    alt={item.name} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                
-                <div className="ml-4 flex-grow">
-                  <h4 className="font-medium">{item.name}</h4>
-                  <p className="text-sm text-gray-500">{item.category}</p>
-                  <p className="text-burgundy font-medium mt-1">{formatPrice(item.price)}</p>
+          {cartItems.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-[50vh]">
+              <ShoppingBag size={64} className="text-gray-300 mb-4" />
+              <p className="text-gray-500 text-center">{t('empty_cart_description')}</p>
+              <SheetClose asChild>
+                <Button className="mt-6 bg-burgundy hover:bg-burgundy/90">
+                  {t('continue_shopping')}
+                </Button>
+              </SheetClose>
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col space-y-4 my-6 max-h-[60vh] overflow-y-auto pr-2">
+                {cartItems.map((item) => (
+                  <div 
+                    key={item.id} 
+                    className="flex justify-between items-start border-b border-gray-200 pb-4"
+                  >
+                    <div className="flex space-x-3">
+                      <img 
+                        src={item.imageUrl} 
+                        alt={item.name} 
+                        className="w-16 h-16 object-cover rounded-md"
+                      />
+                      <div className="flex flex-col">
+                        <span className="font-medium">{item.name}</span>
+                        <span className="text-sm text-gray-500">
+                          {item.category}
+                        </span>
+                        <span className="font-bold text-burgundy mt-1">
+                          {formatPrice(item.price)}
+                        </span>
+                      </div>
+                    </div>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="text-gray-500 hover:text-burgundy"
+                      onClick={() => removeFromCart(item.id)}
+                    >
+                      <X size={18} />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="border-t border-gray-200 pt-4 space-y-4">
+                <div className="flex justify-between">
+                  <span className="font-medium">{t('subtotal')}</span>
+                  <span className="font-bold">{formatPrice(totalPrice)}</span>
                 </div>
                 
                 <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className="flex-shrink-0 text-gray-400 hover:text-burgundy"
-                  onClick={() => removeItem(item.id)}
+                  variant="outline" 
+                  size="sm" 
+                  className="flex items-center w-full justify-center hover:text-burgundy"
+                  onClick={clearCart}
                 >
-                  <X className="h-4 w-4" />
+                  <Trash2 size={16} className="mr-2" />
+                  {t('clear_cart')}
                 </Button>
-              </motion.div>
-            ))}
-          </div>
-          
-          <div className="p-4 border-t">
-            <div className="flex justify-between mb-4">
-              <span className="font-medium">{t("total")}</span>
-              <span className="font-semibold text-burgundy">{formatPrice(totalPrice)}</span>
-            </div>
-            
-            <Button 
-              className="w-full py-6 bg-burgundy hover:bg-burgundy/90 text-white"
-              onClick={handleReserveInStore}
-            >
-              {t("reserve_in_store")}
-            </Button>
-          </div>
-        </div>
-      </div>
+                
+                <Dialog open={isReservationFormOpen} onOpenChange={setIsReservationFormOpen}>
+                  <DialogTrigger asChild>
+                    <Button 
+                      className={cn(
+                        "w-full bg-burgundy hover:bg-burgundy/90",
+                        cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+                      )}
+                      disabled={cartItems.length === 0}
+                      onClick={() => {
+                        if (cartItems.length > 0) {
+                          openReservationForm();
+                        }
+                      }}
+                    >
+                      {t('proceed_to_reservation')}
+                    </Button>
+                  </DialogTrigger>
+                </Dialog>
+              </div>
+            </>
+          )}
+        </SheetContent>
+      </Sheet>
       
-      {/* Reservation Form Modal */}
-      <ReservationForm
-        isOpen={reservationModalOpen}
-        onClose={() => setReservationModalOpen(false)}
+      {/* Reservation Form */}
+      <ReservationForm 
+        isOpen={isReservationFormOpen}
+        onClose={closeReservationForm}
         cartItems={cartItems}
         clearCart={clearCart}
       />

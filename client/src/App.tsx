@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,8 +12,6 @@ import Categories from "@/pages/Categories";
 import Shop from "@/pages/Shop";
 import Contact from "@/pages/Contact";
 import ProductDetail from "@/pages/ProductDetail";
-import { CartProvider, useCart } from "@/components/cart/CartContext";
-import { Cart } from "@/components/cart/Cart";
 
 function Router() {
   return (
@@ -29,30 +28,14 @@ function Router() {
   );
 }
 
-// Separate component to use cart context after provider is available
-function CartContainer() {
+function App() {
   return (
-    <CartProvider>
+    <TooltipProvider>
       <Header />
       <main className="min-h-screen">
         <Router />
       </main>
       <Footer />
-      <CartWrapper />
-    </CartProvider>
-  );
-}
-
-// We need this separate wrapper component to access the cart context
-function CartWrapper() {
-  const { isCartOpen, closeCart } = useCart();
-  return <Cart isOpen={isCartOpen} onClose={closeCart} />;
-}
-
-function App() {
-  return (
-    <TooltipProvider>
-      <CartContainer />
       <Toaster />
     </TooltipProvider>
   );
