@@ -233,7 +233,7 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
                 className="w-full bg-burgundy hover:bg-burgundy/90 text-white py-6"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? t("sending") : t("submit_reservation")}
+                {isSubmitting ? t("reservation_sending") : t("submit_reservation")}
               </Button>
             </div>
           </form>

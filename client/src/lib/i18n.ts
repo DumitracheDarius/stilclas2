@@ -132,7 +132,12 @@ const resources = {
       "error": "Eroare",
       "message_error_description": "A apărut o problemă la trimiterea mesajului. Te rugăm să încerci din nou mai târziu.",
       
-      // Product details
+      // Cart and Checkout
+      "shopping_cart": "Coș de cumpărături",
+      "empty_cart": "Coșul tău este gol",
+      "empty_cart_message": "Explorează colecțiile noastre și adaugă produse în coș",
+      "continue_shopping": "Continuă cumpărăturile",
+      "total": "Total",
       "add_to_cart": "Adaugă în coș",
       "select_color": "Selectează culoarea",
       "select_size": "Selectează mărimea",
@@ -280,13 +285,18 @@ const resources = {
       "email_placeholder": "your@email.com",
       "subject_placeholder": "Inquiry about your products",
       "message_placeholder": "Your message here...",
-      "sending": "Sending...",
+      "contact_sending": "Sending...",
       "message_sent": "Message Sent",
       "message_sent_description": "Thank you for your message. We'll get back to you shortly.",
       "error": "Error",
       "message_error_description": "There was a problem sending your message. Please try again later.",
       
-      // Product details
+      // Cart and Checkout
+      "shopping_cart": "Shopping Cart",
+      "empty_cart": "Your cart is empty",
+      "empty_cart_message": "Browse our collections and add some items to your cart",
+      "continue_shopping": "Continue Shopping",
+      "total": "Total",
       "add_to_cart": "Add to Cart",
       "select_color": "Select Color",
       "select_size": "Select Size",

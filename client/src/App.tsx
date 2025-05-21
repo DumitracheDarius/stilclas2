@@ -11,6 +11,8 @@ import Categories from "@/pages/Categories";
 import Shop from "@/pages/Shop";
 import Contact from "@/pages/Contact";
 import ProductDetail from "@/pages/ProductDetail";
+import { CartProvider, useCart } from "@/components/cart/CartContext";
+import { Cart } from "@/components/cart/Cart";
 
 function Router() {
   return (
@@ -30,14 +32,23 @@ function Router() {
 function App() {
   return (
     <TooltipProvider>
-      <Header />
-      <main className="min-h-screen">
-        <Router />
-      </main>
-      <Footer />
-      <Toaster />
+      <CartProvider>
+        <Header />
+        <main className="min-h-screen">
+          <Router />
+        </main>
+        <Footer />
+        <CartWithProvider />
+        <Toaster />
+      </CartProvider>
     </TooltipProvider>
   );
+}
+
+// Separate component to use cart context
+function CartWithProvider() {
+  const { isCartOpen, closeCart } = useCart();
+  return <Cart isOpen={isCartOpen} onClose={closeCart} />;
 }
 
 export default App;
