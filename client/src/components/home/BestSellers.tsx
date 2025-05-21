@@ -13,6 +13,7 @@ interface BestSellersProps {
 }
 
 export default function BestSellers({ products, className }: BestSellersProps) {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -87,7 +88,7 @@ export default function BestSellers({ products, className }: BestSellersProps) {
     )}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-3">Best Sellers</h2>
+          <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-3">{t('best_sellers')}</h2>
           <div className={dividerVariants()}></div>
         </div>
         
@@ -136,7 +137,7 @@ export default function BestSellers({ products, className }: BestSellersProps) {
                           variant="default"
                           className="transform -translate-y-4 group-hover:translate-y-0 transition-luxury"
                         >
-                          Quick View
+                          {t('quick_view')}
                         </Button>
                       </div>
                     </div>
@@ -147,13 +148,13 @@ export default function BestSellers({ products, className }: BestSellersProps) {
                         <div className="flex text-burgundy">
                           {renderStars(product.rating)}
                         </div>
-                        <span className="ml-2 text-sm text-gray-800">{product.reviewCount} reviews</span>
+                        <span className="ml-2 text-sm text-gray-800">{product.reviewCount} {t('reviews')}</span>
                       </div>
                       <Button
-                        variant="dark"
-                        className="w-full py-3"
+                        variant="default"
+                        className="w-full py-3 bg-gray-900 hover:bg-burgundy"
                       >
-                        Add to Cart
+                        {t('add_to_cart')}
                       </Button>
                     </div>
                   </div>

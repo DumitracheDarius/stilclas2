@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { dividerVariants, sectionContainerVariants } from "@/components/ui/stylesheet";
 import { BrandValue } from "@/lib/types";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 // Import Lucide React icons
 import { Wrench, Sparkles, LayoutGrid, Leaf } from "lucide-react";
 
@@ -11,6 +12,7 @@ interface BrandValuesProps {
 }
 
 export default function BrandValues({ values, className }: BrandValuesProps) {
+  const { t } = useTranslation();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

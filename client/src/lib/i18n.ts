@@ -94,7 +94,9 @@ const resources = {
       "select_color": "Selectează culoarea",
       "select_size": "Selectează mărimea",
       "product_details": "Detalii produs",
-      "related_products": "Produse similare"
+      "related_products": "Produse similare",
+      "quick_view": "Previzualizare",
+      "reviews": "recenzii"
     }
   },
   en: {
@@ -188,7 +190,9 @@ const resources = {
       "select_color": "Select Color",
       "select_size": "Select Size",
       "product_details": "Product Details",
-      "related_products": "Related Products"
+      "related_products": "Related Products",
+      "quick_view": "Quick View",
+      "reviews": "reviews"
     }
   }
 };
