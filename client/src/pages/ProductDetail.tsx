@@ -32,12 +32,9 @@ export default function ProductDetail() {
   // Function to handle thumbnail click with proper image update
   const handleThumbnailClick = (imageUrl: string) => {
     console.log("Thumbnail clicked, updating main image to:", imageUrl);
-    setMainImage(""); // Clear the image first to ensure re-render
     
-    // Force the state update in the next tick
-    requestAnimationFrame(() => {
-      setMainImage(imageUrl);
-    });
+    // Use a direct state update to avoid flickering
+    setMainImage(imageUrl);
   };
   
   // Fetch product data
@@ -195,19 +192,61 @@ export default function ProductDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Product Images */}
             <div>
-              <motion.div 
-                className="mb-4 overflow-hidden rounded-md shadow-md"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                key={mainImage || 'default-image-key'} // Add key to force re-render
-              >
-                <img 
-                  src={mainImage || product.imageUrl} 
-                  alt={product.name} 
-                  className="w-full h-auto object-cover transition-all duration-300"
-                />
-              </motion.div>
+              <div className="relative">
+                <motion.div 
+                  className="mb-4 overflow-hidden rounded-md shadow-md"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  key={mainImage || 'default-image-key'} // Add key to force re-render
+                >
+                  <img 
+                    src={mainImage || product.imageUrl} 
+                    alt={product.name} 
+                    className="w-full h-auto object-cover transition-all duration-300"
+                  />
+                </motion.div>
+                
+                {/* Navigation Arrows */}
+                {product.gallery && (
+                  <>
+                    <button 
+                      type="button"
+                      className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all"
+                      onClick={() => {
+                        if (product.gallery) {
+                          const allImages = [product.imageUrl, ...product.gallery];
+                          const currentIndex = allImages.indexOf(mainImage || product.imageUrl);
+                          const prevIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+                          handleThumbnailClick(allImages[prevIndex]);
+                        }
+                      }}
+                      aria-label="Previous image"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <button 
+                      type="button"
+                      className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all"
+                      onClick={() => {
+                        if (product.gallery) {
+                          const allImages = [product.imageUrl, ...product.gallery];
+                          const currentIndex = allImages.indexOf(mainImage || product.imageUrl);
+                          const nextIndex = (currentIndex + 1) % allImages.length;
+                          handleThumbnailClick(allImages[nextIndex]);
+                        }
+                      }}
+                      aria-label="Next image"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </>
+                )}
+              </div>
               
               {/* Thumbnail Gallery */}
               {product.gallery && product.gallery.length > 0 && (

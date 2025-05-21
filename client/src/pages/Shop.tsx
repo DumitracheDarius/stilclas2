@@ -105,15 +105,13 @@ export default function Shop() {
               matchesMainCategory = true;
             } else if (category?.name === "trousers" && productName.includes("pantaloni")) {
               matchesMainCategory = true;
-            } else if (category?.name === "ties" && productName.includes("cravata")) {
+            } else if (category?.name === "ties" && (productName.includes("cravata") || productName.includes("cravată"))) {
               matchesMainCategory = true;
             } else if (category?.name === "bow_ties" && productName.includes("papion")) {
               matchesMainCategory = true;
             } else if (category?.name === "cufflinks" && productName.includes("butoni")) {
               matchesMainCategory = true;
             } else if (category?.name === "belts" && productName.includes("curea")) {
-              matchesMainCategory = true;
-            } else if (category?.name === "shirts" && productName.includes("camasa")) {
               matchesMainCategory = true;
             }
             
@@ -142,15 +140,13 @@ export default function Shop() {
             return true;
           } else if (category?.name === "trousers" && productName.includes("pantaloni")) {
             return true;
-          } else if (category?.name === "ties" && productName.includes("cravata")) {
+          } else if (category?.name === "ties" && (productName.includes("cravata") || productName.includes("cravată"))) {
             return true;
           } else if (category?.name === "bow_ties" && productName.includes("papion")) {
             return true;
           } else if (category?.name === "cufflinks" && productName.includes("butoni")) {
             return true;
           } else if (category?.name === "belts" && productName.includes("curea")) {
-            return true;
-          } else if (category?.name === "shirts" && productName.includes("camasa")) {
             return true;
           }
           
