@@ -63,6 +63,78 @@ export default function ProductDetail() {
     setQuantity(quantity + 1);
   };
   
+  // Add to cart handler
+  const handleAddToCart = () => {
+    if (!product) return;
+    
+    // Check if size is selected when available
+    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+      toast({
+        title: t('cart_error'),
+        description: t('please_select_size'),
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Check if color is selected when available
+    if (product.colors && product.colors.length > 0 && !selectedColor) {
+      toast({
+        title: t('error'),
+        description: t('please_select_color'),
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Add to cart
+    try {
+      // Create cart item
+      const cartItem = {
+        ...product,
+        quantity: quantity,
+        selectedSize: selectedSize,
+        selectedColor: selectedColor
+      };
+      
+      // Get existing cart
+      const existingCart = localStorage.getItem('stilclas-cart');
+      let cart = existingCart ? JSON.parse(existingCart) : [];
+      
+      // Check if item already exists
+      const existingItemIndex = cart.findIndex((item: any) => 
+        item.id === product.id && 
+        item.selectedSize === selectedSize && 
+        item.selectedColor === selectedColor
+      );
+      
+      if (existingItemIndex >= 0) {
+        // Update quantity if item exists
+        cart[existingItemIndex].quantity += quantity;
+      } else {
+        // Add new item to cart
+        cart.push(cartItem);
+      }
+      
+      // Save cart to localStorage
+      localStorage.setItem('stilclas-cart', JSON.stringify(cart));
+      
+      // Show success message
+      toast({
+        title: t('success'),
+        description: t('product_added_to_cart'),
+        variant: "default",
+      });
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast({
+        title: t('error'),
+        description: t('error_adding_to_cart'),
+        variant: "destructive",
+      });
+    }
+  };
+  
   // Render stars for rating
   const renderStars = (rating: number) => {
     const stars = [];
@@ -223,7 +295,7 @@ export default function ProductDetail() {
                 <h3 className="text-sm font-medium mb-3">Quantity</h3>
                 <div className="flex items-center border border-gray-300 rounded-md w-32">
                   <Button 
-                    variant="transparent" 
+                    variant="ghost" 
                     size="icon" 
                     onClick={decreaseQuantity}
                     disabled={quantity <= 1}
@@ -233,7 +305,7 @@ export default function ProductDetail() {
                   </Button>
                   <div className="flex-1 text-center font-medium">{quantity}</div>
                   <Button 
-                    variant="transparent" 
+                    variant="ghost" 
                     size="icon" 
                     onClick={increaseQuantity}
                     className="text-gray-500 hover:text-burgundy"
@@ -245,13 +317,18 @@ export default function ProductDetail() {
               
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button variant="default" size="lg" className="flex-1 gap-2">
+                <Button 
+                  variant="default" 
+                  size="lg" 
+                  className="flex-1 gap-2"
+                  onClick={handleAddToCart}
+                >
                   <ShoppingCart className="h-5 w-5" />
-                  Add to Cart
+                  {t('add_to_cart')}
                 </Button>
                 <Button variant="outline" size="lg" className="flex-1 gap-2">
                   <Heart className="h-5 w-5" />
-                  Add to Wishlist
+                  {t('add_to_wishlist')}
                 </Button>
               </div>
               
