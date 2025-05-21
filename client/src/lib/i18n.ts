@@ -66,6 +66,20 @@ const resources = {
       "google_reviews_subtitle": "Vedeți ce spun clienții noștri despre experiența lor cu StilClas",
       "view_all_reviews": "Vezi toate recenziile pe Google",
       
+      // Reservation form
+      "reserve_in_store": "Rezervă în magazin",
+      "reservation_description": "Completați formularul pentru a rezerva produsele selectate. Veți fi notificat când produsele sunt gata pentru a fi ridicate.",
+      "full_name": "Nume complet",
+      "full_name_placeholder": "Ion Popescu",
+      "preferred_pickup_date": "Data dorită pentru achiziție",
+      "select_date": "Selectați o dată",
+      "submit_reservation": "Trimite rezervarea",
+      "reservation_sending": "Se trimite...",
+      "reservation_success_title": "Rezervare trimisă!",
+      "reservation_success_message": "Rezervarea a fost trimisă cu succes! Veți primi un email de confirmare în curând.",
+      "reservation_error_title": "Eroare",
+      "reservation_error_message": "A apărut o eroare la trimiterea rezervării. Vă rugăm să încercați din nou.",
+      
       // Footer
       "company_description": "Creăm costume și îmbrăcăminte pentru bărbați premium cu atenție excepțională la detalii, materiale de calitate și design fără timp.",
       "quick_links": "Linkuri Rapide",
@@ -112,7 +126,7 @@ const resources = {
       "email_placeholder": "adresa@email.ro",
       "subject_placeholder": "Întrebare despre produsele dvs.",
       "message_placeholder": "Mesajul tău aici...",
-      "sending": "Se trimite...",
+      "contact_sending": "Se trimite...",
       "message_sent": "Mesaj Trimis",
       "message_sent_description": "Îți mulțumim pentru mesaj. Te vom contacta în curând.",
       "error": "Eroare",
@@ -205,6 +219,20 @@ const resources = {
       "google_reviews": "Customer Reviews",
       "google_reviews_subtitle": "See what our clients are saying about their experience with StilClas",
       "view_all_reviews": "View all reviews on Google",
+      
+      // Reservation form
+      "reserve_in_store": "Reserve in Store",
+      "reservation_description": "Complete the form to reserve your selected products. You will be notified when the products are ready for pickup.",
+      "full_name": "Full Name",
+      "full_name_placeholder": "John Doe",
+      "preferred_pickup_date": "Preferred Pickup Date",
+      "select_date": "Select a date",
+      "submit_reservation": "Submit Reservation",
+      "reservation_sending": "Sending...",
+      "reservation_success_title": "Reservation Sent!",
+      "reservation_success_message": "Your reservation has been successfully sent! You will receive a confirmation email shortly.",
+      "reservation_error_title": "Error",
+      "reservation_error_message": "There was an error sending your reservation. Please try again.",
       
       // Footer
       "company_description": "Crafting premium suits and menswear with exceptional attention to detail, quality materials, and timeless design.",

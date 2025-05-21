@@ -1,0 +1,70 @@
+🔄 Objective
+Replace the traditional buy/checkout flow with a reservation form that sends a confirmation email to the store using EmailJS.
+
+Users will no longer buy online — instead, they will reserve items and come to the store to purchase them in person.
+
+🧩 Complete Flow Using EmailJS
+1. 🛒 Add to Cart (same as before)
+
+Users browse the shop.
+They click “Add to Cart” as normal.
+Products are shown in the cart view.
+2. 🛍️ Cart Page – Replace Purchase Action
+
+On the cart page:
+
+Remove any "Checkout", "Buy", or payment buttons.
+Add one single button:
+Romanian: Rezervă în magazin
+English: Reserve in Store
+3. 📋 Open Reservation Form Modal
+
+When the user clicks the button, open a modal or form asking for:
+
+Full Name (Nume complet)
+Email Address (Adresă de email)
+Preferred Pickup Date (Data dorită pentru achiziție)
+✔️ The form should:
+
+Work on both desktop and mobile
+Include required field validation
+Be styled consistently with the rest of the website
+Support language toggle between RO/EN
+4. 📤 On Submit → Send Email via EmailJS
+
+Once the form is submitted:
+
+Use EmailJS to send an automatic email to the store with the following details:
+✉️ EmailJS Integration
+Use the following EmailJS parameters:
+
+Service ID: service_29oy11b
+Template ID: template_5qiucuw
+User ID / Public Key: DfK5Tovpa24FfvJ1q
+Replace the placeholders with your actual keys from the EmailJS dashboard.
+
+📨 Email Content (Template Example):
+
+Subject: Rezervare produs StilClas
+
+Domnul/Doamna: {{user_name}}  
+Email: {{user_email}}  
+Produse rezervate: {{product_list}}  
+Data aleasă pentru achiziție: {{pickup_date}}  
+Template variables should be passed dynamically when the user submits the form.
+
+Example Data Payload to EmailJS:
+
+emailjs.send("service_xxxxxx", "template_xxxxxx", {
+  user_name: "Ion Popescu",
+  user_email: "ion.popescu@email.com",
+  product_list: "Costum Business - Albastru, Cămașă Slim Fit Albă",
+  pickup_date: "2025-05-25"
+});
+✅ After Sending
+Show a success message:
+RO: Rezervarea a fost trimisă cu succes!
+EN: Your reservation has been successfully sent!
+Clear the cart and reset the form fields.
+📁 Optional UI Enhancements
+Display a confirmation page or popup.
