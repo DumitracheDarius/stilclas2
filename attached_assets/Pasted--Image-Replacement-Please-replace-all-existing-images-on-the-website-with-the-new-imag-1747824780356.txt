@@ -1,0 +1,66 @@
+### 🖼️ Image Replacement
+
+Please replace **all existing images** on the website with the **new images from the folder: /imagini_StilClas_website **. These will represent the updated, high-quality visuals of the StilClas brand.
+**Do not use any other stock photos** – only use the ones I provide.
+
+Make sure all image placements remain **elegant, centered, and responsive**, and all cards, banners, and galleries are **updated accordingly**.
+
+---
+
+### 🌍 Multilingual Support (Romanian + English)
+
+The primary language of the website must be **Romanian**.
+
+Add a **language switch button** (preferably in the header or top-right corner) that allows the user to toggle between **Romanian** and **English**.
+
+* Use clear and complete Romanian text across all pages (buttons, navigation, headings).
+* When the switch is toggled to English, replace all relevant content accordingly.
+* Make sure the switcher is animated or clearly styled to reflect the current language.
+
+---
+
+### 👔 Updated Collection Structure
+
+Please update the **“Collections”** section of the website to reflect the following structure and hierarchy:
+
+#### 👞 Main Categories and Subcategories:
+
+1. **Costume** (Suits)
+
+   * Ceremonie (Ceremony)
+   * Business
+   * Casual
+
+2. **Sacouri** (Blazers)
+
+   * Business
+   * Casual
+
+3. **Pantaloni** (Trousers)
+
+4. **Cămăși** (Shirts)
+
+5. **Cravate** (Ties)
+
+6. **Butoni** (Cufflinks)
+
+7. **Papioane** (Bow Ties)
+
+8. **Curele** (Belts)
+
+Each main category and subcategory should have its **own image**, **title**, and **description**.
+
+* Display them in a **grid layout**, neatly aligned and consistent.
+* Each category should link to a dedicated page or filtered product view.
+* Make sure everything remains **organized, elegant, and visually clean**.
+
+---
+
+### 🖋 Final Notes
+
+* All layouts must be properly **aligned**, with **equal padding/margin**, especially in grids and product cards.
+* Maintain the **refined color palette**: black, white, and the burgundy color from the logo.
+* The **logo I provided earlier must be clearly used** and visible across all views.
+* Texts must be readable, modern, and stylistically consistent with a high-end fashion brand.
+
+
