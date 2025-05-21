@@ -4,17 +4,19 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { dividerVariants, sectionContainerVariants } from "@/components/ui/stylesheet";
 import { Category } from "@/lib/types";
-import { getCategories } from "@/lib/data";
+import { getLegacyCategories } from "@/lib/data";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function Collections() {
   const [categories, setCategories] = useState<Category[]>([]);
+  const { t } = useTranslation();
   
   // Set page title and description
   useEffect(() => {
-    document.title = "Collections - StilClas";
-    setCategories(getCategories());
-  }, []);
+    document.title = `${t('collections')} - StilClas`;
+    setCategories(getLegacyCategories());
+  }, [t]);
 
   return (
     <>
@@ -27,10 +29,10 @@ export default function Collections() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-5xl font-playfair text-white font-semibold mb-4">Our Collections</h1>
+            <h1 className="text-4xl md:text-5xl font-playfair text-white font-semibold mb-4">{t('collections')}</h1>
             <div className={dividerVariants()}></div>
             <p className="text-gray-300 mt-6 max-w-3xl mx-auto font-lato">
-              Discover our carefully curated collections, each designed to bring sophistication and style to the modern gentleman's wardrobe.
+              {t('discover_our_exquisite_collections')}
             </p>
           </motion.div>
         </div>

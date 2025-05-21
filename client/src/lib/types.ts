@@ -67,6 +67,7 @@ export interface Subcategory {
   name: string;
   description: string;
   imageUrl: string;
+  translationKey?: string;
 }
 
 // Category type

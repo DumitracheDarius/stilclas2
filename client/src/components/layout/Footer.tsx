@@ -44,28 +44,28 @@ export default function Footer() {
           
           {/* Customer Service */}
           <div>
-            <h4 className="text-lg font-playfair mb-6">Customer Service</h4>
+            <h4 className="text-lg font-playfair mb-6">{t('customer_service')}</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">FAQ</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">Shipping Policy</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">Returns & Exchanges</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">Size Guide</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">Terms & Conditions</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">{t('faq')}</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">{t('shipping')}</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">{t('returns')}</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">{t('sizing_guide')}</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">{t('privacy_policy')}</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-burgundy transition-luxury">{t('terms')}</a></li>
             </ul>
           </div>
           
           {/* Newsletter */}
           <div>
-            <h4 className="text-lg font-playfair mb-6">Newsletter</h4>
+            <h4 className="text-lg font-playfair mb-6">{t('newsletter')}</h4>
             <p className="text-gray-300 mb-4 font-lato">
-              Subscribe to receive updates on new collections and exclusive offers.
+              {t('newsletter_desc')}
             </p>
             <form className="mb-4" onSubmit={(e) => e.preventDefault()}>
               <div className="flex">
                 <Input 
                   type="email" 
-                  placeholder="Your email address" 
+                  placeholder={t('email')} 
                   className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-sm focus:outline-none focus:border-burgundy transition-luxury"
                 />
                 <Button type="submit" variant="default" size="icon" className="ml-2">
@@ -81,7 +81,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} StilClas. All rights reserved. Made with ♥ by website.ro
+              {t('copyright')} Made with ♥ by website.ro
             </p>
             <div className="flex space-x-6">
               {/* Payment method icons */}
