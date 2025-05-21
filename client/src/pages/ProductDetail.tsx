@@ -18,7 +18,7 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
-  const [mainImage, setMainImage] = useState("");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { t } = useTranslation();
   const { toast } = useToast();
   
@@ -29,35 +29,30 @@ export default function ProductDetail() {
     }
   }, [product]);
   
-  // Function to handle thumbnail click with proper image update
-  const handleThumbnailClick = (imageUrl: string) => {
-    console.log("Thumbnail clicked, updating main image to:", imageUrl);
-    
-    // Use a direct state update to avoid flickering
-    setMainImage(imageUrl);
+  // Helper function to get all product images
+  const getAllImages = () => {
+    if (!product) return [];
+    return [product.imageUrl, ...(product.gallery || [])];
   };
   
-  // Functions to navigate between images
-  const navigateToPrevImage = () => {
-    if (!product || !product.gallery) return;
+  // Navigate to previous image
+  const prevImage = () => {
+    const images = getAllImages();
+    if (images.length <= 1) return;
     
-    const allImages = [product.imageUrl, ...product.gallery];
-    const currentIndex = allImages.indexOf(mainImage || product.imageUrl);
-    const prevIndex = (currentIndex - 1 + allImages.length) % allImages.length;
-    
-    console.log("Navigating to previous image:", allImages[prevIndex]);
-    setMainImage(allImages[prevIndex]);
+    setCurrentImageIndex((prev) => 
+      prev === 0 ? images.length - 1 : prev - 1
+    );
   };
   
-  const navigateToNextImage = () => {
-    if (!product || !product.gallery) return;
+  // Navigate to next image
+  const nextImage = () => {
+    const images = getAllImages();
+    if (images.length <= 1) return;
     
-    const allImages = [product.imageUrl, ...product.gallery];
-    const currentIndex = allImages.indexOf(mainImage || product.imageUrl);
-    const nextIndex = (currentIndex + 1) % allImages.length;
-    
-    console.log("Navigating to next image:", allImages[nextIndex]);
-    setMainImage(allImages[nextIndex]);
+    setCurrentImageIndex((prev) => 
+      prev === images.length - 1 ? 0 : prev + 1
+    );
   };
   
   // Fetch product data
@@ -66,9 +61,7 @@ export default function ProductDetail() {
       const fetchedProduct = getProductById(params.id);
       if (fetchedProduct) {
         setProduct(fetchedProduct);
-        
-        // Set the main image immediately
-        setMainImage(fetchedProduct.imageUrl);
+        setCurrentImageIndex(0);
         
         // Set default selections
         if (fetchedProduct.sizes && fetchedProduct.sizes.length > 0) {
@@ -205,6 +198,10 @@ export default function ProductDetail() {
     );
   }
 
+  // Get all images for current product
+  const allImages = getAllImages();
+  const currentImage = allImages[currentImageIndex];
+
   return (
     <>
       {/* Product Detail */}
@@ -219,22 +216,22 @@ export default function ProductDetail() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6 }}
-                  key={mainImage || 'default-image-key'} // Add key to force re-render
+                  key={`image-${currentImageIndex}`} // Key to force re-render
                 >
                   <img 
-                    src={mainImage || product.imageUrl} 
-                    alt={product.name} 
+                    src={currentImage} 
+                    alt={`${product.name} - Image ${currentImageIndex + 1}`} 
                     className="w-full h-auto object-cover transition-all duration-300"
                   />
                 </motion.div>
                 
-                {/* Navigation Arrows */}
-                {product.gallery && product.gallery.length > 0 && (
+                {/* Navigation Arrows - only show if there are multiple images */}
+                {allImages.length > 1 && (
                   <>
                     <button 
                       type="button"
                       className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all z-10"
-                      onClick={navigateToPrevImage}
+                      onClick={prevImage}
                       aria-label="Previous image"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -244,7 +241,7 @@ export default function ProductDetail() {
                     <button 
                       type="button"
                       className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all z-10"
-                      onClick={navigateToNextImage}
+                      onClick={nextImage}
                       aria-label="Next image"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -255,35 +252,19 @@ export default function ProductDetail() {
                 )}
               </div>
               
-              {/* Thumbnail Gallery */}
-              {product.gallery && product.gallery.length > 0 && (
+              {/* Thumbnail Gallery - only show if there are multiple images */}
+              {allImages.length > 1 && (
                 <div className="grid grid-cols-4 gap-4">
-                  <button 
-                    type="button"
-                    className={cn(
-                      "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105 focus:outline-none",
-                      mainImage === product.imageUrl ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
-                    )}
-                    onClick={() => handleThumbnailClick(product.imageUrl)}
-                    title={t('main_image')}
-                  >
-                    <img 
-                      src={product.imageUrl} 
-                      alt={`${product.name} ${t('thumbnail')}`} 
-                      className="w-full h-24 object-cover"
-                    />
-                  </button>
-                  
-                  {product.gallery.map((image, index) => (
+                  {allImages.map((image, index) => (
                     <button 
-                      key={index}
+                      key={`thumb-${index}`}
                       type="button"
                       className={cn(
                         "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105 focus:outline-none",
-                        mainImage === image ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
+                        currentImageIndex === index ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
                       )}
-                      onClick={() => handleThumbnailClick(image)}
-                      title={`${t('view')} ${index + 1}`}
+                      onClick={() => setCurrentImageIndex(index)}
+                      title={index === 0 ? t('main_image') : `${t('view')} ${index}`}
                     >
                       <img 
                         src={image} 
@@ -345,76 +326,73 @@ export default function ProductDetail() {
                         key={color}
                         className={cn(
                           "w-8 h-8 rounded-full border",
-                          selectedColor === color ? "ring-2 ring-offset-2 ring-burgundy" : "ring-0"
+                          selectedColor === color ? "ring-2 ring-burgundy ring-offset-2" : "ring-0"
                         )}
-                        style={{ backgroundColor: color }}
+                        style={{ backgroundColor: color.toLowerCase() }}
                         onClick={() => setSelectedColor(color)}
                         aria-label={`Select ${color} color`}
-                      ></button>
+                      />
                     ))}
                   </div>
                 </div>
               )}
               
-              {/* Quantity */}
+              {/* Quantity Selection */}
               <div className="mb-8">
                 <h3 className="text-sm font-medium mb-3">Quantity</h3>
-                <div className="flex items-center border border-gray-300 rounded-md w-32">
+                <div className="flex items-center">
                   <Button 
-                    variant="ghost" 
+                    variant="outline" 
                     size="icon" 
-                    onClick={decreaseQuantity}
+                    onClick={decreaseQuantity} 
                     disabled={quantity <= 1}
-                    className="text-gray-500 hover:text-burgundy"
+                    className="h-10 w-10"
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
-                  <div className="flex-1 text-center font-medium">{quantity}</div>
+                  <span className="mx-4 font-medium text-lg min-w-[2rem] text-center">{quantity}</span>
                   <Button 
-                    variant="ghost" 
+                    variant="outline" 
                     size="icon" 
                     onClick={increaseQuantity}
-                    className="text-gray-500 hover:text-burgundy"
+                    className="h-10 w-10"
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
               
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              {/* Add to Cart & Wishlist */}
+              <div className="flex items-center gap-4 mb-8">
                 <Button 
-                  variant="default" 
-                  size="lg" 
-                  className="flex-1 gap-2"
+                  className="flex-1 flex items-center justify-center gap-2 px-8 py-6"
                   onClick={handleAddToCart}
                 >
                   <ShoppingCart className="h-5 w-5" />
-                  {t('add_to_cart')}
+                  Add to Reservation
                 </Button>
-                <Button variant="outline" size="lg" className="flex-1 gap-2">
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="h-12 w-12 border-burgundy text-burgundy hover:bg-burgundy hover:text-white transition-colors"
+                >
                   <Heart className="h-5 w-5" />
-                  {t('add_to_wishlist')}
                 </Button>
-              </div>
-              
-              {/* Share */}
-              <div className="flex items-center text-gray-600 text-sm gap-2">
-                <Share2 className="h-4 w-4" />
-                <span>Share:</span>
-                <div className="flex space-x-2">
-                  <a href="#" className="hover:text-burgundy transition-luxury">Facebook</a>
-                  <a href="#" className="hover:text-burgundy transition-luxury">Instagram</a>
-                  <a href="#" className="hover:text-burgundy transition-luxury">Pinterest</a>
-                </div>
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="h-12 w-12"
+                >
+                  <Share2 className="h-5 w-5" />
+                </Button>
               </div>
               
               {/* Product Meta */}
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <p className="text-sm text-gray-600 mb-1">
+              <div className="border-t border-b py-4 space-y-2">
+                <p className="text-sm text-gray-600">
                   <span className="font-medium">SKU:</span> {product.sku || `SC-${product.id}`}
                 </p>
-                <p className="text-sm text-gray-600 mb-1">
+                <p className="text-sm text-gray-600">
                   <span className="font-medium">Category:</span> {product.category}
                 </p>
                 <p className="text-sm text-gray-600">
@@ -479,11 +457,11 @@ export default function ProductDetail() {
                       </li>
                       <li className="flex items-start">
                         <span className="font-medium w-32">Storage:</span>
-                        <span>Hang on a padded hanger in a breathable garment bag</span>
+                        <span>Hang on a quality hanger in a cool, dry place</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="font-medium w-32">Pressing:</span>
-                        <span>Low iron if needed, use a pressing cloth</span>
+                        <span className="font-medium w-32">Travel:</span>
+                        <span>Use a garment bag for protection</span>
                       </li>
                     </ul>
                   </div>
@@ -491,72 +469,66 @@ export default function ProductDetail() {
               </TabsContent>
               
               <TabsContent value="reviews" className="mt-6">
-                <div className="space-y-6">
-                  {product.reviews && product.reviews.length > 0 ? (
-                    product.reviews.map((review, index) => (
-                      <div key={index} className="border-b border-gray-200 pb-6 last:border-0">
-                        <div className="flex items-center mb-2">
-                          <div className="flex text-burgundy mr-2">
-                            {renderStars(review.rating)}
-                          </div>
-                          <span className="font-medium">{review.title}</span>
+                {product.reviews && product.reviews.length > 0 ? (
+                  <div className="space-y-8">
+                    {product.reviews.map((review, index) => (
+                      <div key={index} className="border-b pb-6 last:border-0">
+                        <div className="flex justify-between items-start mb-2">
+                          <h4 className="font-playfair text-lg">{review.title}</h4>
+                          <span className="text-sm text-gray-500">{review.date}</span>
                         </div>
-                        <p className="text-gray-700 mb-2">{review.comment}</p>
-                        <div className="flex items-center text-sm text-gray-500">
-                          <span className="font-medium">{review.author}</span>
-                          <span className="mx-2">•</span>
-                          <span>{review.date}</span>
+                        <div className="flex text-burgundy mb-2">
+                          {renderStars(review.rating)}
                         </div>
+                        <p className="text-gray-700 mb-2 font-lato">{review.comment}</p>
+                        <p className="text-sm text-gray-600">By {review.author}</p>
                       </div>
-                    ))
-                  ) : (
-                    <div className="text-center py-4">
-                      <p className="text-gray-600">No reviews yet.</p>
-                    </div>
-                  )}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <h3 className="text-xl mb-2">No reviews yet</h3>
+                    <p className="text-gray-600 mb-4">Be the first to review this product</p>
+                  </div>
+                )}
               </TabsContent>
             </Tabs>
           </div>
+          
+          {/* Related Products */}
+          {relatedProducts.length > 0 && (
+            <div className="mt-16">
+              <h2 className="text-2xl font-playfair font-medium mb-8 text-center">You May Also Like</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {relatedProducts.map((relatedProduct) => (
+                  <motion.div 
+                    key={relatedProduct.id}
+                    className="group relative"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Link href={`/product/${relatedProduct.id}`} className="block">
+                      <div className="overflow-hidden rounded-md mb-3">
+                        <img 
+                          src={relatedProduct.imageUrl} 
+                          alt={relatedProduct.name} 
+                          className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <h3 className="text-lg font-medium mb-1">{relatedProduct.name}</h3>
+                      <div className="flex text-burgundy mb-1">
+                        {renderStars(relatedProduct.rating)}
+                      </div>
+                      <p className="font-medium text-burgundy">${relatedProduct.price.toFixed(2)}</p>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
-      
-      {/* Related Products */}
-      {relatedProducts.length > 0 && (
-        <section className={sectionContainerVariants({ variant: "gray" })}>
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-playfair font-semibold mb-2">You May Also Like</h2>
-              <div className="w-20 h-0.5 bg-burgundy mx-auto"></div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {relatedProducts.map((relatedProduct) => (
-                <div key={relatedProduct.id} className="product-card group">
-                  <Link href={`/product/${relatedProduct.id}`}>
-                    <div className="relative overflow-hidden rounded-md shadow-md mb-4">
-                      <img 
-                        src={relatedProduct.imageUrl} 
-                        alt={relatedProduct.name} 
-                        className="w-full h-80 object-cover product-image"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-luxury flex items-center justify-center">
-                        <Button variant="default" className="transform -translate-y-4 group-hover:translate-y-0 transition-luxury">
-                          View Product
-                        </Button>
-                      </div>
-                    </div>
-                    <h3 className="text-lg font-playfair font-medium mb-1 hover:text-burgundy transition-luxury">
-                      {relatedProduct.name}
-                    </h3>
-                  </Link>
-                  <p className="text-burgundy font-medium">${relatedProduct.price.toFixed(2)}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
     </>
   );
 }
