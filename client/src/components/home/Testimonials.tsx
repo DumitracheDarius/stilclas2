@@ -50,7 +50,7 @@ export default function Testimonials({ testimonials, className }: TestimonialsPr
                 {renderStars(testimonial.rating)}
               </div>
               <p className="text-gray-800 mb-6 italic font-lato">
-                "{testimonial.quote}"
+                "{t(`testimonial${index+1}_quote`)}"
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 rounded-full bg-gray-400 mr-4 overflow-hidden">

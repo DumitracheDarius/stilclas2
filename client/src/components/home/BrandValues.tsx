@@ -67,14 +67,18 @@ export default function BrandValues({ values, className }: BrandValuesProps) {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {values.map((value) => (
+          {values.map((value, index) => (
             <motion.div 
               key={value.id} 
               className="text-center"
               variants={itemVariants}
             >
-              <div className="inline-block p-4 rounded-full bg-burgundy bg-opacity-10 mb-6">
-                {renderIcon(value.iconName)}
+              <div className="w-full h-64 rounded-lg overflow-hidden mb-6">
+                <img 
+                  src={`/assets/value${index + 1}.jpg`} 
+                  alt={t(value.title.toLowerCase())}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
               </div>
               <h3 className="text-xl font-playfair font-medium mb-3">{t(value.title.toLowerCase())}</h3>
               <p className="text-gray-800 font-lato">

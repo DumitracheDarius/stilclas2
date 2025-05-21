@@ -57,6 +57,9 @@ const resources = {
       
       // Testimonials
       "testimonials": "Mărturii",
+      "testimonial1_quote": "Atenția la detalii în costumul meu de nuntă a fost extraordinară. StilClas a livrat exact ceea ce mi-am imaginat—eleganță fără timp cu o croială perfectă.",
+      "testimonial2_quote": "Ca CEO, aspectul meu contează. Costumele StilClas au devenit imaginea mea de marcă—calitate excepțională, potrivire perfectă și stil sofisticat.",
+      "testimonial3_quote": "Colecția smart casual combină confortul cu rafinamentul perfect. Aceste piese mi-au îmbunătățit substanțial stilul de zi cu zi.",
       
       // Footer
       "company_description": "Creăm costume și îmbrăcăminte pentru bărbați premium cu atenție excepțională la detalii, materiale de calitate și design fără timp.",
@@ -153,6 +156,9 @@ const resources = {
       
       // Testimonials
       "testimonials": "Testimonials",
+      "testimonial1_quote": "The attention to detail in my wedding suit was extraordinary. StilClas delivered exactly what I envisioned—timeless elegance with perfect tailoring.",
+      "testimonial2_quote": "As a CEO, my appearance matters. StilClas suits have become my signature look—exceptional quality, perfect fit, and sophisticated style.",
+      "testimonial3_quote": "The smart casual collection combines comfort with sophistication perfectly. These pieces have elevated my everyday style substantially.",
       
       // Footer
       "company_description": "Crafting premium suits and menswear with exceptional attention to detail, quality materials, and timeless design.",
