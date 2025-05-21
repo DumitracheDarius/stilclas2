@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRoute, Link } from "wouter";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,7 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [allImages, setAllImages] = useState<string[]>([]);
   const { t } = useTranslation();
   const { toast } = useToast();
   
@@ -26,34 +27,30 @@ export default function ProductDetail() {
   useEffect(() => {
     if (product) {
       document.title = `${product.name} - StilClas`;
+      
+      // Set all images once product is loaded
+      const imageUrls = [product.imageUrl, ...(product.gallery || [])];
+      setAllImages(imageUrls);
     }
   }, [product]);
   
-  // Helper function to get all product images
-  const getAllImages = () => {
-    if (!product) return [];
-    return [product.imageUrl, ...(product.gallery || [])];
-  };
-  
   // Navigate to previous image
-  const prevImage = () => {
-    const images = getAllImages();
-    if (images.length <= 1) return;
+  const prevImage = useCallback(() => {
+    if (allImages.length <= 1) return;
     
     setCurrentImageIndex((prev) => 
-      prev === 0 ? images.length - 1 : prev - 1
+      prev === 0 ? allImages.length - 1 : prev - 1
     );
-  };
+  }, [allImages]);
   
   // Navigate to next image
-  const nextImage = () => {
-    const images = getAllImages();
-    if (images.length <= 1) return;
+  const nextImage = useCallback(() => {
+    if (allImages.length <= 1) return;
     
     setCurrentImageIndex((prev) => 
-      prev === images.length - 1 ? 0 : prev + 1
+      prev === allImages.length - 1 ? 0 : prev + 1
     );
-  };
+  }, [allImages]);
   
   // Fetch product data
   useEffect(() => {
@@ -77,6 +74,11 @@ export default function ProductDetail() {
       }
     }
   }, [params]);
+  
+  // Handle thumbnail click
+  const handleThumbnailClick = useCallback((index: number) => {
+    setCurrentImageIndex(index);
+  }, []);
   
   // Quantity handlers
   const decreaseQuantity = () => {
@@ -198,9 +200,8 @@ export default function ProductDetail() {
     );
   }
 
-  // Get all images for current product
-  const allImages = getAllImages();
-  const currentImage = allImages[currentImageIndex];
+  // Get current image
+  const currentImage = allImages[currentImageIndex] || product.imageUrl;
 
   return (
     <>
@@ -263,7 +264,7 @@ export default function ProductDetail() {
                         "cursor-pointer rounded-md overflow-hidden border-2 transition-all duration-200 transform hover:scale-105 focus:outline-none",
                         currentImageIndex === index ? "border-burgundy shadow-md" : "border-transparent hover:border-gray-300"
                       )}
-                      onClick={() => setCurrentImageIndex(index)}
+                      onClick={() => handleThumbnailClick(index)}
                       title={index === 0 ? t('main_image') : `${t('view')} ${index}`}
                     >
                       <img 
