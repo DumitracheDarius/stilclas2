@@ -136,16 +136,15 @@ export default function Reservation() {
     setIsSubmitting(true);
     
     try {
-      // Create email template parameters
+      // Create email template parameters - matching the EmailJS template variables exactly
       const templateParams = {
-        to_name: "StilClas",
-        from_name: data.fullName,
-        from_email: data.email,
+        user_name: data.fullName,
+        user_email: data.email,
         phone: data.phone,
-        preferred_date: data.preferredDate || "Not specified",
+        pickup_date: data.preferredDate || "Not specified",
         preferred_time: data.preferredTime || "Not specified",
         notes: data.notes || "None",
-        items: cartItems.map(item => `${item.name} - ${formatPrice(item.price)}`).join('\\n'),
+        product_list: cartItems.map(item => `${item.name} - ${formatPrice(item.price)}`).join('\\n'),
         total: formatPrice(totalPrice),
         language: i18n.language,
         reply_to: data.email,
