@@ -252,7 +252,7 @@ export function getBestSellingProducts(): Product[] {
       name: "Signature White Shirt",
       description: "Premium cotton dress shirt with elegant French cuffs",
       price: 199.00,
-      imageUrl: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=750&q=80",
+      imageUrl: "/assets/bestseller4.jpg",
       rating: 4.0,
       reviewCount: 42,
       categoryId: "business",
@@ -463,7 +463,7 @@ export function getTestimonials(): Testimonial[] {
       title: "Wedding Collection Customer",
       quote: "The attention to detail in my wedding suit was extraordinary. StilClas delivered exactly what I envisioned—timeless elegance with perfect tailoring.",
       rating: 5,
-      avatarUrl: ""
+      avatarUrl: "/assets/testimonial1.jpg"
     },
     {
       id: "t2",
@@ -471,7 +471,7 @@ export function getTestimonials(): Testimonial[] {
       title: "Executive Collection Customer",
       quote: "As a CEO, my appearance matters. StilClas suits have become my signature look—exceptional quality, perfect fit, and sophisticated style.",
       rating: 5,
-      avatarUrl: ""
+      avatarUrl: "/assets/testimonial2.jpg"
     },
     {
       id: "t3",
@@ -479,7 +479,7 @@ export function getTestimonials(): Testimonial[] {
       title: "Smart Casual Collection Customer",
       quote: "The smart casual collection combines comfort with sophistication perfectly. These pieces have elevated my everyday style substantially.",
       rating: 4.5,
-      avatarUrl: ""
+      avatarUrl: "/assets/testimonial3.jpg"
     }
   ];
 }
