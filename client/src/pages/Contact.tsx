@@ -67,32 +67,32 @@ export default function Contact() {
                   <div className="flex items-start">
                     <MapPin className="h-5 w-5 text-burgundy mr-4 mt-1" />
                     <div>
-                      <h4 className="font-medium mb-1">Store Location</h4>
-                      <p className="text-gray-800">123 Fashion Avenue, Luxury District, City, Country</p>
+                      <h4 className="font-medium mb-1">{t('store_location')}</h4>
+                      <p className="text-gray-800">{t('store_address')}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
                     <Phone className="h-5 w-5 text-burgundy mr-4 mt-1" />
                     <div>
-                      <h4 className="font-medium mb-1">Phone</h4>
-                      <p className="text-gray-800">+1 (555) 123-4567</p>
+                      <h4 className="font-medium mb-1">{t('phone')}</h4>
+                      <p className="text-gray-800">{t('phone_number')}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
                     <Mail className="h-5 w-5 text-burgundy mr-4 mt-1" />
                     <div>
-                      <h4 className="font-medium mb-1">Email</h4>
-                      <p className="text-gray-800">client@stilclas.com</p>
+                      <h4 className="font-medium mb-1">{t('email')}</h4>
+                      <p className="text-gray-800">{t('email_address')}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
                     <Clock className="h-5 w-5 text-burgundy mr-4 mt-1" />
                     <div>
-                      <h4 className="font-medium mb-1">Business Hours</h4>
-                      <p className="text-gray-800">Monday-Friday: 10AM - 8PM<br />Saturday: 10AM - 6PM<br />Sunday: 12PM - 5PM</p>
+                      <h4 className="font-medium mb-1">{t('business_hours')}</h4>
+                      <p className="text-gray-800">{t('weekday_hours')}<br />{t('saturday_hours')}<br />{t('sunday_hours')}</p>
                     </div>
                   </div>
                 </div>
@@ -100,7 +100,7 @@ export default function Contact() {
               
               {/* Social Media */}
               <div>
-                <h3 className="text-xl font-playfair mb-4">Follow Us</h3>
+                <h3 className="text-xl font-playfair mb-4">{t('follow_us')}</h3>
                 <div className="flex space-x-4">
                   <a href="#" className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-burgundy transition-luxury">
                     <Facebook className="h-5 w-5" />

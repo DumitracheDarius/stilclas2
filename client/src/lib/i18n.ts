@@ -85,12 +85,24 @@ const resources = {
       
       // Contact
       "contact_title": "Contactează-ne",
-      "contact_subtitle": "Suntem aici pentru a te ajuta",
+      "contact_subtitle": "Suntem aici pentru a te ajuta cu întrebările și nevoile tale de îmbrăcăminte formală",
       "name": "Nume",
       "email": "Email",
       "subject": "Subiect",
       "message": "Mesaj",
       "send_message": "Trimite Mesaj",
+      "get_in_touch": "Contactează-ne",
+      "contact_info_description": "Vizitați magazinul nostru sau contactați echipa de servicii clienți pentru asistență personalizată în alegerea stilului potrivit.",
+      "store_location": "Locația Magazinului",
+      "store_address": "123 Bulevardul Modei, Sector 1, București, România",
+      "phone": "Telefon",
+      "phone_number": "+40 755 123 456",
+      "email_address": "client@stilclas.ro",
+      "business_hours": "Program",
+      "weekday_hours": "Luni-Vineri: 10:00 - 20:00",
+      "saturday_hours": "Sâmbătă: 10:00 - 18:00",
+      "sunday_hours": "Duminică: 12:00 - 17:00",
+      "follow_us": "Urmărește-ne",
       
       // Product details
       "add_to_cart": "Adaugă în coș",
@@ -199,12 +211,24 @@ const resources = {
       
       // Contact
       "contact_title": "Contact Us",
-      "contact_subtitle": "We're here to help",
+      "contact_subtitle": "We're here to help with any questions and formal wear needs you may have",
       "name": "Name",
       "email": "Email",
       "subject": "Subject",
       "message": "Message",
       "send_message": "Send Message",
+      "get_in_touch": "Get in Touch",
+      "contact_info_description": "Visit our flagship store or contact our customer service team for personalized assistance with your style needs.",
+      "store_location": "Store Location",
+      "store_address": "123 Fashion Avenue, Luxury District, Bucharest, Romania",
+      "phone": "Phone",
+      "phone_number": "+40 755 123 456",
+      "email_address": "client@stilclas.ro",
+      "business_hours": "Business Hours",
+      "weekday_hours": "Monday-Friday: 10AM - 8PM",
+      "saturday_hours": "Saturday: 10AM - 6PM",
+      "sunday_hours": "Sunday: 12PM - 5PM",
+      "follow_us": "Follow Us",
       
       // Product details
       "add_to_cart": "Add to Cart",
