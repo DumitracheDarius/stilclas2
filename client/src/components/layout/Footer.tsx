@@ -93,29 +93,29 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/faq"
                   className="text-gray-300 hover:text-burgundy transition-luxury"
                 >
-                  {t("faq")}
-                </a>
+                  {t("faqs")}
+                </Link>
               </li>
 
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/privacy"
                   className="text-gray-300 hover:text-burgundy transition-luxury"
                 >
                   {t("privacy_policy")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/terms"
                   className="text-gray-300 hover:text-burgundy transition-luxury"
                 >
-                  {t("terms")}
-                </a>
+                  {t("terms_and_conditions")}
+                </Link>
               </li>
             </ul>
           </div>
