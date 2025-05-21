@@ -103,6 +103,15 @@ const resources = {
       "saturday_hours": "Sâmbătă: 10:00 - 18:00",
       "sunday_hours": "Duminică: 12:00 - 17:00",
       "follow_us": "Urmărește-ne",
+      "name_placeholder": "Ion Popescu",
+      "email_placeholder": "adresa@email.ro",
+      "subject_placeholder": "Întrebare despre produsele dvs.",
+      "message_placeholder": "Mesajul tău aici...",
+      "sending": "Se trimite...",
+      "message_sent": "Mesaj Trimis",
+      "message_sent_description": "Îți mulțumim pentru mesaj. Te vom contacta în curând.",
+      "error": "Eroare",
+      "message_error_description": "A apărut o problemă la trimiterea mesajului. Te rugăm să încerci din nou mai târziu.",
       
       // Product details
       "add_to_cart": "Adaugă în coș",
