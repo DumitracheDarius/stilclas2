@@ -201,18 +201,6 @@ export default function Header() {
           <Button
             variant="ghost"
             size="icon"
-            aria-label="Search"
-            className={
-              isScrolled || isDarkBackground
-                ? "text-white hover:text-white"
-                : "text-white hover:text-white"
-            }
-          >
-            <Search className="h-5 w-5" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
             aria-label="Shopping Cart"
             onClick={handleCartClick}
             className={cn(

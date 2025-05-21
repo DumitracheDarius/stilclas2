@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/layout/CookieBanner";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import Home from "@/pages/Home";
 import AboutUs from "@/pages/AboutUs";
 import Collections from "@/pages/Collections";
@@ -46,6 +47,7 @@ function App() {
       </main>
       <Footer />
       <CookieBanner />
+      <WhatsAppButton />
       <Toaster />
     </TooltipProvider>
   );

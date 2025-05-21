@@ -23,14 +23,14 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://www.facebook.com/stilClass"
                 className="text-gray-300 hover:text-burgundy transition-luxury"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/stil.clas.official/"
                 className="text-gray-300 hover:text-burgundy transition-luxury"
                 aria-label="Instagram"
               >
