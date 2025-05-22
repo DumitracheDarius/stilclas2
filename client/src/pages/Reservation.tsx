@@ -18,10 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { formatPrice } from "@/lib/utils";
 import { Product } from "@/lib/types";
 import { Loader2, ShoppingBag, Trash2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 
 // Form schema
 const formSchema = z.object({

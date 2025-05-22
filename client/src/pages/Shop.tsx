@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
@@ -402,8 +402,8 @@ export default function Shop() {
                 className="mb-2"
               />
               <div className="flex justify-between text-sm text-gray-600">
-                <span>${priceRange[0]}</span>
-                <span>${priceRange[1]}</span>
+                <span>{formatPrice(priceRange[0])}</span>
+                <span>{formatPrice(priceRange[1])}</span>
               </div>
             </div>
           </div>
@@ -444,7 +444,7 @@ export default function Shop() {
                     {product.name}
                   </h3>
                   <p className="text-burgundy font-medium mb-3">
-                    ${product.price.toFixed(2)}
+                    {formatPrice(product.price)}
                   </p>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { dividerVariants, sectionContainerVariants } from "@/components/ui/stylesheet";
 import { Product } from "@/lib/types";
@@ -146,7 +146,7 @@ export default function BestSellers({ products, className }: BestSellersProps) {
                     </div>
                     <div className="p-6">
                       <h3 className="font-playfair text-xl mb-2">{product.name}</h3>
-                      <p className="text-burgundy font-medium mb-3">${product.price.toFixed(2)}</p>
+                      <p className="text-burgundy font-medium mb-3">{formatPrice(product.price)}</p>
                       <div className="flex items-center mb-4">
                         <div className="flex text-burgundy">
                           {renderStars(product.rating)}
