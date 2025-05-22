@@ -220,6 +220,10 @@ const resources = {
       google_reviews_subtitle:
         "Vedeți ce spun clienții noștri despre experiența lor cu StilClas",
       view_all_reviews: "Vezi toate recenziile pe Google",
+      
+      // Location section
+      where_to_find_us: "Unde ne găsiți?",
+      here_you_can_find_us: "Aici ne găsești!",
 
       // Reservation form
       reserve_in_store: "Rezervă în magazin",
@@ -464,6 +468,10 @@ const resources = {
       google_reviews_subtitle:
         "See what our clients are saying about their experience with StilClas",
       view_all_reviews: "View all reviews on Google",
+      
+      // Location section
+      where_to_find_us: "Where to find us?",
+      here_you_can_find_us: "Here you can find us!",
 
       // Reservation form
       reserve_in_store: "Reserve in Store",

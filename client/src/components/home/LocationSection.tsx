@@ -7,7 +7,7 @@ export default function LocationSection() {
   const { t } = useTranslation();
   
   return (
-    <section className={cn(sectionContainerVariants({ variant: "light" }))}>
+    <section className={cn(sectionContainerVariants({ variant: "white" }))}>
       <div className="container mx-auto px-4 py-16">
         <motion.h2 
           className="text-3xl md:text-4xl font-playfair font-semibold text-center mb-8" 
