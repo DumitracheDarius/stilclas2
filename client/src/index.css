@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom 3D logo effect */
+/* Custom logo effect with soft white glow */
 .logo-container {
   position: relative;
   display: inline-block;
+  overflow: visible;
 }
 
 .logo-3d-effect {
@@ -13,19 +14,33 @@
   border-radius: 10px;
   box-shadow: 
     0 0 15px 2px rgba(126, 31, 45, 0.3),
-    0 0 5px 1px rgba(255, 255, 255, 0.2),
+    0 0 12px 5px rgba(255, 255, 255, 0.5),
     0 5px 15px rgba(0, 0, 0, 0.3);
-  filter: blur(2px);
-  transition: all 0.3s ease;
+  filter: blur(8px);
+  transition: all 0.5s ease;
   transform: translateZ(-10px);
   z-index: 1;
+  animation: softGlowPulse 3s infinite alternate;
+}
+
+@keyframes softGlowPulse {
+  0% {
+    box-shadow: 
+      0 0 15px 2px rgba(126, 31, 45, 0.3),
+      0 0 12px 5px rgba(255, 255, 255, 0.5),
+      0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    box-shadow: 
+      0 0 20px 3px rgba(126, 31, 45, 0.4),
+      0 0 18px 8px rgba(255, 255, 255, 0.7),
+      0 8px 20px rgba(0, 0, 0, 0.4);
+  }
 }
 
 .logo-container:hover .logo-3d-effect {
-  box-shadow: 
-    0 0 20px 5px rgba(126, 31, 45, 0.4),
-    0 0 10px 2px rgba(255, 255, 255, 0.3),
-    0 8px 20px rgba(0, 0, 0, 0.4);
+  filter: blur(10px);
+  animation-duration: 1.5s;
 }
 
 :root {

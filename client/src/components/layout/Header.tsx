@@ -166,14 +166,16 @@ export default function Header() {
       )}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo with 3D effect */}
+        {/* Logo with enhanced soft glow effect for better visibility */}
         <Link href="/" className="z-10 rounded px-2 py-1 relative logo-container">
           <div className="logo-3d-effect absolute inset-0 w-full h-full"></div>
-          <img
-            src="/assets/logoStilClas.png"
-            alt="StilClas Logo"
-            className="h-14 md:h-16 relative z-10"
-          />
+          <div className="relative z-10 backdrop-blur-sm bg-white/10 rounded-lg">
+            <img
+              src="/assets/logoStilClas.png"
+              alt="StilClas Logo"
+              className="h-14 md:h-16 relative z-10"
+            />
+          </div>
         </Link>
 
         {/* Desktop Navigation */}

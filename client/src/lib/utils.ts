@@ -7,11 +7,14 @@ export function cn(...inputs: ClassValue[]) {
 
 // Format price in Romanian currency (LEI/RON)
 export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('ro-RO', {
+  // Format with symbol first, then replace with custom format
+  const formatted = new Intl.NumberFormat('ro-RO', {
     style: 'currency',
     currency: 'RON',
-    currencyDisplay: 'name',
   }).format(price);
+  
+  // Replace RON symbol with "Lei"
+  return formatted.replace('RON', 'Lei');
 }
 
 // Truncate string
