@@ -230,7 +230,7 @@ const resources = {
       // Reservation form
       reserve_in_store: "Rezervă în magazin",
       reservation_description:
-        "Completați formularul pentru a rezerva produsele selectate. Veți fi notificat c �nd produsele sunt gata pentru a fi ridicate.",
+        "Completați formularul pentru a rezerva produsele selectate. Veți fi notificat când produsele sunt gata pentru a fi ridicate.",
       full_name: "Nume complet",
       full_name_placeholder: "Ion Popescu",
       res_email: "Email",
