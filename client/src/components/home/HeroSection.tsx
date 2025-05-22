@@ -43,7 +43,7 @@ export default function HeroSection({ className }: HeroSectionProps) {
             size="lg"
             className="transform hover:-translate-y-1 text-lg px-12 py-6 font-semibold"
           >
-            <Link href="/collections">{t("explore_collection")}</Link>
+            <Link href="/shop">{t("explore_collection")}</Link>
           </Button>
         </motion.div>
       </div>

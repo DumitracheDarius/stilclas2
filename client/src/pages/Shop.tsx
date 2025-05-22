@@ -477,7 +477,7 @@ export default function Shop() {
                 onClick={() => {
                   setSelectedCategory("");
                   setSelectedSubcategory("");
-                  setPriceRange([0, 2000]);
+                  setPriceRange([0, 1900]);
                   setSortOption("newest");
                 }}
               >

@@ -1,0 +1,45 @@
+Hello! I need several visual and functional improvements for my project. Please follow the detailed instructions below and make sure everything fits well with the overall design and structure of the website:
+
+1. 3D Effect Behind Logo
+I would like the logo in the header to have a modern and elegant 3D shadow/glow effect behind it. The purpose is to make the logo stand out and remain clearly visible regardless of the background color of the header. The effect should:
+
+Be subtle but noticeable.
+Enhance readability and branding.
+Work both on light and dark backgrounds.
+Fit the visual style of a sleek, professional website (no tacky or cartoonish effects).
+Ideally, use CSS (or WebGL if already used in project) for performant rendering.
+Example techniques that could work:
+
+Soft ambient drop shadow (light + dark layers).
+Neon glow-like border with low opacity.
+Perspective transform or layered z-depth blur.
+2. New Section on Home Page – “Where to find us?”
+Please create a new section immediately after the Hero component on the Home Page with the following structure:
+
+Title (Translated):
+
+Unde ne găsiți? (Romanian)
+Where to find us? (English)
+Text:
+
+Amplasat în incinta APACA, Cotroceni Business Center Str. Iuliu Maniu, Nr. 7, corpul U, etaj 1 București 061072, România
+Ensure that this component follows the same i18n translation setup as other sections (e.g., if the site has a language switcher).
+
+3. Google Maps Integration
+Under the new "Where to find us?" section, please integrate a Google Maps iframe or custom map embed that does the following:
+
+Places a Pin exactly on the address: Cotroceni Business Center, Str. Iuliu Maniu, Nr. 7, corpul U, etaj 1, București 061072
+Above the Pin, add a small label that says: "Aici ne găsești!" (Here you can find us!)
+Make sure the map is zoomed in enough so that the user clearly sees the building.
+The same Pin with the same accuracy should also be updated/shown in the Contact page map, for consistency.
+Use either:
+
+Google Maps embed with custom marker,
+Or a library like react-google-maps if applicable.
+4. Shop Currency Change
+Please update the Shop section so that the prices are displayed in LEI (RON - Romanian Leu) instead of USD. Make sure:
+
+Currency symbol and formatting match Romanian standards (e.g., 99,99 LEI).
+If you're using a library like react-intl, set the currency locale accordingly.
+All cart/checkout components reflect this change.
+Thank you!

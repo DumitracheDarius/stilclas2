@@ -163,7 +163,7 @@ const resources = {
       hero_title: "Eleganță și Rafinament",
       hero_subtitle:
         "Costume și îmbrăcăminte pentru bărbați realizate cu precizie și pasiune",
-      explore_collection: "Explorează Colecția",
+      explore_collection: "Explorează Magazinul",
 
       // Collections
       the_bordeaux_edit: "Colecția Costume Ceremonie",
@@ -407,7 +407,7 @@ const resources = {
       hero_title: "Elegance & Refinement",
       hero_subtitle:
         "Premium suits and menswear crafted with precision and passion",
-      explore_collection: "Explore Collection",
+      explore_collection: "Explore our Shop",
 
       // Collections
       the_bordeaux_edit: "The Ceremony Suit",

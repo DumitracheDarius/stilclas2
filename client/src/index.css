@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom 3D logo effect */
+.logo-container {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-3d-effect {
+  position: absolute;
+  border-radius: 10px;
+  box-shadow: 
+    0 0 15px 2px rgba(126, 31, 45, 0.3),
+    0 0 5px 1px rgba(255, 255, 255, 0.2),
+    0 5px 15px rgba(0, 0, 0, 0.3);
+  filter: blur(2px);
+  transition: all 0.3s ease;
+  transform: translateZ(-10px);
+  z-index: 1;
+}
+
+.logo-container:hover .logo-3d-effect {
+  box-shadow: 
+    0 0 20px 5px rgba(126, 31, 45, 0.4),
+    0 0 10px 2px rgba(255, 255, 255, 0.3),
+    0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
 :root {
   /* Color scheme */
   --burgundy: 350, 60%, 31%; /* #7E1F2D */

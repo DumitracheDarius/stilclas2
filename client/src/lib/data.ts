@@ -139,78 +139,7 @@ export function getBestSellingProducts(): Product[] {
   return [
     {
       id: "p19",
-      name: "Costum Ceremonie Maro cu Model Special",
-      description:
-        "Costum sofisticat pentru ceremonii, maro cu un model unic și rafinat.",
-      price: 399.0,
-      imageUrl: "/assets/costum-ceremonie-maro-model-special.jpg",
-      rating: 5.0,
-      reviewCount: 10,
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-06-20T10:00:00Z",
-      reviews: [
-        {
-          author: "Cristian Marin",
-          rating: 5,
-          title: "Foarte mulțumit",
-          date: "Iunie 1, 2024",
-          comment:
-            "Material și croială excelentă. Recomand tuturor celor care caută un costum special și elegant.",
-        },
-      ],
-    },
-
-    {
-      id: "p20",
-      name: "Costum Ceremonie Verde cu Model Special",
-      description:
-        "Costum unic și sofisticat pentru ceremonii, verde cu model distinctiv.",
-      price: 399.0,
-      imageUrl: "/assets/costum-ceremonie-verde-cu-model.jpg",
-      rating: 5.0,
-      reviewCount: 11,
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-06-10T10:00:00Z",
-      reviews: [
-        {
-          author: "Mihai Vasile",
-          rating: 5,
-          title: "Design excepțional",
-          date: "Mai 20, 2024",
-          comment:
-            "Un costum impresionant cu un design special care m-a ajutat să ies în evidență la eveniment.",
-        },
-      ],
-    },
-    {
-      id: "p21",
-      name: "Costum Ceremonie Albastru cu Model Special",
-      description:
-        "Costum exclusivist de ceremonie albastru, cu detalii fine și elegante.",
-      price: 399.0,
-      imageUrl: "/assets/costum-ceremonie-albastru-model-special.jpg",
-      rating: 5.0,
-      reviewCount: 13,
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-06-15T10:00:00Z",
-      reviews: [
-        {
-          author: "Alexandru Dumitru",
-          rating: 5,
-          title: "Eleganță pură",
-          date: "Mai 25, 2024",
-          comment:
-            "Costumul arată superb și se simte excelent. Am primit multe complimente pentru alegerea mea.",
-        },
-      ],
-    },
-
-    {
-      id: "p22",
-      name: "Costum Ceremonie Verde",
+      name: "Costum Ceremonie Verde cu Model Simplu",
       description:
         "Costum de ceremonie elegant într-o nuanță rafinată de verde.",
       price: 399.0,
@@ -219,7 +148,7 @@ export function getBestSellingProducts(): Product[] {
       reviewCount: 14,
       categoryId: "ceremony",
       category: "Suits",
-      createdAt: "2024-06-05T10:00:00Z",
+      createdAt: "2024-09-05T10:00:00Z",
       reviews: [
         {
           author: "Andrei Popescu",
@@ -239,6 +168,78 @@ export function getBestSellingProducts(): Product[] {
         },
       ],
     },
+
+    {
+      id: "p20",
+      name: "Costum Ceremonie Albastru cu Model Special",
+      description:
+        "Costum exclusivist de ceremonie albastru, cu detalii fine și elegante.",
+      price: 399.0,
+      imageUrl: "/assets/costum-ceremonie-albastru-model-special.jpg",
+      rating: 5.0,
+      reviewCount: 13,
+      categoryId: "ceremony",
+      category: "Suits",
+      createdAt: "2024-02-15T10:00:00Z",
+      reviews: [
+        {
+          author: "Alexandru Dumitru",
+          rating: 5,
+          title: "Eleganță pură",
+          date: "Mai 25, 2024",
+          comment:
+            "Costumul arată superb și se simte excelent. Am primit multe complimente pentru alegerea mea.",
+        },
+      ],
+    },
+
+    {
+      id: "p21",
+      name: "Costum Ceremonie Verde cu Model Special",
+      description:
+        "Costum unic și sofisticat pentru ceremonii, verde cu model distinctiv.",
+      price: 399.0,
+      imageUrl: "/assets/costum-ceremonie-verde-cu-model.jpg",
+      rating: 5.0,
+      reviewCount: 11,
+      categoryId: "ceremony",
+      category: "Suits",
+      createdAt: "2024-02-10T10:00:00Z",
+      reviews: [
+        {
+          author: "Mihai Vasile",
+          rating: 5,
+          title: "Design excepțional",
+          date: "Mai 20, 2024",
+          comment:
+            "Un costum impresionant cu un design special care m-a ajutat să ies în evidență la eveniment.",
+        },
+      ],
+    },
+
+    {
+      id: "p22",
+      name: "Costum Ceremonie Maro cu Model Special",
+      description:
+        "Costum sofisticat pentru ceremonii, maro cu un model unic și rafinat.",
+      price: 399.0,
+      imageUrl: "/assets/costum-ceremonie-maro-model-special.jpg",
+      rating: 5.0,
+      reviewCount: 10,
+      categoryId: "ceremony",
+      category: "Suits",
+      createdAt: "2024-02-09T10:00:00Z",
+      reviews: [
+        {
+          author: "Cristian Marin",
+          rating: 5,
+          title: "Foarte mulțumit",
+          date: "Iunie 1, 2024",
+          comment:
+            "Material și croială excelentă. Recomand tuturor celor care caută un costum special și elegant.",
+        },
+      ],
+    },
   ];
 }
 
@@ -248,7 +249,7 @@ export function getProducts(): Product[] {
 
   const additionalProducts = [
     {
-      id: "po",
+      id: "p0",
       name: "Butoni - Modele Diferite",
       description: "Butoni eleganți disponibili în diverse modele și culori.",
       price: 49.0,
@@ -258,7 +259,7 @@ export function getProducts(): Product[] {
       gallery: ["/assets/butoni10.jpg", "/assets/butoni11.jpg"],
       categoryId: "accessories",
       category: "Accessories",
-      createdAt: "2024-01-15T10:00:00Z",
+      createdAt: "2023-01-15T10:00:00Z",
     },
     {
       id: "p1",
