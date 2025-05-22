@@ -167,7 +167,10 @@ export default function Header() {
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo with enhanced soft glow effect for better visibility */}
-        <Link href="/" className="z-10 rounded px-2 py-1 relative logo-container">
+        <Link
+          href="/"
+          className="z-10 rounded px-2 py-1 relative logo-container"
+        >
           <div className="logo-3d-effect absolute inset-0 w-full h-full"></div>
           <div className="relative z-10 backdrop-blur-sm bg-white/10 rounded-lg">
             <img
@@ -189,8 +192,8 @@ export default function Header() {
                 location === link.path
                   ? "text-burgundy"
                   : isScrolled || isDarkBackground
-                    ? "text-white hover:text-burgundy"
-                    : "text-black hover:text-burgundy",
+                    ? "text-white hover:text-white"
+                    : "text-black hover:text-black",
               )}
             >
               {t(link.key)}
@@ -229,8 +232,8 @@ export default function Header() {
           className={cn(
             "lg:hidden z-20",
             isScrolled || isDarkBackground
-              ? "text-white hover:text-burgundy"
-              : "text-black hover:text-burgundy",
+              ? "text-white hover:text-white"
+              : "text-black hover:text-black",
           )}
           onClick={toggleMobileMenu}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -272,7 +275,7 @@ export default function Header() {
                   variant="ghost"
                   size="icon"
                   aria-label="Search"
-                  className="text-white hover:text-burgundy"
+                  className="text-white hover:text-white"
                 >
                   <Search className="h-6 w-6" />
                 </Button>
@@ -280,7 +283,7 @@ export default function Header() {
                   variant="ghost"
                   size="icon"
                   aria-label="Shopping Cart"
-                  className="relative text-white hover:text-burgundy"
+                  className="relative text-white hover:text-white"
                   onClick={handleCartClick}
                 >
                   <ShoppingBag className="h-6 w-6" />
