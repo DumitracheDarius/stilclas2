@@ -5,11 +5,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// Format price
+// Format price in Romanian currency (LEI/RON)
 export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('ro-RO', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'RON',
+    currencyDisplay: 'name',
   }).format(price);
 }
 

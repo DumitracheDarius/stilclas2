@@ -3,6 +3,7 @@ import NewCollections from "@/components/home/NewCollections";
 import BestSellers from "@/components/home/BestSellers";
 import BrandValues from "@/components/home/BrandValues";
 import GoogleReviews from "@/components/home/GoogleReviews";
+import LocationSection from "@/components/home/LocationSection";
 
 import { getCollections, getBestSellingProducts, getBrandValues } from "@/lib/data";
 import { useEffect } from "react";
@@ -24,6 +25,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <LocationSection />
       <NewCollections collections={collections} />
       <BestSellers products={bestSellers} />
       <BrandValues values={brandValues} />

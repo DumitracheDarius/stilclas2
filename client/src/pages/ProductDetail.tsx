@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRoute, Link } from "wouter";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { sectionContainerVariants } from "@/components/ui/stylesheet";
@@ -199,7 +199,7 @@ export default function ProductDetail() {
                 <span className="text-gray-600 text-sm">{product.reviewCount} reviews</span>
               </div>
               
-              <p className="text-2xl text-burgundy font-medium mb-6">${product.price.toFixed(2)}</p>
+              <p className="text-2xl text-burgundy font-medium mb-6">{formatPrice(product.price)}</p>
               
               <p className="text-gray-700 mb-8 font-lato leading-relaxed">{product.description}</p>
               

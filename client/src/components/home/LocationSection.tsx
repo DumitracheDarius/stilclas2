@@ -26,7 +26,7 @@ export default function LocationSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
         >
-          Amplasat în incinta APACA, Cotroceni Business Center Str. Iuliu Maniu, Nr. 7, corpul U, etaj 1 București 061072, România
+          {t('amplasament')}
         </motion.p>
         
         {/* Google Map Integration with custom pin */}
