@@ -1,8 +1,23 @@
 import express, { type Request, Response, NextFunction } from "express";
+import cors from "cors";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
+
+// CORS configuration for Netlify frontend
+app.use(cors({
+  origin: [
+    'https://stilclas.ro',
+    'https://stilclas.netlify.app', // Your Netlify domain
+    'http://localhost:3000', // For local development
+    'http://localhost:5173', // Vite dev server
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -47,13 +62,24 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
+  // For backend-only mode, only setup Vite in development
+  // In production, we serve API only (frontend hosted on Netlify)
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    serveStatic(app);
+    // Backend-only mode for production
+    app.get('/health', (req, res) => {
+      res.json({ status: 'Backend API is running', timestamp: new Date().toISOString() });
+    });
+    
+    // Handle 404 for non-API routes in production
+    app.get('*', (req, res) => {
+      if (!req.path.startsWith('/api')) {
+        res.status(404).json({ 
+          message: 'Frontend served from Netlify. API endpoints available at /api/*' 
+        });
+      }
+    });
   }
 
   // ALWAYS serve the app on port 5000
