@@ -1,5 +1,8 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
+// Get API base URL from environment variable
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = (await res.text()) || res.statusText;
@@ -7,12 +10,29 @@ async function throwIfResNotOk(res: Response) {
   }
 }
 
+// Helper function to build full API URLs
+function buildApiUrl(endpoint: string): string {
+  // If endpoint already starts with http, return as-is
+  if (endpoint.startsWith('http')) {
+    return endpoint;
+  }
+  
+  // If endpoint starts with /api, replace with full API base URL
+  if (endpoint.startsWith('/api')) {
+    return endpoint.replace('/api', API_BASE_URL);
+  }
+  
+  // Otherwise, prepend API base URL
+  return `${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
+}
+
 export async function apiRequest(
   method: string,
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  const res = await fetch(url, {
+  const fullUrl = buildApiUrl(url);
+  const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
