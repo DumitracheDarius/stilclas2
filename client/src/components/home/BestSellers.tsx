@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "wouter";
 import { toast } from "@/hooks/use-toast";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 interface BestSellersProps {
   products: Product[];
@@ -129,7 +130,7 @@ export default function BestSellers({ products, className }: BestSellersProps) {
                 <div key={product.id} className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
                   <div className="bg-white rounded-md shadow-md overflow-hidden group">
                     <div className="relative overflow-hidden">
-                      <img 
+                      <LazyImage 
                         src={product.imageUrl} 
                         alt={product.name} 
                         className="w-full h-80 object-cover product-image"

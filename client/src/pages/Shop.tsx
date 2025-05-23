@@ -4,6 +4,7 @@ import { cn, formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
+import { LazyImage } from "@/components/ui/LazyImage";
 import {
   Select,
   SelectContent,
@@ -423,7 +424,7 @@ export default function Shop() {
                     className="relative overflow-hidden rounded-md shadow-md mb-4 cursor-pointer"
                     onClick={() => setLocation(`/product/${product.id}`)}
                   >
-                    <img
+                    <LazyImage
                       src={product.imageUrl}
                       alt={product.name}
                       className="w-full h-80 object-cover product-image"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { LazyImage } from "@/components/ui/LazyImage";
 
 interface ProductGalleryProps {
   mainImage: string;
@@ -42,7 +43,7 @@ export default function ProductGallery({ mainImage, gallery = [], productName }:
           transition={{ duration: 0.3 }}
           key={`active-image-${activeIndex}`}
         >
-          <img 
+          <LazyImage 
             src={currentImage} 
             alt={`${productName} - Image ${activeIndex + 1}`} 
             className="w-full h-[400px] object-cover transition-all duration-300"
@@ -90,7 +91,7 @@ export default function ProductGallery({ mainImage, gallery = [], productName }:
               onClick={() => handleThumbnailClick(index)}
               title={index === 0 ? t('main_image') : `${t('view')} ${index}`}
             >
-              <img 
+              <LazyImage 
                 src={image} 
                 alt={`${productName} ${t('thumbnail')} ${index + 1}`} 
                 className="w-full h-24 object-cover"
