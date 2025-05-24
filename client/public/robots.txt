@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://stilclas.ro/sitemap.xml
