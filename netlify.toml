@@ -7,12 +7,21 @@ command = "npm install && vite build"
 NODE_VERSION = "18"
 VITE_API_BASE_URL = "https://stilclas.replit.app/api"
 
+# ✅ Redirect de la www → non-www
+[[redirects]]
+from = "https://www.stilclas.ro/*"
+to = "https://stilclas.ro/:splat"
+status = 301
+force = true
+
+# API proxy
 [[redirects]]
 from = "/api/*"
 to = "https://stilclas.replit.app/api/:splat"
 status = 200
 force = true
 
+# SPA fallback
 [[redirects]]
 from = "/*"
 to = "/index.html"
