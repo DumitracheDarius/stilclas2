@@ -132,15 +132,15 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
       const url = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
       setWhatsappUrl(url);
       
+      // Clear cart but don't close the form yet
+      clearCart();
+      form.reset();
+      
       toast({
         title: t('reservation_success'),
         description: t('reservation_success_message'),
         variant: "default",
       });
-      
-      // Clear cart but don't close the form yet
-      clearCart();
-      form.reset();
       
     } catch (error) {
       console.error("Error sending reservation:", error);
@@ -308,7 +308,10 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
                 {whatsappUrl ? (
                   <div className="flex flex-col items-center w-full space-y-4">
                     <p className="text-sm text-center text-muted-foreground">
-                      {t('reservation_success')}
+                      {t('whatsapp_success')}
+                    </p>
+                    <p className="text-sm text-center text-muted-foreground">
+                      {t('whatsapp_description')}
                     </p>
                     <div className="flex gap-4 w-full">
                       <a
@@ -316,6 +319,19 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center justify-center gap-2 flex-1 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-2 rounded-md transition-colors"
+                        onClick={(e) => {
+                          // Prevent the default action
+                          e.preventDefault();
+                          
+                          // Open WhatsApp in a new window
+                          window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+                          
+                          // Close the dialog after a short delay
+                          setTimeout(() => {
+                            setWhatsappUrl(null);
+                            onClose();
+                          }, 500);
+                        }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

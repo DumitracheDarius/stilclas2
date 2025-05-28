@@ -598,6 +598,12 @@ const resources = {
       "product_casual-suit-2_full_desc": "Costumul casual modern oferă o interpretare contemporană a eleganței relaxate. Designul său versatil îl face perfect pentru diverse ocazii, de la întâlniri de afaceri informale până la evenimente sociale. Materialele premium și croiala impecabilă asigură un confort deosebit și o prezență distinctă. Detaliile atent lucrate și finisajele de calitate subliniază caracterul premium al acestui costum.",
 
       "no_reviews_yet": "Încă nu există recenzii pentru acest produs",
+      
+      // WhatsApp Integration
+      continue_on_whatsapp: "Continuă pe WhatsApp",
+      close: "Închide",
+      whatsapp_success: "Rezervare trimisă cu succes!",
+      whatsapp_description: "Click pe butonul de mai jos pentru a continua conversația pe WhatsApp",
     },
   },
   en: {
@@ -1171,6 +1177,12 @@ const resources = {
       "product_casual-suit-2_full_desc": "Costumul casual modern oferă o interpretare contemporană a eleganței relaxate. Designul său versatil îl face perfect pentru diverse ocazii, de la întâlniri de afaceri informale până la evenimente sociale. Materialele premium și croiala impecabilă asigură un confort deosebit și o prezență distinctă. Detaliile atent lucrate și finisajele de calitate subliniază caracterul premium al acestui costum.",
 
       "no_reviews_yet": "No reviews yet for this product",
+      
+      // WhatsApp Integration
+      continue_on_whatsapp: "Continue on WhatsApp",
+      close: "Close",
+      whatsapp_success: "Reservation sent successfully!",
+      whatsapp_description: "Click the button below to continue the conversation on WhatsApp",
     },
   },
 };
