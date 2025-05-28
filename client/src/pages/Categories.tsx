@@ -33,15 +33,15 @@ export default function Categories() {
       <div className="relative h-64 overflow-hidden">
         <img 
           src={subcategory.imageUrl} 
-          alt={t(subcategory.name)} 
+          alt={t(`${subcategory.id}`)} 
           className="h-full w-full object-cover transform transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-70"></div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-        <h3 className="text-xl font-playfair font-medium mb-2">{t(subcategory.name)}</h3>
+        <h3 className="text-xl font-playfair font-medium mb-2">{t(`${subcategory.id}`)}</h3>
         {subcategory.description && (
-          <p className="text-sm text-gray-100 font-lato">{t(subcategory.description)}</p>
+          <p className="text-sm text-gray-100 font-lato">{t(`${subcategory.id}_desc`)}</p>
         )}
       </div>
     </motion.div>
@@ -53,7 +53,9 @@ export default function Categories() {
       variants={itemVariants}
       className="mb-16"
     >
-      <h2 className="text-3xl font-playfair font-semibold mb-2 text-gray-900 after:content-[''] after:block after:w-24 after:h-1 after:bg-burgundy after:mt-2">{t(category.name)}</h2>
+      <h2 className="text-3xl font-playfair font-semibold mb-2 text-gray-900 after:content-[''] after:block after:w-24 after:h-1 after:bg-burgundy after:mt-2">
+        {t(`category_${category.id}`)}
+      </h2>
       
       {/* If the category has subcategories */}
       {category.subcategories && category.subcategories.length > 0 ? (
@@ -67,15 +69,15 @@ export default function Categories() {
             <div className="relative h-80 overflow-hidden">
               <img 
                 src={category.imageUrl} 
-                alt={t(category.name)} 
+                alt={t(`category_${category.id}`)} 
                 className="h-full w-full object-cover transform transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-70"></div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-              <h3 className="text-2xl font-playfair font-medium mb-2">{t(category.name)}</h3>
+              <h3 className="text-2xl font-playfair font-medium mb-2">{t(`category_${category.id}`)}</h3>
               {category.description && (
-                <p className="text-sm text-gray-100 font-lato">{t(category.description)}</p>
+                <p className="text-sm text-gray-100 font-lato">{t(`${category.id}_desc`)}</p>
               )}
             </div>
           </div>

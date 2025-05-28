@@ -161,9 +161,8 @@ const resources = {
 
       // Hero Section
       hero_title: "Eleganță și Rafinament",
-      hero_subtitle:
-        "Costume și îmbrăcăminte pentru bărbați realizate cu precizie și pasiune",
-      explore_collection: "Explorează Magazinul",
+      hero_subtitle: "Costume și îmbrăcăminte pentru bărbați realizate cu precizie și pasiune",
+      explore_collection: "Explorează Colecția",
 
       // Collections
       the_bordeaux_edit: "Colecția Costume Ceremonie",
@@ -174,7 +173,7 @@ const resources = {
       summer_description: "Pentru eleganță.",
       urban_classics: "Clasici Urbani",
       urban_description:
-        "Stiluri contemporane pentru gentlemanul modern al orașului.",
+        "Stiluri contemporani pentru gentlemanul modern al orașului.",
 
       // Main Categories
       suits: "Costume",
@@ -188,6 +187,68 @@ const resources = {
       cufflinks: "Butoni",
       bow_ties: "Papioane",
       belts: "Curele",
+      hats: "Pălării",
+      caps: "Șepci",
+      shoes: "Pantofi",
+
+      // Product Names and Descriptions
+      // Business Suits
+      "product_business-suit-1_name": "Costum Business Elite",
+      "product_business-suit-1_desc": "Costum business elegant, perfect pentru mediul corporativ și întâlniri importante.",
+      "product_business-suit-2_name": "Costum Business Modern",
+      "product_business-suit-2_desc": "Costum business modern cu design contemporan și croială impecabilă.",
+      
+      // Casual Suits
+      "product_casual-suit-1_name": "Costum Casual Premium",
+      "product_casual-suit-1_desc": "Costum casual versatil, perfect pentru evenimente sociale și ocazii semi-formale.",
+      "product_casual-suit-2_name": "Costum Casual Modern",
+      "product_casual-suit-2_desc": "Costum casual modern pentru un look relaxat dar elegant.",
+      
+      // Ceremony Suits
+      "product_ceremony-suit-1_name": "Costum de Ceremonie Exclusivist",
+      "product_ceremony-suit-1_desc": "Costum de ceremonie elegant, perfect pentru evenimente speciale și ocazii memorabile.",
+      
+      // Blazers
+      "product_blazer-1_name": "Sacou Business Elite",
+      "product_blazer-1_desc": "Sacou business elegant, perfect pentru ținute formale.",
+      "product_blazer-2_name": "Sacou Casual Modern",
+      "product_blazer-2_desc": "Sacou casual versatil pentru un look modern și sofisticat.",
+      
+      // Shirts
+      "product_shirt-1_name": "Cămașă Business Premium",
+      "product_shirt-1_desc": "Cămașă business din bumbac de înaltă calitate.",
+      "product_shirt-2_name": "Cămașă Casual Elegantă",
+      "product_shirt-2_desc": "Cămașă casual pentru un look relaxat dar rafinat.",
+      
+      // Overcoats
+      "product_overcoat-1_name": "Pardesiu Classic Elite",
+      "product_overcoat-1_desc": "Pardesiu clasic pentru sezonul rece, confecționat din materiale premium.",
+      "product_overcoat-2_name": "Pardesiu Modern Premium",
+      "product_overcoat-2_desc": "Pardesiu modern cu design contemporan și materiale de excepție.",
+      
+      // Accessories
+      "product_tie-1_name": "Cravată Premium",
+      "product_tie-1_desc": "Cravată elegantă din mătase naturală.",
+      "product_cufflinks-1_name": "Butoni Eleganți",
+      "product_cufflinks-1_desc": "Butoni premium pentru ocazii speciale.",
+      "product_bowtie-1_name": "Papion Classic",
+      "product_bowtie-1_desc": "Papion elegant pentru evenimente formale.",
+      "product_belt-1_name": "Curea din Piele Premium",
+      "product_belt-1_desc": "Curea elegantă din piele naturală de înaltă calitate.",
+      
+      // New Categories - Hats
+      "product_hat-1_name": "Pălărie Clasică Premium",
+      "product_hat-1_desc": "Pălărie elegantă din materiale premium, perfectă pentru completarea ținutelor rafinate.",
+      
+      // Caps
+      "product_cap-1_name": "Șapcă Premium Elegantă",
+      "product_cap-1_desc": "Șapcă modernă din materiale de înaltă calitate, perfectă pentru ținute casual-elegante.",
+      "product_cap-2_name": "Șapcă Casual Modern",
+      "product_cap-2_desc": "Șapcă casual cu design modern, ideală pentru ținute relaxate.",
+      
+      // Shoes
+      "product_shoes-1_name": "Pantofi Eleganți Premium",
+      "product_shoes-1_desc": "Pantofi premium din piele naturală, confecționați manual pentru confort și stil suprem.",
 
       // Best Sellers
       best_sellers: "Cele mai vândute",
@@ -393,6 +454,150 @@ const resources = {
       no_products_found: "Nu s-au găsit produse",
       try_adjust_filters:
         "Încercați să ajustați filtrele pentru a găsi ce căutați",
+
+      // Collections Page
+      shop_now: "Cumpără Acum",
+      ready_to_experience: "Gata să Experimentezi StilClas?",
+      browse_collection: "Explorează colecția noastră completă și descoperă piesa perfectă pentru garderoba ta.",
+      
+      // Collection Categories
+      formal_elegance: "Eleganță Formală",
+      formal_elegance_description: "Costume rafinate pentru ocazii speciale și evenimente de afaceri.",
+      casual_sophistication: "Sofisticare Casual",
+      casual_sophistication_description: "Ținute casual-elegante pentru un stil relaxat dar distins.",
+      essential_accessories: "Accesorii Esențiale",
+      essential_accessories_description: "Completează-ți ținuta cu accesorii rafinate și elegante.",
+      seasonal_outerwear: "Colecția de Sezon",
+      seasonal_outerwear_description: "Pardesie și jachete pentru un stil impecabil în orice sezon.",
+
+      // Shop Page Additional
+      filter_by_category: "Filtrează după categorie",
+      filter_by_price: "Filtrează după preț",
+      apply_filters: "Aplică filtrele",
+      clear_filters: "Șterge filtrele",
+      products_found: "produse găsite",
+      price_range_label: "Interval de preț: {{min}} - {{max}} RON",
+      add_to_favorites: "Adaugă la favorite",
+      remove_from_favorites: "Șterge din favorite",
+      product_added_to_favorites: "Produs adăugat la favorite",
+      product_removed_from_favorites: "Produs șters din favorite",
+      
+      // Product Categories
+      category_business_suits: "Costume Business",
+      category_casual_suits: "Costume Casual",
+      category_ceremony_suits: "Costume de Ceremonie",
+      category_blazers: "Sacouri",
+      category_shirts: "Cămăși",
+      category_overcoats: "Pardesie",
+      category_accessories: "Accesorii",
+      category_shoes: "Pantofi",
+      category_hats: "Pălării",
+      category_caps: "Șepci",
+      category_ties: "Cravate",
+      category_cufflinks: "Butoni",
+      category_bow_ties: "Papioane",
+      category_belts: "Curele",
+
+      // Subcategories
+      classic_business: "Business Clasic",
+      modern_business: "Business Modern",
+      ceremonial_business: "Ceremonial",
+      smart_casual: "Smart Casual",
+      weekend_casual: "Weekend Casual",
+      formal_blazers: "Sacouri Formale",
+      casual_blazers: "Sacouri Casual",
+      formal_shirts: "Cămăși Formale",
+      casual_shirts: "Cămăși Casual",
+      classic_overcoats: "Pardesie Clasice",
+      formal_shoes: "Pantofi Eleganți",
+
+      // Category Descriptions
+      business_suits_desc: "Costume business elegante pentru un aspect profesional impecabil",
+      casual_suits_desc: "Costume casual pentru un stil relaxat dar elegant",
+      blazers_desc: "Sacouri elegante pentru orice ocazie",
+      shirts_desc: "Cămăși rafinate pentru orice ocazie",
+      overcoats_desc: "Pardesie elegante pentru sezonul rece",
+      accessories_desc: "Accesorii pentru completarea ținutei",
+      shoes_desc: "Încălțăminte elegantă din piele",
+
+      // Subcategory Descriptions
+      classic_business_desc: "Costume business clasice pentru un look profesional",
+      modern_business_desc: "Costume business moderne cu un twist contemporan",
+      ceremonial_desc: "Costume de ceremonie moderne",
+      smart_casual_desc: "Costume pentru ocazii semi-formale",
+      weekend_casual_desc: "Costume pentru un weekend stilat",
+      formal_blazers_desc: "Sacouri pentru ocazii formale",
+      casual_blazers_desc: "Sacouri pentru un look relaxat",
+      formal_shirts_desc: "Cămăși pentru ocazii formale",
+      casual_shirts_desc: "Cămăși pentru zi de zi",
+      classic_overcoats_desc: "Pardesie clasice atemporale",
+      formal_shoes_desc: "Pantofi pentru ocazii formale",
+
+      // Product Filters
+      filter_price_asc: "Preț crescător",
+      filter_price_desc: "Preț descrescător",
+      filter_newest: "Cele mai noi",
+      filter_popularity: "Popularitate",
+      filter_rating: "Evaluare",
+
+      // Collections
+      "collection_c1_name": "Colecția Ceremonie",
+      "collection_c1_desc": "O selecție rafinată de costume.",
+      "collection_c2_name": "Colecția Business",
+      "collection_c2_desc": "Costume elegante pentru mediul profesional.",
+      "collection_c3_name": "Colecția Casual",
+      "collection_c3_desc": "Ținute sofisticate pentru un stil relaxat dar distins.",
+
+      // Brand Values
+      "premium materials": "Materiale Premium",
+      "premium materials_desc": "Folosim doar cele mai fine materiale, selectate cu grijă pentru calitatea și durabilitatea lor excepțională.",
+      "timeless design": "Design Atemporal",
+      "timeless design_desc": "Creăm piese clasice care transcend tendințele trecătoare, menținându-și eleganța de-a lungul timpului.",
+      "customer focus": "Focus pe Client",
+      "customer focus_desc": "Ne dedicăm să oferim o experiență personalizată și servicii excepționale fiecărui client.",
+
+      // Categories and Subcategories
+      "category_business-suits": "Costume Business",
+      "classic-business": "Business Clasic",
+      "classic-business_desc": "Costume tradiționale pentru un aspect profesional impecabil.",
+      "modern-business": "Business Modern",
+      "modern-business_desc": "Costume contemporane pentru mediul de afaceri actual.",
+      "ceremonial-business": "Ceremonial",
+      "ceremonial-business_desc": "Costume elegante pentru evenimente speciale.",
+
+      "category_casual-suits": "Costume Casual",
+      "smart-casual": "Smart Casual",
+      "smart-casual_desc": "Costume versatile pentru ocazii semi-formale.",
+      "weekend-casual": "Weekend Casual",
+      "weekend-casual_desc": "Ținute rafinate pentru timpul liber.",
+
+      "formal-blazers": "Sacouri Formale",
+      "formal-blazers_desc": "Sacouri elegante pentru ținute oficiale.",
+      "casual-blazers": "Sacouri Casual",
+      "casual-blazers_desc": "Sacouri versatile pentru un stil relaxat.",
+
+      "formal-shirts": "Cămăși Formale",
+      "formal-shirts_desc": "Cămăși elegante pentru ocazii oficiale.",
+      "casual-shirts": "Cămăși Casual",
+      "casual-shirts_desc": "Cămăși confortabile pentru uz zilnic.",
+
+      "classic-overcoats": "Pardesie Clasice",
+      "classic-overcoats_desc": "Pardesie elegante pentru sezonul rece.",
+
+      "hats_desc": "Pălării rafinate pentru completarea ținutei.",
+      "caps_desc": "Șepci moderne pentru un stil casual-elegant.",
+
+      "formal-shoes": "Pantofi Eleganți",
+      "formal-shoes_desc": "Încălțăminte premium pentru ocazii formale.",
+
+      // Product Descriptions
+      "product_casual-suit-1_full_desc": "Acest costum casual premium reprezintă îmbinarea perfectă între confort și eleganță. Realizat din materiale de înaltă calitate, cu o croială modernă și atenție deosebită la detalii, este alegerea ideală pentru evenimente sociale și ocazii semi-formale. Sacoul prezintă o construcție semi-structurată care oferă o siluetă rafinată dar relaxată, în timp ce pantalonii sunt croiți pentru confort și mobilitate optimă.",
+      
+      "product_quality_description": "Fiecare costum StilClas este realizat cu măiestrie folosind materiale premium atent selecționate. Procesul nostru de producție combină tehnici tradiționale de croitorie cu tehnologii moderne pentru a asigura cea mai înaltă calitate și durabilitate. Fiecare detaliu, de la cusături până la căptușeală, este executat cu precizie pentru a crea o piesă vestimentară excepțională.",
+
+      "product_casual-suit-2_full_desc": "Costumul casual modern oferă o interpretare contemporană a eleganței relaxate. Designul său versatil îl face perfect pentru diverse ocazii, de la întâlniri de afaceri informale până la evenimente sociale. Materialele premium și croiala impecabilă asigură un confort deosebit și o prezență distinctă. Detaliile atent lucrate și finisajele de calitate subliniază caracterul premium al acestui costum.",
+
+      "no_reviews_yet": "Încă nu există recenzii pentru acest produs",
     },
   },
   en: {
@@ -413,7 +618,7 @@ const resources = {
       hero_title: "Elegance & Refinement",
       hero_subtitle:
         "Premium suits and menswear crafted with precision and passion",
-      explore_collection: "Explore our Shop",
+      explore_collection: "Explore Collection",
 
       // Collections
       the_bordeaux_edit: "The Ceremony Suit",
@@ -437,6 +642,68 @@ const resources = {
       cufflinks: "Cufflinks",
       bow_ties: "Bow Ties",
       belts: "Belts",
+      hats: "Hats",
+      caps: "Caps",
+      shoes: "Shoes",
+
+      // Product Names and Descriptions
+      // Business Suits
+      "product_business-suit-1_name": "Elite Business Suit",
+      "product_business-suit-1_desc": "Elegant business suit, perfect for corporate environments and important meetings.",
+      "product_business-suit-2_name": "Modern Business Suit",
+      "product_business-suit-2_desc": "Modern business suit with contemporary design and impeccable tailoring.",
+      
+      // Casual Suits
+      "product_casual-suit-1_name": "Premium Casual Suit",
+      "product_casual-suit-1_desc": "Versatile casual suit, perfect for social events and semi-formal occasions.",
+      "product_casual-suit-2_name": "Modern Casual Suit",
+      "product_casual-suit-2_desc": "Modern casual suit for a relaxed yet elegant look.",
+      
+      // Ceremony Suits
+      "product_ceremony-suit-1_name": "Exclusive Ceremony Suit",
+      "product_ceremony-suit-1_desc": "Elegant ceremony suit, perfect for special events and memorable occasions.",
+      
+      // Blazers
+      "product_blazer-1_name": "Elite Business Blazer",
+      "product_blazer-1_desc": "Elegant business blazer, perfect for formal outfits.",
+      "product_blazer-2_name": "Modern Casual Blazer",
+      "product_blazer-2_desc": "Versatile casual blazer for a modern and sophisticated look.",
+      
+      // Shirts
+      "product_shirt-1_name": "Premium Business Shirt",
+      "product_shirt-1_desc": "High-quality cotton business shirt.",
+      "product_shirt-2_name": "Elegant Casual Shirt",
+      "product_shirt-2_desc": "Casual shirt for a relaxed yet refined look.",
+      
+      // Overcoats
+      "product_overcoat-1_name": "Classic Elite Overcoat",
+      "product_overcoat-1_desc": "Classic overcoat for the cold season, made from premium materials.",
+      "product_overcoat-2_name": "Premium Modern Overcoat",
+      "product_overcoat-2_desc": "Modern overcoat with contemporary design and exceptional materials.",
+      
+      // Accessories
+      "product_tie-1_name": "Premium Tie",
+      "product_tie-1_desc": "Elegant silk tie.",
+      "product_cufflinks-1_name": "Elegant Cufflinks",
+      "product_cufflinks-1_desc": "Premium cufflinks for special occasions.",
+      "product_bowtie-1_name": "Classic Bow Tie",
+      "product_bowtie-1_desc": "Elegant bow tie for formal events.",
+      "product_belt-1_name": "Premium Leather Belt",
+      "product_belt-1_desc": "Elegant belt made from high-quality natural leather.",
+      
+      // Hats
+      "product_hat-1_name": "Premium Classic Hat",
+      "product_hat-1_desc": "Elegant hat made from premium materials, perfect for completing refined outfits.",
+      
+      // Caps
+      "product_cap-1_name": "Premium Elegant Cap",
+      "product_cap-1_desc": "Modern cap made from high-quality materials, perfect for casual-elegant outfits.",
+      "product_cap-2_name": "Modern Casual Cap",
+      "product_cap-2_desc": "Casual cap with modern design, ideal for relaxed outfits.",
+      
+      // Shoes
+      "product_shoes-1_name": "Premium Elegant Shoes",
+      "product_shoes-1_desc": "Premium leather shoes, handcrafted for supreme comfort and style.",
 
       // Best Sellers
       best_sellers: "Best Sellers",
@@ -666,7 +933,7 @@ const resources = {
       our_story_p2:
         "Today, StilClas is recognized as a premium brand dedicated to men who value exceptional quality and timeless elegance. Every suit or garment crafted in our atelier embodies our profound commitment to meticulous detail, impeccable fit, and enduring style.",
       our_story_p3:
-        "Our Romanian artisans, renowned for their extensive experience, ensure each piece is impeccably made to highlight the wearer’s personality and presence.",
+        "Our Romanian artisans, renowned for their extensive experience, ensure each piece is impeccably made to highlight the wearer's personality and presence.",
       discover_craftsmanship: "Discover Romanian Tailoring Excellence",
       our_mission: "Our Mission",
       mission_description:
@@ -681,7 +948,7 @@ const resources = {
       tailoring_p2:
         "We are committed to classic tailoring techniques, from delicate hand stitching to well-defined internal structures. The result is clothing renowned for superior comfort, style, and durability.",
       tailoring_p3:
-        "We believe true elegance lies in details: a perfectly crafted buttonhole, elegantly shaped lapels, and impeccable interior finishes. These subtle touches set StilClas apart and define our standard of excellence.",
+        "We believe true elegance lies in details: a perfectly crafted buttonhole, elegantly shaped lapels, and impeccably finished interior. These subtle touches set StilClas apart and define our standard of excellence.",
 
       // Categories page
       discover_our_exquisite_collections:
@@ -760,6 +1027,150 @@ const resources = {
       no_products_found: "No products found",
       try_adjust_filters:
         "Try adjusting your filters to find what you're looking for",
+
+      // Collections Page
+      shop_now: "Shop Now",
+      ready_to_experience: "Ready to Experience StilClas?",
+      browse_collection: "Browse our complete collection and discover the perfect addition to your wardrobe.",
+      
+      // Collection Categories
+      formal_elegance: "Formal Elegance",
+      formal_elegance_description: "Refined suits for special occasions and business events.",
+      casual_sophistication: "Casual Sophistication",
+      casual_sophistication_description: "Smart-casual attire for a relaxed yet distinguished style.",
+      essential_accessories: "Essential Accessories",
+      essential_accessories_description: "Complete your look with refined and elegant accessories.",
+      seasonal_outerwear: "Seasonal Collection",
+      seasonal_outerwear_description: "Overcoats and jackets for impeccable style in any season.",
+
+      // Shop Page Additional
+      filter_by_category: "Filter by category",
+      filter_by_price: "Filter by price",
+      apply_filters: "Apply filters",
+      clear_filters: "Clear filters",
+      products_found: "products found",
+      price_range_label: "Price range: {{min}} - {{max}} RON",
+      add_to_favorites: "Add to favorites",
+      remove_from_favorites: "Remove from favorites",
+      product_added_to_favorites: "Product added to favorites",
+      product_removed_from_favorites: "Product removed from favorites",
+      
+      // Product Categories
+      category_business_suits: "Business Suits",
+      category_casual_suits: "Casual Suits",
+      category_ceremony_suits: "Ceremony Suits",
+      category_blazers: "Blazers",
+      category_shirts: "Shirts",
+      category_overcoats: "Overcoats",
+      category_accessories: "Accessories",
+      category_shoes: "Shoes",
+      category_hats: "Hats",
+      category_caps: "Caps",
+      category_ties: "Ties",
+      category_cufflinks: "Cufflinks",
+      category_bow_ties: "Bow Ties",
+      category_belts: "Belts",
+
+      // Subcategories
+      classic_business: "Classic Business",
+      modern_business: "Modern Business",
+      ceremonial_business: "Ceremonial",
+      smart_casual: "Smart Casual",
+      weekend_casual: "Weekend Casual",
+      formal_blazers: "Formal Blazers",
+      casual_blazers: "Casual Blazers",
+      formal_shirts: "Formal Shirts",
+      casual_shirts: "Casual Shirts",
+      classic_overcoats: "Classic Overcoats",
+      formal_shoes: "Formal Shoes",
+
+      // Category Descriptions
+      business_suits_desc: "Elegant business suits for an impeccable professional look",
+      casual_suits_desc: "Casual suits for a relaxed yet elegant style",
+      blazers_desc: "Elegant blazers for any occasion",
+      shirts_desc: "Refined shirts for any occasion",
+      overcoats_desc: "Elegant overcoats for the cold season",
+      accessories_desc: "Accessories to complete your outfit",
+      shoes_desc: "Elegant leather footwear",
+
+      // Subcategory Descriptions
+      classic_business_desc: "Classic business suits for a professional look",
+      modern_business_desc: "Modern business suits with a contemporary twist",
+      ceremonial_desc: "Modern ceremony suits",
+      smart_casual_desc: "Suits for semi-formal occasions",
+      weekend_casual_desc: "Suits for a stylish weekend",
+      formal_blazers_desc: "Blazers for formal occasions",
+      casual_blazers_desc: "Blazers for a relaxed look",
+      formal_shirts_desc: "Shirts for formal occasions",
+      casual_shirts_desc: "Shirts for everyday wear",
+      classic_overcoats_desc: "Timeless classic overcoats",
+      formal_shoes_desc: "Shoes for formal occasions",
+
+      // Product Filters
+      filter_price_asc: "Price: Low to High",
+      filter_price_desc: "Price: High to Low",
+      filter_newest: "Newest",
+      filter_popularity: "Popularity",
+      filter_rating: "Rating",
+
+      // Collections
+      "collection_c1_name": "Ceremony Collection",
+      "collection_c1_desc": "A refined selection of suits for life's most important moments.",
+      "collection_c2_name": "Business Collection",
+      "collection_c2_desc": "Elegant suits for the professional environment, created with attention to detail and comfort.",
+      "collection_c3_name": "Casual Collection",
+      "collection_c3_desc": "Sophisticated outfits for a relaxed yet distinguished style.",
+
+      // Brand Values
+      "premium materials": "Premium Materials",
+      "premium materials_desc": "We use only the finest materials, carefully selected for their exceptional quality and durability.",
+      "timeless design": "Timeless Design",
+      "timeless design_desc": "We create classic pieces that transcend passing trends, maintaining their elegance over time.",
+      "customer focus": "Customer Focus",
+      "customer focus_desc": "We are dedicated to providing a personalized experience and exceptional service to each client.",
+
+      // Categories and Subcategories
+      "category_business-suits": "Business Suits",
+      "classic-business": "Business Clasic",
+      "classic-business_desc": "Costume tradiționale pentru un aspect profesional impecabil.",
+      "modern-business": "Business Modern",
+      "modern-business_desc": "Costume contemporane pentru mediul de afaceri actual.",
+      "ceremonial-business": "Ceremonial",
+      "ceremonial-business_desc": "Costume elegante pentru evenimente speciale.",
+
+      "category_casual-suits": "Costume Casual",
+      "smart-casual": "Smart Casual",
+      "smart-casual_desc": "Costume versatile pentru ocazii semi-formale.",
+      "weekend-casual": "Weekend Casual",
+      "weekend-casual_desc": "Ținute rafinate pentru timpul liber.",
+
+      "formal-blazers": "Sacouri Formale",
+      "formal-blazers_desc": "Sacouri elegante pentru ținute oficiale.",
+      "casual-blazers": "Sacouri Casual",
+      "casual-blazers_desc": "Sacouri versatile pentru un stil relaxat.",
+
+      "formal-shirts": "Cămăși Formale",
+      "formal-shirts_desc": "Cămăși elegante pentru ocazii oficiale.",
+      "casual-shirts": "Cămăși Casual",
+      "casual-shirts_desc": "Cămăși confortabile pentru uz zilnic.",
+
+      "classic-overcoats": "Pardesie Clasice",
+      "classic-overcoats_desc": "Pardesie elegante pentru sezonul rece.",
+
+      "hats_desc": "Pălării rafinate pentru completarea ținutei.",
+      "caps_desc": "Șepci moderne pentru un stil casual-elegant.",
+
+      "formal-shoes": "Pantofi Eleganți",
+      "formal-shoes_desc": "Încălțăminte premium pentru ocazii formale.",
+
+      // Product Descriptions
+      "product_casual-suit-1_full_desc": "Acest costum casual premium reprezintă îmbinarea perfectă între confort și eleganță. Realizat din materiale de înaltă calitate, cu o croială modernă și atenție deosebită la detalii, este alegerea ideală pentru evenimente sociale și ocazii semi-formale. Sacoul prezintă o construcție semi-structurată care oferă o siluetă rafinată dar relaxată, în timp ce pantalonii sunt croiți pentru confort și mobilitate optimă.",
+      
+      "product_quality_description": "Fiecare costum StilClas este realizat cu măiestrie folosind materiale premium atent selecționate. Procesul nostru de producție combină tehnici tradiționale de croitorie cu tehnologii moderne pentru a asigura cea mai înaltă calitate și durabilitate. Fiecare detaliu, de la cusături până la căptușeală, este executat cu precizie pentru a crea o piesă vestimentară excepțională.",
+
+      "product_casual-suit-2_full_desc": "Costumul casual modern oferă o interpretare contemporană a eleganței relaxate. Designul său versatil îl face perfect pentru diverse ocazii, de la întâlniri de afaceri informale până la evenimente sociale. Materialele premium și croiala impecabilă asigură un confort deosebit și o prezență distinctă. Detaliile atent lucrate și finisajele de calitate subliniază caracterul premium al acestui costum.",
+
+      "no_reviews_yet": "No reviews yet for this product",
     },
   },
 };

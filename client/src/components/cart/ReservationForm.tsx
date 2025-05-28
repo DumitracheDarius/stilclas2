@@ -58,6 +58,23 @@ interface ReservationFormProps {
   clearCart: () => void;
 }
 
+// Helper function to format WhatsApp message
+const formatWhatsAppMessage = (data: FormValues, cartItems: Product[], totalPrice: number) => {
+  const itemsList = cartItems.map(item => `${item.name} - ${formatPrice(item.price)}`).join('\\n');
+  
+  return encodeURIComponent(
+    `*New Reservation from ${data.fullName}*\\n\\n` +
+    `📧 Email: ${data.email}\\n` +
+    `📱 Phone: ${data.phone}\\n` +
+    `📍 Address: ${data.address}\\n` +
+    `📅 Preferred Date: ${data.preferredDate || 'Not specified'}\\n` +
+    `⏰ Preferred Time: ${data.preferredTime || 'Not specified'}\\n` +
+    `📝 Notes: ${data.notes || 'None'}\\n\\n` +
+    `*Selected Items:*\\n${itemsList}\\n\\n` +
+    `*Total: ${formatPrice(totalPrice)}*`
+  );
+};
+
 export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: ReservationFormProps) {
   const { t, i18n } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -107,6 +124,11 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
         templateParams,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
+
+      // Format and open WhatsApp message
+      const whatsappMessage = formatWhatsAppMessage(data, cartItems, totalPrice);
+      const whatsappUrl = `https://wa.me/40769245781?text=${whatsappMessage}`;
+      window.open(whatsappUrl, '_blank');
       
       toast({
         title: t('reservation_success'),

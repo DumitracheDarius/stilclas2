@@ -266,101 +266,77 @@ export default function Shop() {
 
                   {categories.map((category) => (
                     <div key={category.id} className="relative">
-                      <div className="flex mb-2">
-                        <Button
-                          variant={
-                            selectedCategory === category.id &&
-                            !selectedSubcategory
-                              ? "default"
-                              : "outline"
-                          }
-                          onClick={() => handleCategorySelect(category.id)}
-                          className="mr-1"
-                        >
-                          {t(category.name)}
-                        </Button>
-
-                        {category.subcategories &&
-                          category.subcategories.length > 0 && (
-                            <Button
-                              variant="outline"
-                              size="icon"
-                              onClick={() => toggleCategoryMenu(category.id)}
-                              className="px-2"
-                            >
-                              <ChevronDown
-                                className={cn(
-                                  "h-4 w-4 transition-transform",
-                                  activeCategoryMenu === category.id &&
-                                    "transform rotate-180",
-                                )}
-                              />
-                            </Button>
-                          )}
-                      </div>
-
-                      {/* Subcategories dropdown */}
-                      {activeCategoryMenu === category.id &&
-                        category.subcategories &&
-                        category.subcategories.length > 0 && (
-                          <div className="absolute z-10 mt-1 w-full bg-white shadow-lg rounded-md border border-gray-200 py-1">
-                            {category.subcategories.map((subcategory) => (
-                              <button
-                                key={subcategory.id}
-                                onClick={() => {
-                                  setSelectedCategory(category.id);
-                                  handleSubcategorySelect(subcategory.id);
-                                }}
-                                className={cn(
-                                  "w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors",
-                                  selectedSubcategory === subcategory.id
-                                    ? "bg-burgundy bg-opacity-10 text-white font-medium"
-                                    : "",
-                                )}
-                              >
-                                {t(subcategory.name)}
-                              </button>
-                            ))}
-                          </div>
-                        )}
+                      <Button
+                        variant={
+                          selectedCategory === category.id ? "default" : "outline"
+                        }
+                        onClick={() => handleCategorySelect(category.id)}
+                        className="mb-2"
+                      >
+                        {t(`category_${category.id}`)}
+                      </Button>
                     </div>
                   ))}
                 </div>
 
-                {/* Active filters display */}
+                {/* Price Range Filter */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-medium mb-2">{t("filter_by_price")}</h3>
+                  <Slider
+                    defaultValue={[0, 2000]}
+                    max={2000}
+                    step={10}
+                    value={priceRange}
+                    onValueChange={(value) => setPriceRange(value as [number, number])}
+                    className="w-full max-w-sm"
+                  />
+                  <div className="text-sm text-gray-600 mt-2">
+                    {t("price_range_label", { min: priceRange[0], max: priceRange[1] })}
+                  </div>
+                </div>
+
+                {/* Sort Options */}
+                <div className="mb-6">
+                  <Select
+                    value={sortOption}
+                    onValueChange={(value) => setSortOption(value)}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder={t("sort_by")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="newest">{t("filter_newest")}</SelectItem>
+                      <SelectItem value="price_asc">
+                        {t("filter_price_asc")}
+                      </SelectItem>
+                      <SelectItem value="price_desc">
+                        {t("filter_price_desc")}
+                      </SelectItem>
+                      <SelectItem value="rating">
+                        {t("filter_rating")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Active Filters */}
                 {(selectedCategory || selectedSubcategory) && (
                   <div className="flex flex-wrap items-center gap-2 mb-4">
                     <span className="text-sm text-gray-600">
                       {t("active_filters")}:
                     </span>
                     {selectedCategory && (
-                      <div className="px-3 py-1 bg-burgundy bg-opacity-10 rounded-full text-white text-sm flex items-center">
-                        {categories.find((c) => c.id === selectedCategory)
-                          ?.name &&
-                          t(
-                            categories.find((c) => c.id === selectedCategory)
-                              ?.name || "",
-                          )}
+                      <div className="px-3 py-1 bg-burgundy bg-opacity-10 rounded-full text-burgundy text-sm flex items-center">
+                        {t(`category_${selectedCategory}`)}
                         {selectedSubcategory && " › "}
                         {selectedSubcategory &&
-                          categories
-                            .find((c) => c.id === selectedCategory)
-                            ?.subcategories?.find(
-                              (s) => s.id === selectedSubcategory,
-                            )?.name &&
-                          t(
-                            categories
-                              .find((c) => c.id === selectedCategory)
-                              ?.subcategories?.find(
-                                (s) => s.id === selectedSubcategory,
-                              )?.name || "",
-                          )}
+                          t(`category_${selectedSubcategory}`)}
                         <button
                           onClick={() => {
                             setSelectedCategory("");
                             setSelectedSubcategory("");
                           }}
-                          className="ml-2 text-white hover:text-burgundy/80"
+                          className="ml-2 text-burgundy hover:text-burgundy/80"
                         >
                           ×
                         </button>
@@ -368,43 +344,6 @@ export default function Shop() {
                     )}
                   </div>
                 )}
-              </div>
-
-              <div className="w-full md:w-48">
-                <Select value={sortOption} onValueChange={setSortOption}>
-                  <SelectTrigger>
-                    <SelectValue placeholder={t("sort_by")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="newest">{t("newest")}</SelectItem>
-                    <SelectItem value="price-asc">
-                      {t("price_low_to_high")}
-                    </SelectItem>
-                    <SelectItem value="price-desc">
-                      {t("price_high_to_low")}
-                    </SelectItem>
-                    <SelectItem value="rating">{t("highest_rated")}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            {/* Price Range Filter */}
-            <div className="bg-gray-50 p-4 rounded-md mb-8">
-              <h3 className="font-medium mb-4">{t("price_range")}</h3>
-              <Slider
-                defaultValue={[0, 2000]}
-                max={2000}
-                step={10}
-                value={priceRange}
-                onValueChange={(value) =>
-                  setPriceRange(value as [number, number])
-                }
-                className="mb-2"
-              />
-              <div className="flex justify-between text-sm text-gray-600">
-                <span>{formatPrice(priceRange[0])}</span>
-                <span>{formatPrice(priceRange[1])}</span>
               </div>
             </div>
           </div>
@@ -442,7 +381,7 @@ export default function Shop() {
                     className="text-lg font-playfair font-medium mb-1 cursor-pointer hover:text-burgundy transition-luxury"
                     onClick={() => setLocation(`/product/${product.id}`)}
                   >
-                    {product.name}
+                    {t(`product_${product.id}_name`)}
                   </h3>
                   <p className="text-burgundy font-medium mb-3">
                     {formatPrice(product.price)}

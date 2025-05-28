@@ -11,6 +11,7 @@ export interface Collection {
 
 // Product review type
 export interface ProductReview {
+  id: string;
   author: string;
   rating: number;
   title: string;
@@ -42,6 +43,7 @@ export interface Product {
   tags?: string[];
   reviews?: ProductReview[];
   sku?: string;
+  isBestSeller?: boolean;
 }
 
 // Brand value type

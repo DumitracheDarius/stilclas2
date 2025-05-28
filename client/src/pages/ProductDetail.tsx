@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useRoute, Link } from "wouter";
+import { useRoute, useLocation, Link } from "wouter";
 import { cn, formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { sectionContainerVariants } from "@/components/ui/stylesheet";
 import ProductGallery from "@/components/product/ProductGallery";
-import { Product } from "@/lib/types";
+import { LazyImage } from "@/components/ui/LazyImage";
+import { Product, ProductReview } from "@/lib/types";
 import { getProductById, getRelatedProducts } from "@/lib/data";
 import { Heart, Minus, Plus, Star, StarHalf, ShoppingCart, Share2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -21,6 +22,7 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState("");
   const { t } = useTranslation();
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
   
   // Set page title and description
   useEffect(() => {
@@ -134,6 +136,14 @@ export default function ProductDetail() {
     }
   };
   
+  // Handle adding to wishlist
+  const handleAddToWishlist = () => {
+    toast({
+      title: t("success"),
+      description: t("product_added_to_favorites"),
+    });
+  };
+  
   // Render stars for rating
   const renderStars = (rating: number) => {
     const stars = [];
@@ -190,31 +200,38 @@ export default function ProductDetail() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-3xl md:text-4xl font-playfair font-semibold mb-2">{product.name}</h1>
+              <h1 className="text-3xl md:text-4xl font-playfair font-semibold mb-2">
+                {t(`product_${product.id}_name`)}
+              </h1>
               
               <div className="flex items-center mb-4">
                 <div className="flex text-burgundy mr-2">
                   {renderStars(product.rating)}
                 </div>
-                <span className="text-gray-600 text-sm">{product.reviewCount} reviews</span>
+                <span className="text-gray-600 text-sm">
+                  {product.reviewCount} {t("reviews")}
+                </span>
               </div>
               
-              <p className="text-2xl text-burgundy font-medium mb-6">{formatPrice(product.price)}</p>
+              <p className="text-2xl text-burgundy font-medium mb-6">
+                {formatPrice(product.price)}
+              </p>
               
-              <p className="text-gray-700 mb-8 font-lato leading-relaxed">{product.description}</p>
+              <p className="text-gray-700 mb-8 font-lato leading-relaxed">
+                {t(`product_${product.id}_desc`)}
+              </p>
               
               {/* Size Selection */}
               {product.sizes && product.sizes.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-sm font-medium mb-3">Size</h3>
+                  <h3 className="text-sm font-medium mb-2">{t("select_size")}</h3>
                   <div className="flex flex-wrap gap-2">
                     {product.sizes.map((size) => (
                       <Button
                         key={size}
                         variant={selectedSize === size ? "default" : "outline"}
-                        size="sm"
                         onClick={() => setSelectedSize(size)}
-                        className="min-w-[3rem]"
+                        className="w-12 h-12"
                       >
                         {size}
                       </Button>
@@ -226,19 +243,17 @@ export default function ProductDetail() {
               {/* Color Selection */}
               {product.colors && product.colors.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-sm font-medium mb-3">Color</h3>
-                  <div className="flex flex-wrap gap-3">
+                  <h3 className="text-sm font-medium mb-2">{t("select_color")}</h3>
+                  <div className="flex flex-wrap gap-2">
                     {product.colors.map((color) => (
-                      <button
+                      <Button
                         key={color}
-                        className={cn(
-                          "w-8 h-8 rounded-full border",
-                          selectedColor === color ? "ring-2 ring-burgundy ring-offset-2" : "ring-0"
-                        )}
-                        style={{ backgroundColor: color.toLowerCase() }}
+                        variant={selectedColor === color ? "default" : "outline"}
                         onClick={() => setSelectedColor(color)}
-                        aria-label={`Select ${color} color`}
-                      />
+                        className="w-12 h-12"
+                      >
+                        {color}
+                      </Button>
                     ))}
                   </div>
                 </div>
@@ -246,22 +261,23 @@ export default function ProductDetail() {
               
               {/* Quantity Selection */}
               <div className="mb-8">
-                <h3 className="text-sm font-medium mb-3">Quantity</h3>
-                <div className="flex items-center">
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={decreaseQuantity} 
-                    disabled={quantity <= 1}
+                <h3 className="text-sm font-medium mb-2">{t("quantity")}</h3>
+                <div className="flex items-center space-x-4">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => quantity > 1 && setQuantity(quantity - 1)}
                     className="h-10 w-10"
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
-                  <span className="mx-4 font-medium text-lg min-w-[2rem] text-center">{quantity}</span>
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={increaseQuantity}
+                  <span className="text-lg font-medium w-8 text-center">
+                    {quantity}
+                  </span>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setQuantity(quantity + 1)}
                     className="h-10 w-10"
                   >
                     <Plus className="h-4 w-4" />
@@ -269,41 +285,41 @@ export default function ProductDetail() {
                 </div>
               </div>
               
-              {/* Add to Cart & Wishlist */}
-              <div className="flex items-center gap-4 mb-8">
-                <Button 
-                  className="flex-1 flex items-center justify-center gap-2 px-8 py-6"
+              {/* Add to Cart Button */}
+              <div className="flex gap-4 mb-8">
+                <Button
                   onClick={handleAddToCart}
+                  className="flex-1 flex items-center justify-center gap-2"
                 >
                   <ShoppingCart className="h-5 w-5" />
-                  Add to Reservation
+                  {t("add_to_cart")}
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  className="h-12 w-12 border-burgundy text-burgundy hover:bg-burgundy hover:text-white transition-colors"
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handleAddToWishlist}
+                  className="flex-none"
                 >
                   <Heart className="h-5 w-5" />
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  className="h-12 w-12"
-                >
+                <Button variant="outline" size="icon" className="flex-none">
                   <Share2 className="h-5 w-5" />
                 </Button>
               </div>
               
-              {/* Product Meta */}
+              {/* Product Info */}
               <div className="border-t border-b py-4 space-y-2">
                 <p className="text-sm text-gray-600">
-                  <span className="font-medium">SKU:</span> {product.sku || `SC-${product.id}`}
+                  <span className="font-medium">SKU:</span>{" "}
+                  {product.sku || `SC-${product.id}`}
                 </p>
                 <p className="text-sm text-gray-600">
-                  <span className="font-medium">Category:</span> {product.category}
+                  <span className="font-medium">{t("category")}:</span>{" "}
+                  {t(`category_${product.categoryId}`)}
                 </p>
                 <p className="text-sm text-gray-600">
-                  <span className="font-medium">Tags:</span> {product.tags?.join(", ") || "Luxury, Menswear"}
+                  <span className="font-medium">{t("tags")}:</span>{" "}
+                  {product.tags?.map(tag => t(`tag_${tag}`)).join(", ") || t("default_tags")}
                 </p>
               </div>
             </motion.div>
@@ -313,90 +329,69 @@ export default function ProductDetail() {
           <div className="mt-16">
             <Tabs defaultValue="description" className="w-full">
               <TabsList className="grid w-full grid-cols-3 max-w-2xl">
-                <TabsTrigger value="description">Description</TabsTrigger>
-                <TabsTrigger value="specs">Specifications</TabsTrigger>
-                <TabsTrigger value="reviews">Reviews ({product.reviewCount})</TabsTrigger>
+                <TabsTrigger value="description">{t("product_details")}</TabsTrigger>
+                <TabsTrigger value="specs">{t("specifications")}</TabsTrigger>
+                <TabsTrigger value="reviews">
+                  {t("reviews")} ({product.reviewCount})
+                </TabsTrigger>
               </TabsList>
               
               <TabsContent value="description" className="mt-6">
                 <div className="prose max-w-none">
                   <p className="text-gray-700 font-lato leading-relaxed mb-4">
-                    {product.fullDescription || 
-                      `The ${product.name} exemplifies our commitment to quality and craftsmanship. 
-                      Each piece is meticulously tailored using premium materials to ensure exceptional 
-                      fit, comfort, and durability.`
-                    }
+                    {t(`product_${product.id}_full_desc`) || 
+                      t("default_product_description", { productName: product.name })}
                   </p>
                   <p className="text-gray-700 font-lato leading-relaxed">
-                    {`Our attention to detail is evident in every stitch, button, and seam. 
-                    The result is a garment that not only looks exceptional but also stands 
-                    the test of time, both in durability and style.`}
+                    {t("product_quality_description")}
                   </p>
                 </div>
               </TabsContent>
               
               <TabsContent value="specs" className="mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="font-playfair text-lg mb-4">Materials & Composition</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start">
-                        <span className="font-medium w-32">Fabric:</span>
-                        <span>{product.fabric || "Premium Italian wool"}</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="font-medium w-32">Lining:</span>
-                        <span>{product.lining || "Silk blend"}</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="font-medium w-32">Buttons:</span>
-                        <span>{product.buttons || "Horn buttons"}</span>
-                      </li>
-                    </ul>
-                  </div>
+                  {product.fabric && (
+                    <div>
+                      <h3 className="text-lg font-medium mb-2">{t("fabric")}</h3>
+                      <p className="text-gray-700">{t(`fabric_${product.fabric}`)}</p>
+                    </div>
+                  )}
                   
-                  <div>
-                    <h3 className="font-playfair text-lg mb-4">Care Instructions</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start">
-                        <span className="font-medium w-32">Cleaning:</span>
-                        <span>Dry clean only</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="font-medium w-32">Storage:</span>
-                        <span>Hang on a quality hanger in a cool, dry place</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="font-medium w-32">Travel:</span>
-                        <span>Use a garment bag for protection</span>
-                      </li>
-                    </ul>
-                  </div>
+                  {product.lining && (
+                    <div>
+                      <h3 className="text-lg font-medium mb-2">{t("lining")}</h3>
+                      <p className="text-gray-700">{t(`lining_${product.lining}`)}</p>
+                    </div>
+                  )}
+                  
+                  {product.buttons && (
+                    <div>
+                      <h3 className="text-lg font-medium mb-2">{t("buttons")}</h3>
+                      <p className="text-gray-700">{t(`buttons_${product.buttons}`)}</p>
+                    </div>
+                  )}
                 </div>
               </TabsContent>
               
               <TabsContent value="reviews" className="mt-6">
                 {product.reviews && product.reviews.length > 0 ? (
-                  <div className="space-y-8">
-                    {product.reviews.map((review, index) => (
-                      <div key={index} className="border-b pb-6 last:border-0">
-                        <div className="flex justify-between items-start mb-2">
-                          <h4 className="font-playfair text-lg">{review.title}</h4>
-                          <span className="text-sm text-gray-500">{review.date}</span>
+                  <div className="space-y-6">
+                    {product.reviews.map((review) => (
+                      <div key={review.id} className="border-b pb-6">
+                        <div className="flex items-center mb-2">
+                          <div className="flex text-burgundy mr-2">
+                            {renderStars(review.rating)}
+                          </div>
+                          <span className="text-gray-600 text-sm">
+                            {review.author}
+                          </span>
                         </div>
-                        <div className="flex text-burgundy mb-2">
-                          {renderStars(review.rating)}
-                        </div>
-                        <p className="text-gray-700 mb-2 font-lato">{review.comment}</p>
-                        <p className="text-sm text-gray-600">By {review.author}</p>
+                        <p className="text-gray-700">{review.comment}</p>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8">
-                    <h3 className="text-xl mb-2">No reviews yet</h3>
-                    <p className="text-gray-600 mb-4">Be the first to review this product</p>
-                  </div>
+                  <p className="text-gray-600">{t("no_reviews_yet")}</p>
                 )}
               </TabsContent>
             </Tabs>
@@ -405,30 +400,46 @@ export default function ProductDetail() {
           {/* Related Products */}
           {relatedProducts.length > 0 && (
             <div className="mt-16">
-              <h2 className="text-2xl font-playfair font-medium mb-8 text-center">You May Also Like</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <h2 className="text-2xl font-playfair font-semibold mb-8">
+                {t("related_products")}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {relatedProducts.map((relatedProduct) => (
-                  <motion.div 
+                  <motion.div
                     key={relatedProduct.id}
-                    className="group relative"
+                    className="product-card group"
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
                   >
-                    <Link href={`/product/${relatedProduct.id}`} className="block">
-                      <div className="overflow-hidden rounded-md mb-3">
-                        <img 
-                          src={relatedProduct.imageUrl} 
-                          alt={relatedProduct.name} 
-                          className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
+                    <div
+                      className="relative overflow-hidden rounded-md shadow-md mb-4 cursor-pointer"
+                      onClick={() => setLocation(`/product/${relatedProduct.id}`)}
+                    >
+                      <LazyImage
+                        src={relatedProduct.imageUrl}
+                        alt={t(`product_${relatedProduct.id}_name`) || relatedProduct.name}
+                        className="w-full h-80 object-cover product-image"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-luxury flex items-center justify-center">
+                        <Button
+                          variant="default"
+                          className="transform -translate-y-4 group-hover:translate-y-0 transition-luxury"
+                        >
+                          {t("quick_view")}
+                        </Button>
                       </div>
-                      <h3 className="text-lg font-medium mb-1">{relatedProduct.name}</h3>
-                      <div className="flex text-burgundy mb-1">
-                        {renderStars(relatedProduct.rating)}
-                      </div>
-                      <p className="font-medium text-burgundy">${relatedProduct.price.toFixed(2)}</p>
-                    </Link>
+                    </div>
+                    <h3
+                      className="text-lg font-playfair font-medium mb-1 cursor-pointer hover:text-burgundy transition-luxury"
+                      onClick={() => setLocation(`/product/${relatedProduct.id}`)}
+                    >
+                      {t(`product_${relatedProduct.id}_name`)}
+                    </h3>
+                    <p className="text-burgundy font-medium">
+                      {formatPrice(relatedProduct.price)}
+                    </p>
                   </motion.div>
                 ))}
               </div>

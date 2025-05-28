@@ -2,9 +2,169 @@ import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { sectionContainerVariants } from "@/components/ui/stylesheet";
 import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+// Custom CSS for Google Maps-like styling
+const customPopupStyle = `
+  .custom-popup {
+    position: absolute !important;
+    left: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-left: 0 !important;
+  }
+  .custom-popup .leaflet-popup-content-wrapper {
+    background: white;
+    border-radius: 8px;
+    padding: 0;
+    box-shadow: 0 2px 7px 1px rgba(0,0,0,0.3);
+    width: 300px;
+  }
+  .custom-popup .leaflet-popup-content {
+    margin: 0;
+    width: 100% !important;
+  }
+  .custom-popup .leaflet-popup-tip-container {
+    display: none;
+  }
+  .store-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  .store-info {
+    padding: 16px;
+  }
+  .store-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a73e8;
+    margin-bottom: 8px;
+  }
+  .store-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .store-stars {
+    color: #ffd700;
+    margin-right: 8px;
+  }
+  .store-reviews {
+    color: #70757a;
+    font-size: 14px;
+  }
+  .store-type {
+    color: #70757a;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .store-address {
+    color: #202124;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .store-hours {
+    color: #188038;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .store-website {
+    color: #1a73e8;
+    font-size: 14px;
+    text-decoration: none;
+  }
+`;
 
 export default function LocationSection() {
   const { t } = useTranslation();
+  const mapRef = useRef<HTMLDivElement>(null);
+  const location = { lat: 44.436214, lng: 26.0593453 };
+  const mapInstanceRef = useRef<L.Map | null>(null);
+
+  useEffect(() => {
+    if (!mapRef.current || mapInstanceRef.current) return;
+
+    // Add custom CSS
+    const style = document.createElement('style');
+    style.textContent = customPopupStyle;
+    document.head.appendChild(style);
+
+    // Create map instance
+    const map = L.map(mapRef.current).setView([location.lat, location.lng], 17);
+    mapInstanceRef.current = map;
+
+    // Add OpenStreetMap tiles with a cleaner style
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Create custom icon
+    const customIcon = L.divIcon({
+      className: 'custom-marker',
+      html: `
+        <div style="position: relative;">
+          <img src="/assets/logoStilClas.png" style="width: 64px; height: 64px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);" />
+          <div style="position: absolute; bottom: -30px; left: 80%; transform: translateX(-50%); width: 2px; height: 30px; background: #EA4335;"></div>
+          <div style="position: absolute; bottom: -40px; left: 80%; transform: translateX(-50%) rotate(45deg); width: 20px; height: 20px; background: #EA4335;"></div>
+        </div>
+      `,
+      iconSize: [40, 60],
+      iconAnchor: [20, 40],
+      popupAnchor: [-150, 0] // Position popup to the left of the marker
+    });
+
+    // Add marker with custom icon
+    const marker = L.marker([location.lat, location.lng], { icon: customIcon }).addTo(map);
+
+    // Create Google Maps-like popup content
+    const popupContent = `
+      <div>
+        <img src="/assets/hero-image.jpg" alt="STIL CLAS Store" class="store-image" />
+        <div class="store-info">
+          <div class="store-name">STIL CLAS</div>
+          <div class="store-rating">
+            <div class="store-stars">★★★★★</div>
+            <div class="store-reviews">(48)</div>
+          </div>
+          <div class="store-type">Magazin de îmbrăcăminte</div>
+          <div class="store-address">Amplasat in incinta APACA, Business Center, Str. Iuliu Maniu, 7; corpul U; etaj 1, București 061072</div>
+          <div class="store-hours">Deschis · Închide la 18</div>
+          <a href="https://stilclas.ro" class="store-website" target="_blank">stilclas.ro</a>
+        </div>
+      </div>
+    `;
+
+    // Add popup with custom class
+    const popup = L.popup({
+      className: 'custom-popup',
+      closeButton: true,
+      autoClose: false,
+      closeOnEscapeKey: false,
+      closeOnClick: false,
+      offset: L.point(0, 0)
+    }).setContent(popupContent);
+
+    marker.bindPopup(popup).openPopup();
+
+    // Adjust map padding after popup is opened
+    map.once('popupopen', () => {
+      map.panBy([150, 0]); // Pan the map to the right to make space for the popup
+    });
+
+    return () => {
+      document.head.removeChild(style);
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, []);
   
   return (
     <section className={cn(sectionContainerVariants({ variant: "white" }))}>
@@ -29,31 +189,15 @@ export default function LocationSection() {
           {t('amplasament')}
         </motion.p>
         
-        {/* Google Map Integration with custom pin */}
+        {/* OpenStreetMap with Leaflet */}
         <motion.div
           className="rounded-lg overflow-hidden shadow-xl h-[400px] relative"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-        >
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.824370944172!2d26.0582195!3d44.43071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b201e97a3bc039%3A0xfcf3cb6d87b70c52!2sCotroceni%20Business%20Center%2C%20Strada%20Iuliu%20Maniu%207%2C%20Bucure%C8%99ti!5e0!3m2!1sen!2sro!4v1665412658690!5m2!1sen!2sro"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen={true}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="StilClas Store Location"
-            aria-label="StilClas Store Location Map"
-          ></iframe>
-          
-          {/* Custom pin label */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-burgundy text-white px-4 py-2 rounded-md shadow-lg z-10 font-medium">
-            {t('here_you_can_find_us')}
-          </div>
-        </motion.div>
+          ref={mapRef}
+        />
       </div>
     </section>
   );

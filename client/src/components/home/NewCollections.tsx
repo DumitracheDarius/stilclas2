@@ -71,16 +71,18 @@ export default function NewCollections({
                 />
               </div>
               <h3 className="text-xl font-playfair font-medium mb-2">
-                {t(collection.translationKey || collection.title)}
+                {t(`collection_${collection.id}_name`)}
               </h3>
-              <p className="text-gray-800 mb-4 font-lato">
-                {t(collection.description)}
-              </p>
+              {collection.description && (
+                <p className="text-sm font-lato">
+                  {t(`collection_${collection.id}_desc`)}
+                </p>
+              )}
               <Link
                 href={`/collections`}
                 className="inline-block text-burgundy font-medium border-b border-burgundy hover:border-black transition-luxury"
               >
-                {t("view_all")}
+                {t("explore_collection")}
               </Link>
             </motion.div>
           ))}

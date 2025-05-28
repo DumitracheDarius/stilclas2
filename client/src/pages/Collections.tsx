@@ -3,8 +3,8 @@ import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { dividerVariants, sectionContainerVariants } from "@/components/ui/stylesheet";
-import { Category } from "@/lib/types";
-import { getLegacyCategories } from "@/lib/data";
+import { Category, Subcategory } from "@/lib/types";
+import { getCategories } from "@/lib/data";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -15,198 +15,108 @@ export default function Collections() {
   // Set page title and description
   useEffect(() => {
     document.title = `${t('collections')} - StilClas`;
-    setCategories(getLegacyCategories());
+    setCategories(getCategories());
   }, [t]);
 
-  return (
-    <>
-      {/* Collections Hero */}
-      <section className="pt-32 pb-16 bg-black">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-playfair text-white font-semibold mb-4">{t('collections')}</h1>
-            <div className={dividerVariants()}></div>
-            <p className="text-gray-300 mt-6 max-w-3xl mx-auto font-lato">
-              {t('discover_our_exquisite_collections')}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
-      {/* Collections Overview */}
-      <section className={sectionContainerVariants({ variant: "gray" })}>
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {categories.slice(0, 2).map((category, index) => (
-              <motion.div 
-                key={category.id} 
-                className="relative overflow-hidden rounded-md shadow-lg group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <img 
-                  src={category.imageUrl} 
-                  alt={category.name} 
-                  className="w-full h-96 object-cover transition-luxury group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-8">
-                  <h3 className="text-white text-2xl font-playfair mb-2">{category.name}</h3>
-                  <p className="text-white text-sm md:text-base mb-4 max-w-md font-lato">
-                    {category.description}
-                  </p>
-                  <Button 
-                    asChild 
-                    variant="default"
-                    className="w-auto self-start"
-                  >
-                    <Link href={`/shop?category=${category.id}`}>
-                      Explore Collection
-                    </Link>
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {categories.slice(2, 4).map((category, index) => (
-              <motion.div 
-                key={category.id} 
-                className="relative overflow-hidden rounded-md shadow-lg group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
-                viewport={{ once: true }}
-              >
-                <img 
-                  src={category.imageUrl} 
-                  alt={category.name} 
-                  className="w-full h-96 object-cover transition-luxury group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-8">
-                  <h3 className="text-white text-2xl font-playfair mb-2">{category.name}</h3>
-                  <p className="text-white text-sm md:text-base mb-4 max-w-md font-lato">
-                    {category.description}
-                  </p>
-                  <Button 
-                    asChild 
-                    variant="default"
-                    className="w-auto self-start"
-                  >
-                    <Link href={`/shop?category=${category.id}`}>
-                      Explore Collection
-                    </Link>
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
+  const renderSubcategory = (subcategory: Subcategory, index: number) => (
+    <motion.div 
+      key={subcategory.id}
+      variants={itemVariants}
+      className="group relative overflow-hidden rounded-lg shadow-lg bg-white transition-all duration-300 hover:shadow-xl"
+    >
+      <div className="relative h-64 overflow-hidden">
+        <img 
+          src={subcategory.imageUrl} 
+          alt={t(`category_${subcategory.id}`)} 
+          className="h-full w-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-70"></div>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+        <h3 className="text-xl font-playfair font-medium mb-2">{t(`category_${subcategory.id}`)}</h3>
+        {subcategory.description && (
+          <p className="text-sm text-gray-100 font-lato">{t(`category_${subcategory.id}_desc`)}</p>
+        )}
+      </div>
+    </motion.div>
+  );
+
+  const renderCategory = (category: Category, index: number) => (
+    <motion.div 
+      key={category.id} 
+      variants={itemVariants}
+      className="mb-16"
+    >
+      <h2 className="text-3xl font-playfair font-semibold mb-2 text-gray-900 after:content-[''] after:block after:w-24 after:h-1 after:bg-burgundy after:mt-2">
+        {t(`category_${category.id}`)}
+      </h2>
       
-      {/* Process Section */}
-      <section className={sectionContainerVariants({ variant: "white" })}>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-3">Our Process</h2>
-            <div className={dividerVariants()}></div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative mb-6">
-                <div className="w-16 h-16 bg-burgundy rounded-full flex items-center justify-center text-white text-2xl font-playfair mx-auto">
-                  1
-                </div>
-                <div className="absolute top-1/2 left-[calc(50%+2rem)] w-full h-0.5 bg-gray-200 hidden md:block"></div>
-              </div>
-              <h3 className="text-xl font-playfair font-medium mb-3">Material Selection</h3>
-              <p className="text-gray-800 font-lato">
-                We source only the finest fabrics from renowned mills in Italy, England and Scotland to ensure exceptional quality in every garment.
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative mb-6">
-                <div className="w-16 h-16 bg-burgundy rounded-full flex items-center justify-center text-white text-2xl font-playfair mx-auto">
-                  2
-                </div>
-                <div className="absolute top-1/2 left-[calc(50%+2rem)] w-full h-0.5 bg-gray-200 hidden md:block"></div>
-              </div>
-              <h3 className="text-xl font-playfair font-medium mb-3">Expert Craftsmanship</h3>
-              <p className="text-gray-800 font-lato">
-                Our master tailors with decades of experience utilize traditional techniques to create garments of exceptional fit and finish.
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative mb-6">
-                <div className="w-16 h-16 bg-burgundy rounded-full flex items-center justify-center text-white text-2xl font-playfair mx-auto">
-                  3
-                </div>
-              </div>
-              <h3 className="text-xl font-playfair font-medium mb-3">Meticulous Finishing</h3>
-              <p className="text-gray-800 font-lato">
-                Each garment undergoes rigorous quality control to ensure that every detail, from stitching to buttons, meets our exacting standards.
-              </p>
-            </motion.div>
+      {/* If the category has subcategories */}
+      {category.subcategories && category.subcategories.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          {category.subcategories.map(renderSubcategory)}
+        </div>
+      ) : (
+        /* For categories without subcategories */
+        <div className="mt-8">
+          <div className="group relative overflow-hidden rounded-lg shadow-lg bg-white transition-all duration-300 hover:shadow-xl max-w-md mx-auto">
+            <div className="relative h-80 overflow-hidden">
+              <img 
+                src={category.imageUrl} 
+                alt={t(`category_${category.id}`)} 
+                className="h-full w-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-70"></div>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+              <h3 className="text-2xl font-playfair font-medium mb-2">{t(`category_${category.id}`)}</h3>
+              {category.description && (
+                <p className="text-sm text-gray-100 font-lato">{t(`category_${category.id}_desc`)}</p>
+              )}
+            </div>
           </div>
         </div>
-      </section>
-      
-      {/* CTA Section */}
-      <section className="py-16 bg-black">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-4 text-white">Ready to Experience StilClas?</h2>
-              <p className="text-gray-300 mb-8 font-lato">
-                Browse our complete collection and discover the perfect addition to your wardrobe.
-              </p>
-              <Button 
-                asChild 
-                variant="default"
-                size="lg"
-                className="transform hover:-translate-y-1"
-              >
-                <Link href="/shop">
-                  Shop Now
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
+      )}
+    </motion.div>
+  );
+
+  return (
+    <div className="pt-32 pb-20 min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">
+            {t('collections')}
+          </h1>
+          <div className="w-24 h-1 bg-burgundy mx-auto mb-6"></div>
+          <p className="text-lg text-gray-600 font-lato max-w-2xl mx-auto">
+            {t('discover_our_exquisite_collections')}
+          </p>
         </div>
-      </section>
-    </>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
+          {categories.map(renderCategory)}
+        </motion.div>
+      </div>
+    </div>
   );
 }

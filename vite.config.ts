@@ -28,4 +28,8 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "client/dist"),
     emptyOutDir: true,
   },
+  server: {
+    port: 3000,
+    strictPort: true,
+  },
 });

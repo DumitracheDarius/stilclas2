@@ -6,504 +6,518 @@ import {
   Category,
 } from "./types";
 
-// Collection data
+// Collection data - Reorganized for a luxury fashion experience
 export function getCollections(): Collection[] {
   return [
     {
       id: "c1",
-      title: "the_bordeaux_edit",
-      description: "bordeaux_description",
-      imageUrl: "/assets/collection1.jpg",
-      translationKey: "the_bordeaux_edit",
+      title: "formal_elegance",
+      description: "formal_elegance_description",
+      imageUrl: "/assets/Costume Business StilClas/Costume Business .43 (2).jpeg",
+      translationKey: "formal_elegance",
     },
     {
       id: "c2",
-      title: "black_tie_essentials",
-      description: "black_tie_description",
-      imageUrl: "/assets/collection2.jpg",
-      translationKey: "black_tie_essentials",
+      title: "casual_sophistication",
+      description: "casual_sophistication_description",
+      imageUrl: "/assets/Costume Casual StilClas/Costume Casual.05 (2).jpeg",
+      translationKey: "casual_sophistication",
     },
     {
       id: "c3",
-      title: "summer_sophistication",
-      description: "summer_description",
-      imageUrl: "/assets/collection3.jpg",
-      translationKey: "summer_sophistication",
+      title: "essential_accessories",
+      description: "essential_accessories_description",
+      imageUrl: "/assets/Palarii StilClas/Palarii 11.01.16.jpeg",
+      translationKey: "essential_accessories",
     },
     {
       id: "c4",
-      title: "urban_classics",
-      description: "urban_description",
-      imageUrl: "/assets/collection4.jpg",
-      translationKey: "urban_classics",
+      title: "seasonal_outerwear",
+      description: "seasonal_outerwear_description",
+      imageUrl: "/assets/Pardesie StilClas/pardesiu-1.jpeg",
+      translationKey: "seasonal_outerwear",
     },
   ];
 }
 
-// Main category data
+// Main category data - Restructured for better organization
 export function getCategories(): Category[] {
   return [
     {
-      id: "cat1",
-      name: "suits",
-      description: "",
-      imageUrl: "/assets/category-suits.jpg",
+      id: "business-suits",
+      name: "Business Suits",
+      description: "Costume business elegante pentru un aspect profesional impecabil",
+      imageUrl: "/assets/Costume Business StilClas/Costume Business .43 (5).jpeg",
       subcategories: [
         {
-          id: "subcat1",
-          name: "ceremony",
-          description: "",
-          imageUrl: "/assets/collection1.jpg",
+          id: "classic-business",
+          name: "Classic Business",
+          description: "Costume business clasice pentru un look profesional",
+          imageUrl: "/assets/Costume Business StilClas/Costume Business .43 (5).jpeg"
         },
         {
-          id: "subcat2",
-          name: "business",
-          description: "",
-          imageUrl: "/assets/business.jpg",
+          id: "modern-business",
+          name: "Modern Business",
+          description: "Costume business moderne cu un twist contemporan",
+          imageUrl: "/assets/Costume Business StilClas/Costume Business .43 (7).jpeg"
         },
         {
-          id: "subcat3",
-          name: "casual",
-          description: "",
-          imageUrl: "/assets/testimonial2.jpg",
-        },
-      ],
+          id: "ceremonial-business",
+          name: "Ceremonial",
+          description: "Costume de ceremonie moderne",
+          imageUrl: "/assets/Costum Ceremonie 1.jpeg"
+        }
+      ]
     },
     {
-      id: "cat2",
-      name: "blazers",
-      description: "",
-      imageUrl: "/assets/category-blazers.jpg",
+      id: "casual-suits",
+      name: "Casual Suits",
+      description: "Costume casual pentru un stil relaxat dar elegant",
+      imageUrl: "/assets/Costume Casual StilClas/costum-casual-1.jpeg",
       subcategories: [
         {
-          id: "subcat4",
-          name: "business",
-          description: "",
-          imageUrl: "/assets/testimonial3.jpg",
+          id: "smart-casual",
+          name: "Smart Casual",
+          description: "Costume pentru ocazii semi-formale",
+          imageUrl: "/assets/Costume Casual StilClas/Costume Casual.03 (1).jpeg"
         },
         {
-          id: "subcat5",
-          name: "casual",
-          description: "",
-          imageUrl: "/assets/value11.jpg",
+          id: "weekend-casual",
+          name: "Weekend Casual",
+          description: "Costume pentru un weekend stilat",
+          imageUrl: "/assets/Costume Casual StilClas/Costume Casual.05.jpeg"
+        }
+      ]
+    },
+    {
+      id: "blazers",
+      name: "Blazers",
+      description: "Sacouri elegante pentru orice ocazie",
+      imageUrl: "/assets/Sacouri StilClas/Sacouri .50.jpeg",
+      subcategories: [
+        {
+          id: "formal-blazers",
+          name: "Formal Blazers",
+          description: "Sacouri pentru ocazii formale",
+          imageUrl: "/assets/Sacouri StilClas/Sacouri .49.jpeg"
         },
-      ],
+        {
+          id: "casual-blazers",
+          name: "Casual Blazers",
+          description: "Sacouri pentru un look relaxat",
+          imageUrl: "/assets/Sacouri StilClas/Sacouri .48.jpeg"
+        }
+      ]
     },
     {
-      id: "cat3",
-      name: "trousers",
-      description: "",
-      imageUrl: "/assets/pants.png",
-      subcategories: [],
+      id: "shirts",
+      name: "Shirts",
+      description: "Cămăși rafinate pentru orice ocazie",
+      imageUrl: "/assets/Camasi StilClas/camasa-1.jpeg",
+      subcategories: [
+        {
+          id: "formal-shirts",
+          name: "Formal Shirts",
+          description: "Cămăși pentru ocazii formale",
+          imageUrl: "/assets/Camasi StilClas/Camasi .22 (1).jpeg"
+        },
+        {
+          id: "casual-shirts",
+          name: "Casual Shirts",
+          description: "Cămăși pentru zi de zi",
+          imageUrl: "/assets/Camasi StilClas/Camasi .23 (1).jpeg"
+        }
+      ]
     },
     {
-      id: "cat4",
-      name: "shirts",
-      description: "",
-      imageUrl: "/assets/camasa.jpg",
-      subcategories: [],
+      id: "overcoats",
+      name: "Overcoats",
+      description: "Pardesie elegante pentru sezonul rece",
+      imageUrl: "/assets/Pardesie StilClas/pardesiu-1.jpeg",
+      subcategories: [
+        {
+          id: "classic-overcoats",
+          name: "Classic Overcoats",
+          description: "Pardesie clasice atemporale",
+          imageUrl: "/assets/Pardesie StilClas/Pardesie .20 (1).jpeg"
+        }
+      ]
     },
     {
-      id: "cat5",
-      name: "ties",
-      description: "",
-      imageUrl: "/assets/cravatacolection.jpg",
-      subcategories: [],
+      id: "accessories",
+      name: "Accessories",
+      description: "Accesorii pentru completarea ținutei",
+      imageUrl: "/assets/Palarii StilClas/Palarii 11.01.16.jpeg",
+      subcategories: [
+        {
+          id: "hats",
+          name: "Hats",
+          description: "Pălării elegante",
+          imageUrl: "/assets/Palarii StilClas/Palarii 11.01.17.jpeg"
+        },
+        {
+          id: "caps",
+          name: "Caps",
+          description: "Șepci moderne",
+          imageUrl: "/assets/Sepci StilClas/Sepci 11.01.55.jpeg"
+        },
+        {
+          id: "ties",
+          name: "ties",
+          description: "",
+          imageUrl: "/assets/cravatacolection.jpg",
+        },
+        {
+          id: "cufflinks",
+          name: "cufflinks",
+          description: "",
+          imageUrl: "/assets/butoni2.jpg",
+        },
+        {
+          id: "bow_ties",
+          name: "bow_ties",
+          description: "",
+          imageUrl: "/assets/papion.jpg",
+        },
+        {
+          id: "belts",
+          name: "belts",
+          description: "",
+          imageUrl: "/assets/bestseller2.jpg",
+        },
+      ]
     },
     {
-      id: "cat6",
-      name: "cufflinks",
-      description: "",
-      imageUrl: "/assets/butoni2.jpg",
-      subcategories: [],
-    },
-    {
-      id: "cat7",
-      name: "bow_ties",
-      description: "",
-      imageUrl: "/assets/papion.jpg",
-      subcategories: [],
-    },
-    {
-      id: "cat8",
-      name: "belts",
-      description: "",
-      imageUrl: "/assets/bestseller2.jpg",
-      subcategories: [],
-    },
+      id: "shoes",
+      name: "Shoes",
+      description: "Încălțăminte elegantă din piele",
+      imageUrl: "/assets/Pantofi StilClas/Pantofi 11.07.44.jpeg",
+      subcategories: [
+        {
+          id: "formal-shoes",
+          name: "Formal Shoes",
+          description: "Pantofi pentru ocazii formale",
+          imageUrl: "/assets/Pantofi StilClas/Pantofi 11.07.44 (1).jpeg"
+        }
+      ]
+    }
   ];
 }
 
-// Best selling products
-export function getBestSellingProducts(): Product[] {
-  return [
-    {
-      id: "p19",
-      name: "Costum Ceremonie Verde cu Model Simplu",
-      description:
-        "Costum de ceremonie elegant într-o nuanță rafinată de verde.",
-      price: 1550.0,
-      imageUrl: "/assets/costum-ceremonie-verde.jpg",
-      rating: 5.0,
-      reviewCount: 14,
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-09-05T10:00:00Z",
-      reviews: [
-        {
-          author: "Andrei Popescu",
-          rating: 5,
-          title: "Perfect pentru nunta mea",
-          date: "Aprilie 12, 2024",
-          comment:
-            "Costumul a fost exact cum mi-am dorit, elegant și foarte confortabil. Recomand cu încredere!",
-        },
-        {
-          author: "George Ionescu",
-          rating: 5,
-          title: "Calitate premium",
-          date: "Mai 3, 2024",
-          comment:
-            "Materialele sunt de înaltă calitate, iar finisajele sunt excelente. Un costum minunat pentru ocazii speciale.",
-        },
-      ],
-    },
-
-    {
-      id: "p20",
-      name: "Costum Ceremonie Albastru cu Model Special",
-      description:
-        "Costum exclusivist de ceremonie albastru, cu detalii fine și elegante.",
-      price: 1290.0,
-      imageUrl: "/assets/costum-ceremonie-albastru-model-special.jpg",
-      rating: 5.0,
-      reviewCount: 13,
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-02-15T10:00:00Z",
-      reviews: [
-        {
-          author: "Alexandru Dumitru",
-          rating: 5,
-          title: "Eleganță pură",
-          date: "Mai 25, 2024",
-          comment:
-            "Costumul arată superb și se simte excelent. Am primit multe complimente pentru alegerea mea.",
-        },
-      ],
-    },
-
-    {
-      id: "p21",
-      name: "Costum Ceremonie Verde cu Model Special",
-      description:
-        "Costum unic și sofisticat pentru ceremonii, verde cu model distinctiv.",
-      price: 1290.0,
-      imageUrl: "/assets/costum-ceremonie-verde-cu-model.jpg",
-      rating: 5.0,
-      reviewCount: 11,
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-02-10T10:00:00Z",
-      reviews: [
-        {
-          author: "Mihai Vasile",
-          rating: 5,
-          title: "Design excepțional",
-          date: "Mai 20, 2024",
-          comment:
-            "Un costum impresionant cu un design special care m-a ajutat să ies în evidență la eveniment.",
-        },
-      ],
-    },
-
-    {
-      id: "p22",
-      name: "Costum Ceremonie Maro cu Model Special",
-      description:
-        "Costum sofisticat pentru ceremonii, maro cu un model unic și rafinat.",
-      price: 1100.0,
-      imageUrl: "/assets/costum-ceremonie-maro-model-special.jpg",
-      rating: 5.0,
-      reviewCount: 10,
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-02-09T10:00:00Z",
-      reviews: [
-        {
-          author: "Cristian Marin",
-          rating: 5,
-          title: "Foarte mulțumit",
-          date: "Iunie 1, 2024",
-          comment:
-            "Material și croială excelentă. Recomand tuturor celor care caută un costum special și elegant.",
-        },
-      ],
-    },
-  ];
-}
-
-// Get all products
+// Products with all available images in galleries
 export function getProducts(): Product[] {
-  const bestSellers = getBestSellingProducts();
-
-  const additionalProducts = [
+  return [
+    // Business Suits
     {
-      id: "p0",
-      name: "Butoni - Modele Diferite",
-      description: "Butoni eleganți disponibili în diverse modele și culori.",
-      price: 75.0,
-      imageUrl: "/assets/butoni2.jpg",
-      rating: 4.5,
-      reviewCount: 20,
-      gallery: ["/assets/butoni10.jpg", "/assets/butoni11.jpg"],
-      categoryId: "accessories",
-      category: "Accessories",
-      createdAt: "2023-01-15T10:00:00Z",
-    },
-    {
-      id: "p1",
-      name: "Papion - Modele Diferite",
-      description: "Papion elegant disponibil în diverse modele și culori.",
-      price: 75.0,
-      imageUrl: "/assets/papion.jpg",
-      rating: 4.5,
-      reviewCount: 20,
-      gallery: [
-        "/assets/papion2.jpg",
-        "/assets/papion3.jpg",
-        "/assets/papion4.jpg",
-      ],
-      categoryId: "accessories",
-      category: "Accessories",
-      createdAt: "2024-01-15T10:00:00Z",
-    },
-    {
-      id: "p2",
-      name: "Cravată - Modele Diferite",
-      description:
-        "Cravate stilate pentru orice ocazie, disponibile în diverse modele.",
-      price: 95.0,
-      imageUrl: "/assets/cravatacolection.jpg",
-      rating: 4.7,
-      reviewCount: 25,
-      gallery: [
-        "/assets/cravata10.jpg",
-        "/assets/cravata11.jpg",
-        "/assets/cravata12.jpg",
-        "/assets/cravata13.jpg",
-        "/assets/cravata14.jpg",
-        "/assets/cravata15.jpg",
-      ],
-      categoryId: "accessories",
-      category: "Accessories",
-      createdAt: "2024-01-20T10:00:00Z",
-    },
-    {
-      id: "p3",
-      name: "Curea - Modele Diferite",
-      description:
-        "Curea din piele premium, disponibile în diferite modele și culori.",
-      price: 130.0,
-      imageUrl: "/assets/bestseller2.jpg",
-      rating: 4.6,
+      id: "business-suit-1",
+      name: "Costum Business Elite",
+      description: "Costum business elegant, perfect pentru mediul corporativ și întâlniri importante.",
+      price: 790.0,
+      imageUrl: "/assets/Costume Business StilClas/Costume Business .43 (5).jpeg",
+      rating: 5.0,
       reviewCount: 18,
       gallery: [
-        "/assets/bestseller1.jpg",
-        "/assets/bestseller3.jpg",
-        "/assets/bestseller4.jpg",
+        "/assets/Costume Business StilClas/Costume Business .43 (6).jpeg",
+        "/assets/Costume Business StilClas/Costume Business .43 (7).jpeg",
+        "/assets/Costume Business StilClas/Costume Business .43 (8).jpeg",
+        "/assets/Costume Business StilClas/Costume Business .43 (9).jpeg"
       ],
-      categoryId: "accessories",
-      category: "Accessories",
-      createdAt: "2024-02-01T10:00:00Z",
+      categoryId: "business-suits",
+      category: "Business Suits",
+      createdAt: "2024-03-20T10:00:00Z",
+      isBestSeller: true
     },
     {
-      id: "p4",
-      name: "Pantaloni - Modele Diferite",
-      description:
-        "Pantaloni eleganți pentru business sau casual în diferite stiluri.",
-      price: 190.0,
-      imageUrl: "/assets/pants.png",
-      rating: 4.8,
-      reviewCount: 22,
-      categoryId: "trousers",
-      category: "Trousers",
-      createdAt: "2024-02-10T10:00:00Z",
-    },
-    {
-      id: "p5",
-      name: "Sacou Casual Albastru",
-      description: "Sacou casual în nuanță elegantă de albastru.",
-      price: 390.0,
-      imageUrl: "/assets/sacou-casual-albastru.jpg",
+      id: "business-suit-2",
+      name: "Costum Business Modern",
+      description: "Costum business modern cu design contemporani și croială impecabilă.",
+      price: 790.0,
+      imageUrl: "/assets/Costume Business StilClas/Costume Business .43 (41).jpeg",
       rating: 4.9,
       reviewCount: 15,
-      categoryId: "casual",
-      category: "Jackets",
-      createdAt: "2024-02-15T10:00:00Z",
+      gallery: [
+        "/assets/Costume Business StilClas/Costume Business .43 (42).jpeg",
+        "/assets/Costume Business StilClas/Costume Business .43 (43).jpeg",
+        "/assets/Costume Business StilClas/Costume Business .43 (44).jpeg"
+      ],
+      categoryId: "business-suits",
+      category: "Business Suits",
+      createdAt: "2024-03-21T10:00:00Z"
     },
+    // Casual Suits
     {
-      id: "p6",
-      name: "Sacou Casual Roșu",
-      description: "Sacou casual vibrant, ideal pentru evenimente speciale.",
-      price: 390.0,
-      imageUrl: "/assets/sacou-casual-rosu.jpg",
+      id: "casual-suit-1",
+      name: "Costum Casual Premium",
+      description: "Costum casual versatil, perfect pentru evenimente sociale și ocazii semi-formale.",
+      price: 790.0,
+      imageUrl: "/assets/Costume Casual StilClas/Costume Casual.05 (2).jpeg",
       rating: 4.8,
-      reviewCount: 12,
-      categoryId: "casual",
-      category: "Jackets",
-      createdAt: "2024-03-01T10:00:00Z",
-    },
-    {
-      id: "p7",
-      name: "Sacou Business Turcoaz",
-      description: "Sacou elegant pentru mediul business în culoare turcoaz.",
-      price: 390.0,
-      imageUrl: "/assets/sacou-business-turcoaz.jpg",
-      rating: 5.0,
-      reviewCount: 10,
-      categoryId: "business",
-      category: "Jackets",
-      createdAt: "2024-03-10T10:00:00Z",
-    },
-    {
-      id: "p8",
-      name: "Sacou Business în Carouri Turcoaz",
-      description: "Sacou business modern, în carouri turcoaz.",
-      price: 450.0,
-      imageUrl: "/assets/sacou-business-carouri-turcoaz.jpg",
-      rating: 4.9,
-      reviewCount: 8,
-      categoryId: "business",
-      category: "Jackets",
-      createdAt: "2024-03-15T10:00:00Z",
-    },
-    {
-      id: "p9",
-      name: "Costum Business Verde Închis",
-      description: "Costum business rafinat în nuanță verde închis.",
-      price: 1550.0,
-      imageUrl: "/assets/costum-business-verde-inchis.jpg",
-      rating: 5.0,
       reviewCount: 14,
-      categoryId: "business",
-      category: "Suits",
-      createdAt: "2024-04-01T10:00:00Z",
+      gallery: [
+        "/assets/Costume Casual StilClas/Costume Casual.05 (1).jpeg",
+        "/assets/Costume Casual StilClas/Costume Casual.05.jpeg",
+        "/assets/Costume Casual StilClas/Costume Casual.06.jpeg"
+      ],
+      categoryId: "casual-suits",
+      category: "Casual Suits",
+      createdAt: "2024-03-22T10:00:00Z",
+      isBestSeller: true
     },
     {
-      id: "p10",
-      name: "Costum Business Negru",
-      description: "Costum clasic negru, perfect pentru mediul de afaceri.",
-      price: 1290.0,
-      imageUrl: "/assets/costum-business-negru.jpg",
+      id: "casual-suit-2",
+      name: "Costum Casual Modern",
+      description: "Costum casual modern pentru un look relaxat dar elegant.",
+      price: 790.0,
+      imageUrl: "/assets/Costume Casual StilClas/Costume Casual.03 (1).jpeg",
+      rating: 4.7,
+      reviewCount: 12,
+      gallery: [
+        "/assets/Costume Casual StilClas/Costume Casual.03 (2).jpeg",
+        "/assets/Costume Casual StilClas/Costume Casual.03 (3).jpeg",
+        "/assets/Costume Casual StilClas/Costume Casual.03.jpeg"
+      ],
+      categoryId: "casual-suits",
+      category: "Casual Suits",
+      createdAt: "2024-03-23T10:00:00Z"
+    },
+    // Ceremony Suits
+    {
+      id: "ceremony-suit-1",
+      name: "Costum de Ceremonie Exclusivist",
+      description: "Costum de ceremonie elegant, perfect pentru evenimente speciale și ocazii memorabile.",
+      price: 1100.0,
+      imageUrl: "/assets/Costum Ceremonie 1.jpeg",
       rating: 5.0,
       reviewCount: 20,
-      categoryId: "business",
-      category: "Suits",
-      createdAt: "2024-04-05T10:00:00Z",
+      gallery: [
+        "/assets/Costum Ceremonie 1.jpeg"
+      ],
+      categoryId: "ceremonial-business",
+      category: "Ceremonial",
+      createdAt: "2024-03-24T10:00:00Z",
+      isBestSeller: true
+    },
+    // Blazers
+    {
+      id: "blazer-1",
+      name: "Sacou Business Elite",
+      description: "Sacou business elegant, perfect pentru ținute formale.",
+      price: 390.0,
+      imageUrl: "/assets/Sacouri StilClas/Sacouri .50.jpeg",
+      rating: 4.9,
+      reviewCount: 16,
+      gallery: [
+        "/assets/Sacouri StilClas/Sacouri .50 (1).jpeg",
+        "/assets/Sacouri StilClas/Sacouri .50 (2).jpeg",
+        "/assets/Sacouri StilClas/Sacouri .50 (3).jpeg"
+      ],
+      categoryId: "blazers",
+      category: "Blazers",
+      createdAt: "2024-03-25T10:00:00Z"
     },
     {
-      id: "p11",
-      name: "Costum Casual Verde",
-      description: "Costum casual elegant în tonuri de verde.",
-      price: 1100.0,
-      imageUrl: "/assets/costum-casual-verde.jpg",
-      rating: 4.7,
-      reviewCount: 9,
-      categoryId: "casual",
-      category: "Suits",
-      createdAt: "2024-04-10T10:00:00Z",
-    },
-    {
-      id: "p12",
-      name: "Costum Ceremonie Gri",
-      description: "Costum de ceremonie elegant în culoare gri.",
-      price: 1900.0,
-      imageUrl: "/assets/costum-ceremonie-gri.jpg",
-      rating: 5.0,
-      reviewCount: 11,
-      gallery: ["/assets/costum-ceremonie-gri-2.jpg"],
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-05-01T10:00:00Z",
-    },
-    {
-      id: "p13",
-      name: "Costum Casual Gri",
-      description: "Costum casual elegant în nuanță gri.",
-      price: 1290.0,
-      imageUrl: "/assets/costum-casual-gri.jpg",
-      rating: 4.6,
-      reviewCount: 10,
-      categoryId: "casual",
-      category: "Suits",
-      createdAt: "2024-05-05T10:00:00Z",
-    },
-    {
-      id: "p14",
-      name: "Costum Casual Bej",
-      description: "Costum casual confortabil în nuanță bej.",
-      price: 1290.0,
-      imageUrl: "/assets/costum-casual-bej.jpg",
-      rating: 4.5,
-      reviewCount: 8,
-      categoryId: "casual",
-      category: "Suits",
-      createdAt: "2024-05-10T10:00:00Z",
-    },
-    {
-      id: "p15",
-      name: "Costum Business Gri",
-      description: "Costum business clasic, ideal pentru întâlniri importante.",
-      price: 1550.0,
-      imageUrl: "/assets/costum-business-gri.jpg",
+      id: "blazer-2",
+      name: "Sacou Casual Modern",
+      description: "Sacou casual versatil pentru un look modern și sofisticat.",
+      price: 390.0,
+      imageUrl: "/assets/Sacouri StilClas/Sacouri .48.jpeg",
       rating: 4.8,
-      reviewCount: 12,
-      categoryId: "business",
-      category: "Suits",
-      createdAt: "2024-05-15T10:00:00Z",
+      reviewCount: 14,
+      gallery: [
+        "/assets/Sacouri StilClas/Sacouri .48 (1).jpeg",
+        "/assets/Sacouri StilClas/Sacouri .48 (2).jpeg",
+        "/assets/Sacouri StilClas/Sacouri .48 (3).jpeg"
+      ],
+      categoryId: "blazers",
+      category: "Blazers",
+      createdAt: "2024-03-26T10:00:00Z"
+    },
+    // Shirts
+    {
+      id: "shirt-1",
+      name: "Cămașă Business Premium",
+      description: "Cămașă business din bumbac de înaltă calitate.",
+      price: 150.0,
+      imageUrl: "/assets/Camasi StilClas/Camasi .22 (1).jpeg",
+      rating: 4.8,
+      reviewCount: 22,
+      gallery: [
+        "/assets/Camasi StilClas/Camasi .22.jpeg"
+      ],
+      categoryId: "shirts",
+      category: "Shirts",
+      createdAt: "2024-03-27T10:00:00Z"
     },
     {
-      id: "p16",
-      name: "Costum Ceremonie Maro cu Model",
-      description:
-        "Costum sofisticat pentru ceremonii în tonuri maro cu model distinctiv.",
-      price: 1290.0,
-      imageUrl: "/assets/costum-ceremonie-maro-cu-model.jpg",
-      rating: 5.0,
-      reviewCount: 7,
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-05-20T10:00:00Z",
-    },
-    {
-      id: "p17",
-      name: "Costum Ceremonie Albastru cu Model",
-      description:
-        "Costum elegant pentru ceremonii, albastru cu detalii speciale.",
-      price: 1550.0,
-      imageUrl: "/assets/costum-ceremonie-albastru-cu-model.jpg",
-      rating: 5.0,
-      reviewCount: 6,
-      categoryId: "ceremony",
-      category: "Suits",
-      createdAt: "2024-05-25T10:00:00Z",
-    },
-    {
-      id: "p18",
-      name: "Costum Casual Albastru Deschis",
-      description: "Costum casual modern în albastru deschis.",
-      price: 1100.0,
-      imageUrl: "/assets/costum-casual-albastru-deschis.jpg",
+      id: "shirt-2",
+      name: "Cămașă Casual Elegantă",
+      description: "Cămașă casual pentru un look relaxat dar rafinat.",
+      price: 150.0,
+      imageUrl: "/assets/Camasi StilClas/Camasi .23 (1).jpeg",
       rating: 4.7,
-      reviewCount: 8,
-      categoryId: "casual",
-      category: "Suits",
-      createdAt: "2024-06-01T10:00:00Z",
+      reviewCount: 18,
+      gallery: [
+        "/assets/Camasi StilClas/Camasi .23.jpeg"
+      ],
+      categoryId: "shirts",
+      category: "Shirts",
+      createdAt: "2024-03-28T10:00:00Z"
     },
+    // Overcoats
+    {
+      id: "overcoat-1",
+      name: "Pardesiu Classic Elite",
+      description: "Pardesiu clasic pentru sezonul rece, confecționat din materiale premium.",
+      price: 790.0,
+      imageUrl: "/assets/Pardesie StilClas/Pardesie .20.jpeg",
+      rating: 4.9,
+      reviewCount: 15,
+      gallery: [
+        "/assets/Pardesie StilClas/Pardesie .20 (1).jpeg",
+        "/assets/Pardesie StilClas/Pardesie .20 (2).jpeg",
+        "/assets/Pardesie StilClas/Pardesie .20 (3).jpeg"
+      ],
+      categoryId: "overcoats",
+      category: "Overcoats",
+      createdAt: "2024-03-29T10:00:00Z"
+    },
+    {
+      id: "overcoat-2",
+      name: "Pardesiu Modern Premium",
+      description: "Pardesiu modern cu design contemporani și materiale de excepție.",
+      price: 790.0,
+      imageUrl: "/assets/Pardesie StilClas/Pardesie .21.jpeg",
+      rating: 4.8,
+      reviewCount: 13,
+      gallery: [
+        "/assets/Pardesie StilClas/Pardesie .21 (1).jpeg"
+      ],
+      categoryId: "overcoats",
+      category: "Overcoats",
+      createdAt: "2024-03-30T10:00:00Z"
+    },
+    // Accessories
+    {
+      id: "tie-1",
+      name: "Cravată Premium",
+      description: "Cravată elegantă din mătase naturală.",
+      price: 95.0,
+      imageUrl: "/assets/cravatacolection.jpg",
+      rating: 4.8,
+      reviewCount: 25,
+      categoryId: "ties",
+      category: "Ties",
+      createdAt: "2024-03-31T10:00:00Z"
+    },
+    {
+      id: "cufflinks-1",
+      name: "Butoni Eleganți",
+      description: "Butoni premium pentru ocazii speciale.",
+      price: 75.0,
+      imageUrl: "/assets/butoni2.jpg",
+      rating: 4.9,
+      reviewCount: 20,
+      categoryId: "cufflinks",
+      category: "Cufflinks",
+      createdAt: "2024-04-01T10:00:00Z"
+    },
+    {
+      id: "bowtie-1",
+      name: "Papion Classic",
+      description: "Papion elegant pentru evenimente formale.",
+      price: 75.0,
+      imageUrl: "/assets/papion.jpg",
+      rating: 4.8,
+      reviewCount: 18,
+      categoryId: "bow_ties",
+      category: "Bow Ties",
+      createdAt: "2024-04-02T10:00:00Z"
+    },
+    {
+      id: "belt-1",
+      name: "Curea din Piele Premium",
+      description: "Curea elegantă din piele naturală de înaltă calitate.",
+      price: 130.0,
+      imageUrl: "/assets/bestseller2.jpg",
+      rating: 4.7,
+      reviewCount: 22,
+      categoryId: "belts",
+      category: "Belts",
+      createdAt: "2024-04-03T10:00:00Z"
+    },
+    // Hats
+    {
+      id: "hat-1",
+      name: "Pălărie Clasică Premium",
+      description: "Pălărie elegantă din materiale premium, perfectă pentru completarea ținutelor rafinate.",
+      price: 180.0,
+      imageUrl: "/assets/Palarii StilClas/Palarii 11.01.16.jpeg",
+      rating: 4.9,
+      reviewCount: 16,
+      gallery: [
+        "/assets/Palarii StilClas/Palarii 11.01.16 (1).jpeg",
+        "/assets/Palarii StilClas/Palarii 11.01.16 (2).jpeg",
+        "/assets/Palarii StilClas/Palarii 11.01.17.jpeg"
+      ],
+      categoryId: "hats",
+      category: "Hats",
+      createdAt: "2024-04-04T10:00:00Z",
+      isBestSeller: true
+    },
+    // Caps
+    {
+      id: "cap-1",
+      name: "Șapcă Premium Elegantă",
+      description: "Șapcă modernă din materiale de înaltă calitate, perfectă pentru ținute casual-elegante.",
+      price: 130.0,
+      imageUrl: "/assets/Sepci StilClas/Sepci 11.01.55.jpeg",
+      rating: 4.8,
+      reviewCount: 15,
+      gallery: [
+        "/assets/Sepci StilClas/Sepci 11.01.55 (1).jpeg",
+        "/assets/Sepci StilClas/Sepci 11.01.55 (2).jpeg",
+        "/assets/Sepci StilClas/Sepci 11.01.55 (3).jpeg"
+      ],
+      categoryId: "caps",
+      category: "Caps",
+      createdAt: "2024-04-05T10:00:00Z"
+    },
+    {
+      id: "cap-2",
+      name: "Șapcă Casual Modern",
+      description: "Șapcă casual cu design modern, ideală pentru ținute relaxate.",
+      price: 130.0,
+      imageUrl: "/assets/Sepci StilClas/Sepci 11.01.56.jpeg",
+      rating: 4.7,
+      reviewCount: 12,
+      gallery: [
+        "/assets/Sepci StilClas/Sepci 11.01.56 (1).jpeg",
+        "/assets/Sepci StilClas/Sepci 11.01.56 (2).jpeg"
+      ],
+      categoryId: "caps",
+      category: "Caps",
+      createdAt: "2024-04-06T10:00:00Z"
+    },
+    // Shoes
+    {
+      id: "shoes-1",
+      name: "Pantofi Eleganți Premium",
+      description: "Pantofi premium din piele naturală, confecționați manual pentru confort și stil suprem.",
+      price: 300.0,
+      imageUrl: "/assets/Pantofi StilClas/Pantofi 11.07.44.jpeg",
+      rating: 5.0,
+      reviewCount: 20,
+      gallery: [
+        "/assets/Pantofi StilClas/Pantofi 11.07.44 (1).jpeg",
+        "/assets/Pantofi StilClas/Pantofi 11.07.44 (2).jpeg",
+        "/assets/Pantofi StilClas/Pantofi 11.07.45.jpeg"
+      ],
+      categoryId: "shoes",
+      category: "Shoes",
+      createdAt: "2024-04-07T10:00:00Z",
+      isBestSeller: true
+    }
   ];
-
-  return [...bestSellers, ...additionalProducts];
 }
 
 // Get product by ID
@@ -513,16 +527,10 @@ export function getProductById(id: string): Product | null {
 }
 
 // Get related products
-export function getRelatedProducts(
-  productId: string,
-  categoryId: string,
-): Product[] {
+export function getRelatedProducts(productId: string, categoryId: string): Product[] {
   const allProducts = getProducts();
   return allProducts
-    .filter(
-      (product) =>
-        product.id !== productId && product.categoryId === categoryId,
-    )
+    .filter((product) => product.id !== productId && product.categoryId === categoryId)
     .slice(0, 4);
 }
 
@@ -532,104 +540,41 @@ export function getBrandValues(): BrandValue[] {
     {
       id: "bv1",
       title: "Craftsmanship",
-      description:
-        "Each garment is meticulously crafted by skilled artisans with decades of experience in traditional tailoring techniques.",
+      description: "Fiecare produs este creat cu atenție la detalii de către meșteri cu experiență în tehnici tradiționale de croitorie.",
       icon: null,
       iconName: "tool",
     },
     {
       id: "bv2",
-      title: "Materials",
-      description:
-        "We source only the finest textiles from renowned mills across Europe, ensuring superior quality in every thread.",
+      title: "Premium Materials",
+      description: "Folosim doar materiale de cea mai înaltă calitate de la furnizori renumiți din Europa.",
       icon: null,
       iconName: "sparkles",
     },
     {
       id: "bv3",
-      title: "Design",
-      description:
-        "Our designs balance contemporary trends with classic elements, creating pieces that transcend seasonal fashions.",
+      title: "Timeless Design",
+      description: "Designul nostru îmbină elementele clasice cu tendințele contemporane pentru un stil atemporal.",
       icon: null,
       iconName: "layout",
     },
     {
       id: "bv4",
-      title: "Sustainability",
-      description:
-        "We're committed to responsible production practices that minimize environmental impact while maximizing quality.",
+      title: "Customer Focus",
+      description: "Ne dedicăm să oferim o experiență de cumpărare excepțională și produse care depășesc așteptările.",
       icon: null,
-      iconName: "leaf",
+      iconName: "heart",
     },
   ];
 }
 
-// Testimonials
-export function getTestimonials(): Testimonial[] {
-  return [
-    {
-      id: "t1",
-      name: "James Wilson",
-      title: "Wedding Collection Customer",
-      quote:
-        "The attention to detail in my wedding suit was extraordinary. StilClas delivered exactly what I envisioned—timeless elegance with perfect tailoring.",
-      rating: 5,
-      avatarUrl: "/assets/testimonial1.jpg",
-    },
-    {
-      id: "t2",
-      name: "Robert Chen",
-      title: "Executive Collection Customer",
-      quote:
-        "As a CEO, my appearance matters. StilClas suits have become my signature look—exceptional quality, perfect fit, and sophisticated style.",
-      rating: 5,
-      avatarUrl: "/assets/testimonial2.jpg",
-    },
-    {
-      id: "t3",
-      name: "Michael Thompson",
-      title: "Smart Casual Collection Customer",
-      quote:
-        "The smart casual collection combines comfort with sophistication perfectly. These pieces have elevated my everyday style substantially.",
-      rating: 5,
-      avatarUrl: "/assets/testimonial3.jpg",
-    },
-  ];
-}
-
-// Categories
+// Legacy categories for compatibility
 export function getLegacyCategories(): Category[] {
-  return [
-    {
-      id: "wedding",
-      name: "Wedding Suits",
-      description:
-        "Exquisite tailoring for your most important day, combining timeless elegance with contemporary details.",
-      imageUrl: "/assets/suit-ceremony.jpg",
-    },
-    {
-      id: "business",
-      name: "Business Suits",
-      description:
-        "Command respect in boardrooms with our precision-tailored business attire, crafted for distinction.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
-    },
-    {
-      id: "casual",
-      name: "Smart Casual",
-      description:
-        "Refined everyday attire that blends comfort with sophisticated style for the modern gentleman.",
-      imageUrl:
-        "https://pixabay.com/get/g6c28212eb889fc25ce619bf0df5d0eca83d75ba2b0c91d5ca4f7ca882af8cb090e9286982765e55e1f63eb821bacecf26b3634469d5a46548118583e5b503e2e_1280.jpg",
-    },
-    {
-      id: "accessories",
-      name: "Accessories",
-      description:
-        "Complete your look with our curated selection of premium ties, cufflinks, pocket squares, and more.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1590548784585-643d2b9f2925?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500&q=80",
-    },
-  ];
+  return getCategories();
+}
+
+// Get best selling products
+export function getBestSellingProducts(): Product[] {
+  const allProducts = getProducts();
+  return allProducts.filter(product => product.isBestSeller);
 }

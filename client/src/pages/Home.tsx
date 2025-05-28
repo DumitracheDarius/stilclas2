@@ -25,9 +25,9 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <LocationSection />
       <NewCollections collections={collections} />
       <BestSellers products={bestSellers} />
+      <LocationSection />
       <BrandValues values={brandValues} />
       <GoogleReviews />
     </>
