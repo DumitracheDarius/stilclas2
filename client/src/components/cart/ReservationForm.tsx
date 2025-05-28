@@ -78,6 +78,7 @@ const formatWhatsAppMessage = (data: FormValues, cartItems: Product[], totalPric
 export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: ReservationFormProps) {
   const { t, i18n } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState<string | null>(null);
   
   const defaultValues: Partial<FormValues> = {
     fullName: "",
@@ -127,17 +128,9 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
 
       // Format WhatsApp message and create link
       const whatsappMessage = formatWhatsAppMessage(data, cartItems, totalPrice);
-      const phoneNumber = "40769245781"; // Remove the + from the phone number
-      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
-      
-      // Create and click a temporary link
-      const link = document.createElement('a');
-      link.href = whatsappUrl;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const phoneNumber = "40769245781";
+      const url = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+      setWhatsappUrl(url);
       
       toast({
         title: t('reservation_success'),
@@ -145,10 +138,9 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
         variant: "default",
       });
       
-      // Clear form and cart
-      form.reset();
+      // Clear cart but don't close the form yet
       clearCart();
-      onClose();
+      form.reset();
       
     } catch (error) {
       console.error("Error sending reservation:", error);
@@ -312,32 +304,69 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
                 )}
               />
               
-              <DialogFooter>
-                <Button 
-                  type="button" 
-                  variant="outline" 
-                  onClick={onClose}
-                  disabled={isSubmitting}
-                >
-                  {t('cancel')}
-                </Button>
-                <Button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className={cn(
-                    "bg-burgundy hover:bg-burgundy/90",
-                    isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-                  )}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      {t('submitting')}
-                    </>
-                  ) : (
-                    t('complete_reservation')
-                  )}
-                </Button>
+              <DialogFooter className="flex-col space-y-4 sm:space-y-0">
+                {whatsappUrl ? (
+                  <div className="flex flex-col items-center w-full space-y-4">
+                    <p className="text-sm text-center text-muted-foreground">
+                      {t('reservation_success')}
+                    </p>
+                    <div className="flex gap-4 w-full">
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 flex-1 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-2 rounded-md transition-colors"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 175.216 175.552"
+                          className="w-5 h-5 fill-current"
+                        >
+                          <path d="M89.4,0.5C41.4,0.5,2.5,39.5,2.5,87.4c0,14.7,3.7,28.6,10.3,40.8l-11.1,40c-0.5,1.9,0.2,4,1.8,5.3c1.1,0.9,2.5,1.4,3.8,1.4 c0.6,0,1.2-0.1,1.8-0.3l41.8-14.5c12.6,6.9,27.1,10.9,42.6,10.9c48,0,87-39,87-86.9S137.4,0.5,89.4,0.5z M144.8,124.8 c-2.2,6.1-8.9,11.6-14.8,13c-3.9,0.9-9,1.7-26.2-5.6c-22-9.3-36.4-32.1-37.4-33.5c-1-1.5-8.1-10.8-8.1-20.7 c0-9.8,5.2-14.7,7-16.7c1.9-2,4-2.5,5.4-2.5c1.3,0,2.6,0,3.8,0.1c1.2,0.1,2.8-0.5,4.4,3.4c1.6,3.9,5.5,13.7,6,14.7 c0.5,1,0.8,2.1,0.1,3.4c-0.7,1.3-1,2.1-2,3.3c-1,1.2-2,2.6-2.9,3.5c-1,1-2,2-0.9,4c1.1,2,5.1,8.4,10.9,13.6 c7.5,6.7,13.7,8.8,15.7,9.8c2,1,3.1,0.8,4.3-0.5c1.2-1.3,5-5.8,6.4-7.8c1.3-2,2.7-1.7,4.6-1c1.9,0.7,12,5.7,14.1,6.7 c2.1,1,3.4,1.5,3.9,2.3C147.3,113.9,147,118.7,144.8,124.8z" />
+                        </svg>
+                        {t('continue_on_whatsapp')}
+                      </a>
+                      <Button 
+                        type="button" 
+                        variant="outline" 
+                        onClick={() => {
+                          setWhatsappUrl(null);
+                          onClose();
+                        }}
+                      >
+                        {t('close')}
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex gap-4 w-full">
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      onClick={onClose}
+                      disabled={isSubmitting}
+                    >
+                      {t('cancel')}
+                    </Button>
+                    <Button 
+                      type="submit" 
+                      disabled={isSubmitting}
+                      className={cn(
+                        "flex-1 bg-burgundy hover:bg-burgundy/90",
+                        isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                      )}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          {t('submitting')}
+                        </>
+                      ) : (
+                        t('complete_reservation')
+                      )}
+                    </Button>
+                  </div>
+                )}
               </DialogFooter>
             </form>
           </Form>
