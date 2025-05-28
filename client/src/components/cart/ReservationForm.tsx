@@ -60,17 +60,17 @@ interface ReservationFormProps {
 
 // Helper function to format WhatsApp message
 const formatWhatsAppMessage = (data: FormValues, cartItems: Product[], totalPrice: number) => {
-  const itemsList = cartItems.map(item => `${item.name} - ${formatPrice(item.price)}`).join('\\n');
+  const itemsList = cartItems.map(item => `${item.name} - ${formatPrice(item.price)}`).join('\n');
   
   return encodeURIComponent(
-    `*New Reservation from ${data.fullName}*\\n\\n` +
-    `📧 Email: ${data.email}\\n` +
-    `📱 Phone: ${data.phone}\\n` +
-    `📍 Address: ${data.address}\\n` +
-    `📅 Preferred Date: ${data.preferredDate || 'Not specified'}\\n` +
-    `⏰ Preferred Time: ${data.preferredTime || 'Not specified'}\\n` +
-    `📝 Notes: ${data.notes || 'None'}\\n\\n` +
-    `*Selected Items:*\\n${itemsList}\\n\\n` +
+    `*Rezervare nouă de la ${data.fullName}*\n\n` +
+    `📧 Email: ${data.email}\n` +
+    `📱 Telefon: ${data.phone}\n` +
+    `📍 Adresă: ${data.address}\n` +
+    `📅 Data preferată: ${data.preferredDate || 'Nespecificat'}\n` +
+    `⏰ Ora preferată: ${data.preferredTime || 'Nespecificat'}\n` +
+    `📝 Note: ${data.notes || 'Nicio notă'}\n\n` +
+    `*Produse selectate:*\n${itemsList}\n\n` +
     `*Total: ${formatPrice(totalPrice)}*`
   );
 };
@@ -111,7 +111,7 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
         preferred_date: data.preferredDate || "Not specified",
         preferred_time: data.preferredTime || "Not specified",
         notes: data.notes || "None",
-        items: cartItems.map(item => `${item.name} - ${formatPrice(item.price)}`).join('\\n'),
+        items: cartItems.map(item => `${item.name} - ${formatPrice(item.price)}`).join('\n'),
         total: formatPrice(totalPrice),
         language: i18n.language,
         reply_to: data.email,
@@ -125,10 +125,19 @@ export function ReservationForm({ isOpen, onClose, cartItems, clearCart }: Reser
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
-      // Format and open WhatsApp message
+      // Format WhatsApp message and create link
       const whatsappMessage = formatWhatsAppMessage(data, cartItems, totalPrice);
-      const whatsappUrl = `https://wa.me/40769245781?text=${whatsappMessage}`;
-      window.open(whatsappUrl, '_blank');
+      const phoneNumber = "40769245781"; // Remove the + from the phone number
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+      
+      // Create and click a temporary link
+      const link = document.createElement('a');
+      link.href = whatsappUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
       
       toast({
         title: t('reservation_success'),
