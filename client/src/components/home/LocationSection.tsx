@@ -84,7 +84,7 @@ const customPopupStyle = `
 export default function LocationSection() {
   const { t } = useTranslation();
   const mapRef = useRef<HTMLDivElement>(null);
-  const location = { lat: 44.436214, lng: 26.0593453 };
+  const location = { lat: 44.433889, lng: 26.053611 };
   const mapInstanceRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
@@ -125,7 +125,7 @@ export default function LocationSection() {
     // Create Google Maps-like popup content
     const popupContent = `
       <div>
-        <img src="/assets/hero-image.jpg" alt="STIL CLAS Store" class="store-image" />
+        <img src="/assets/stilclasafara.jpeg" alt="STIL CLAS Store" class="store-image" />
         <div class="store-info">
           <div class="store-name">STIL CLAS</div>
           <div class="store-rating">
@@ -133,7 +133,7 @@ export default function LocationSection() {
             <div class="store-reviews">(48)</div>
           </div>
           <div class="store-type">Magazin de îmbrăcăminte</div>
-          <div class="store-address">Amplasat in incinta APACA, Business Center, Str. Iuliu Maniu, 7; corpul U; etaj 1, București 061072</div>
+          <div class="store-address">Cotroceni Business Center, Bd. Iuliu Maniu 7, București 061072</div>
           <div class="store-hours">Deschis · Închide la 18</div>
           <a href="https://stilclas.ro" class="store-website" target="_blank">stilclas.ro</a>
         </div>

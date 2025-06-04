@@ -274,7 +274,8 @@ export function getProducts(): Product[] {
       gallery: [
         "/assets/Costume Casual StilClas/Costume Casual.03 (2).jpeg",
         "/assets/Costume Casual StilClas/Costume Casual.03 (3).jpeg",
-        "/assets/Costume Casual StilClas/Costume Casual.03.jpeg"
+        "/assets/Costume Casual StilClas/Costume Casual.03.jpeg",
+        "/assets/Costume Casual StilClas/costum-casual-roz.jpeg"
       ],
       categoryId: "casual-suits",
       category: "Casual Suits",
@@ -440,6 +441,19 @@ export function getProducts(): Product[] {
       price: 130.0,
       imageUrl: "/assets/bestseller2.jpg",
       rating: 4.7,
+      gallery: [
+        "/assets/curel1.jpeg",
+        "/assets/curel2.jpeg",
+        "/assets/curel3.jpeg",
+        "/assets/curel4.jpeg",
+        "/assets/curel5.jpeg",
+        "/assets/curel6.jpeg",
+        "/assets/curel7.jpeg",
+        "/assets/curel8.jpeg",
+        "/assets/curel9.jpeg",
+        "/assets/curel10.jpeg",
+        "/assets/curel11.jpeg"
+      ],
       reviewCount: 22,
       categoryId: "belts",
       category: "Belts",
