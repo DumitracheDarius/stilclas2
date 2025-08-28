@@ -63,13 +63,19 @@ export default function NewCollections({
               className="group transition-luxury"
               variants={itemVariants}
             >
-              <div className="overflow-hidden rounded-md shadow-md mb-4">
-                <img
-                  src={collection.imageUrl}
-                  alt={t(collection.translationKey || collection.title)}
-                  className="w-full h-96 object-cover transition-luxury group-hover:scale-105"
-                />
-              </div>
+              <Link
+                href="/collections"
+                aria-label={t(`collection_${collection.id}_name`)}
+                className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-burgundy rounded-md"
+              >
+                <div className="overflow-hidden rounded-md shadow-md mb-4">
+                  <img
+                    src={collection.imageUrl}
+                    alt={t(collection.translationKey || collection.title)}
+                    className="w-full h-96 object-cover transition-luxury group-hover:scale-105"
+                  />
+                </div>
+              </Link>
               <h3 className="text-xl font-playfair font-medium mb-2">
                 {t(`collection_${collection.id}_name`)}
               </h3>
